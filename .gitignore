@@ -1,3 +1,4 @@
 corewar
 ./resources/vm_champs
-**/*.o
+./**/*.o
+*.o
