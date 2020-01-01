@@ -101,6 +101,7 @@ SRCS =		./chars/ft_chtostr.c\
 			./widechars/ft_wcsncpy.c\
 			./widechars/ft_wstrdup.c\
 			./widechars/ft_wstrlen.c\
+			./get_next_line/get_next_line.c\
 
 OBJS = $(patsubst %.c,%.o, $(SRCS))
 

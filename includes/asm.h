@@ -1,36 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   corewar.h                                          :+:      :+:    :+:   */
+/*   asm.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/01 18:56:11 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/01 20:30:00 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COREWAR_H
-# define COREWAR_H
+#ifndef ASM_H
+# define ASM_H
+
+#include <limits.h>
 
 # include "libft.h"
 # include "op.h"
 
-
-typedef	struct	s_ply
+typedef struct	s_asm
 {
-	char		*path;
-	int			name;
-	char		*cname;
-	
-}				t_ply;
+	char	*file_path;
+	char	*name;
+	char	*comment;
+	char	*label;
+	char	*output;
+}				t_asm;
 
-typedef struct	s_vm
-{
-	t_ply		**players;
-}				t_vm;
+t_asm		*create_asm();
+void		destroy_asm(t_asm **_asm);
 
-t_vm			*create_vm();
-void			destroy_vm(t_vm **vm);
+void		validate_format(t_asm *_asm);
+void		validate_name(char *line, t_asm *_asm);
+void		validate_comment(char *line, t_asm *_asm);
+
+void		read_file(t_asm *_asm);
+void		read_name(char *line, int fd, t_asm *_asm);
+void		read_comment(char *line, int fd, t_asm *_asm);
+
+void		terminate(int code, t_asm **_asm);
 
 #endif

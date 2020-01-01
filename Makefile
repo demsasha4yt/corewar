@@ -16,19 +16,31 @@ CC = gcc
 LFLAGS = $(L_LIBFT)
 IFLAGS = $(I_I) $(I_LIBFT)
 DFLAGS = -g
-CFLAGS = $(DFLAGS) $(IFLAGS)
-CCFLAGS = $(DFLAGS) $(IFLAGS) $(LFLAGS)
+EFLAGS = -Wall -Wextra -Werror
+CFLAGS = $(DFLAGS) $(IFLAGS) $(EFLAGS)
+CCFLAGS = $(DFLAGS) $(IFLAGS) $(LFLAGS) $(EFLAGS)
 
 # COREWAR EXECUTABLE
 COREWAR_EXEC = corewar
 COREWAR_SRCS = $(wildcard ./src/cw/*.c ./src/cw/**/*.c)
 COREWAR_OBJS = $(patsubst %.c,%.o,$(COREWAR_SRCS))
 
-all: $(COREWAR_EXEC)
+# ASM EXECUTABLE
+
+ASM_EXEC = asm
+ASM_SRCS = $(wildcard ./src/_asm/*.c ./src/_asm/**/*.c)
+ASM_OBJS = $(patsubst %.c,%.o,$(ASM_SRCS))
+
+
+all: $(COREWAR_EXEC) $(ASM_EXEC)
 
 $(COREWAR_EXEC): $(COREWAR_OBJS)
 	@$(CC) $(CCFLAGS) -o $(COREWAR_EXEC) $(COREWAR_OBJS)
 	@echo ...........The $(COREWAR_EXEC) program builded!............
+
+$(ASM_EXEC): $(ASM_OBJS)
+	@$(CC) $(CCFLAGS) -o $(ASM_EXEC) $(ASM_OBJS)
+	@echo ...........The $(ASM_EXEC) program builded!............
 
 %.o: %.c
 	@$(CC) $(CFLAGS) $< -c -o $@
@@ -36,10 +48,12 @@ $(COREWAR_EXEC): $(COREWAR_OBJS)
 
 clean:
 	@$(RM) -f $(COREWAR_OBJS)
+	@$(RM) -f $(ASM_OBJS)
 	@echo [RM]: All .o cleaned!
 
 fclean: clean
 	@$(RM) -f $(COREWAR_EXEC)
+	@$(RM) -f $(ASM_EXEC)
 	@echo [RM]: All executables cleaned!
 
 re: fclean all

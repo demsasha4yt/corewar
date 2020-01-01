@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 18:16:42 by bharrold          #+#    #+#             */
-/*   Updated: 2019/02/04 15:44:40 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/01 20:07:19 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <wchar.h>
 # include "ft_printf.h"
+# include "get_next_line.h"
 
 /*
 	** MACROS
