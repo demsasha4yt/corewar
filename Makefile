@@ -21,7 +21,7 @@ CCFLAGS = $(DFLAGS) $(IFLAGS) $(LFLAGS)
 
 # COREWAR EXECUTABLE
 COREWAR_EXEC = corewar
-COREWAR_SRCS = $(wildcard ./src/corewar/*.c ./src/corewar/**/*.c)
+COREWAR_SRCS = $(wildcard ./src/cw/*.c ./src/cw/**/*.c)
 COREWAR_OBJS = $(patsubst %.c,%.o,$(COREWAR_SRCS))
 
 all: $(COREWAR_EXEC)
