@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 19:18:18 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/01 19:59:33 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/17 18:08:01 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ int	main(int argc, char **argv)
 	_asm->file_path = argv[1];
 	validate_format(_asm);
 	read_file(_asm);
+	destroy_asm(&_asm);
 	return (0);
 }

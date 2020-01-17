@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/22 20:18:52 by bharrold          #+#    #+#             */
-/*   Updated: 2018/11/22 20:26:41 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/17 20:12:33 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ char	*ft_strjoin(char const *s1, char const *s2)
 			ft_strcpy(ptr, s1);
 			ft_strcat(ptr, s2);
 		}
+	}
+	if (!s1 && s2)
+	{
+		ptr = ft_strdup(s2);
 	}
 	return (ptr);
 }

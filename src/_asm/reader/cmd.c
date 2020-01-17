@@ -1,39 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_asm.c                                            :+:      :+:    :+:   */
+/*   cmd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/01 19:29:45 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/17 21:29:07 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/01 20:23:07 by bharrold          #+#    #+#             */
+/*   Updated: 2020/01/17 18:10:34 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "asm.h"
 
-t_asm	*create_asm()
+void	read_cmd(char *line, int fd, t_asm *_asm)
 {
-	t_asm	*_asm;
+	char *ptr;
+	(void)fd;
 
-	if (!(_asm = (t_asm*)ft_memalloc(sizeof(t_asm))))
-		exit(2048);
-	_asm->file_path = NULL;
-	_asm->name = NULL;
-	_asm->comment = NULL;
-	_asm->label = NULL;
-	_asm->output = NULL;
-	return (_asm);
-}
-
-void	destroy_asm(t_asm **_asm)
-{
-	// free((*_asm)->file_path);
-	free((*_asm)->name);
-	free((*_asm)->comment);
-	// free((*_asm)->label);
-	// free((*_asm)->output);
-	free(*_asm);
-	
-	*_asm = NULL;
+	validate_name(line, _asm);
+	ptr = ft_strchr(line, '\"');
+	if (!ptr)
+		terminate(3, &_asm);
+	ptr++;
+	ft_printf(ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/01 20:30:00 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/17 21:30:41 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct	s_asm
 	char	*comment;
 	char	*label;
 	char	*output;
+	t_list	*cmds;
 }				t_asm;
 
 t_asm		*create_asm();
@@ -32,7 +33,11 @@ void		destroy_asm(t_asm **_asm);
 
 void		validate_format(t_asm *_asm);
 void		validate_name(char *line, t_asm *_asm);
+void		validate_name_second_str(char *line, t_asm *_asm);
+void		validate_name_last_str(char *line, t_asm *_asm);
 void		validate_comment(char *line, t_asm *_asm);
+void		validate_comment_second_str(char *line, t_asm *_asm);
+void		validate_comment_last_str(char *line, t_asm *_asm);
 
 void		read_file(t_asm *_asm);
 void		read_name(char *line, int fd, t_asm *_asm);

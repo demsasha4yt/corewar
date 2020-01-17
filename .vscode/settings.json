@@ -2,6 +2,8 @@
 	"files.associations": {
 		"corewar.h": "c",
 		"libft.h": "c",
-		"asm.h": "c"
+		"asm.h": "c",
+		"get_next_line.h": "c",
+		"limits.h": "c"
 	}
 }
