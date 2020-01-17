@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 19:53:23 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/17 20:41:25 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/17 21:43:19 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void		read_file(t_asm *_asm)
 			read_name(code, fd, _asm);
 		else if (ft_strstr(code, COMMENT_CMD_STRING))
 			read_comment(code, fd, _asm);
+		else if (!is_comment_ch(code))
+			read_cmds(code, fd, _asm);
 		ft_strdel(&code);
 	}
 	ft_printf("%s\n", _asm->name);
