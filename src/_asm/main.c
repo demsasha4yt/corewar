@@ -26,7 +26,8 @@ int asm_create_file(char *argv, t_asm *asm_ms)
 	if (!(asm_ms->file_name = ft_strjoin(temp, ".cor")))
 		asm_error(4);
 	free(temp);
-	if (!(fd = open(asm_ms->file_name, O_WRONLY)))
+	fd = open(asm_ms->file_name, O_WRONLY);
+	return (fd);
 }
 
 int asm_check_name(char *argv)
@@ -48,6 +49,8 @@ void init_asm_ms(t_asm *asm_ms)
 	asm_ms->file_name = NULL;
 	if (!(asm_ms->name = ft_strnew(PROG_NAME_LENGTH)))
 		asm_error(4);
+	if (!(asm_ms->comment = ft_strnew(COMMENT_LENGTH)))
+		asm_error(4);
 }
 
 int main(int argc, char **argv)
@@ -59,9 +62,10 @@ int main(int argc, char **argv)
 		asm_error(0);
 	if (!asm_check_name(argv[1]))
 		asm_error(1);
-	if ((asm.fd_r = open(argv[1], O_RDONLY)) <= 0)
+	if ((asm.fd_r = open(argv[1], O_RDONLY)) == -1)
 		asm_error(2);
-	if ((asm.fd_w = asm_create_file(argv[1], &asm_ms)) <= 0)
+	if ((asm.fd_w = asm_create_file(argv[1], &asm_ms)) == -1)
 		asm_error(3);
+	asm_read_cycle(&asm_ms);
 	return (0);
 }
