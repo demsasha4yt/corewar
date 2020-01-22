@@ -15,10 +15,14 @@
 int main (int argc, char **argv)
 {
 	t_cw	cw;
-	
+
 	(void)argc;
 	(void)argv;
 	// read && validate
+	reader(&cw, argc, argv);
+//	validate(&cw);
+//	main_algo(&cw);
+//	terminate(0, &cw);
 	(void)cw;
 	//	
 }

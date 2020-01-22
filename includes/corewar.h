@@ -36,5 +36,9 @@ typedef struct	s_cw
 	
 }				t_cw;
 
+void     reader(t_cw *cw, int ac, char **av);
+
+
+void		terminate(int code, t_cw **cw);
 
 #endif
