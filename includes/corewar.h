@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/01 18:56:11 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/22 16:24:40 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,25 @@
 # include "libft.h"
 # include "op.h"
 
-
 typedef	struct	s_ply
 {
-	char		*path;
-	int			name;
-	char		*cname;
-	
+	int				ident_number;
+	char			*name;
+	char			*comment;
+	int				code_size;
+	int				*ply_code;
+	char			*file_path;
+	struct s_ply	*next;
+	struct s_ply	*prev;
 }				t_ply;
 
-typedef struct	s_vm
-{
-	t_ply		**players;
-}				t_vm;
 
-t_vm			*create_vm();
-void			destroy_vm(t_vm **vm);
+
+typedef struct	s_cw
+{
+	t_ply		*players;
+	
+}				t_cw;
+
 
 #endif
