@@ -20,9 +20,14 @@
 
 typedef struct	s_asm
 {
-	char	*file_path;
+	int fd_r;
+	int fd_w;
+	char	*file_name;
 	char	*name;
 	char	*comment;
+	//
+	char	*file_path;
+
 	char	*label;
 	char	*output;
 	t_list	*cmds;
