@@ -46,7 +46,8 @@ void init_asm_ms(t_asm *asm_ms)
 	asm_ms->fd_r = -1;
 	asm_ms->fd_w = -1;
 	asm_ms->file_name = NULL;
-	if (!(asm_ms->name = ft_strnew(#)
+	if (!(asm_ms->name = ft_strnew(PROG_NAME_LENGTH)))
+		asm_error(4);
 }
 
 int main(int argc, char **argv)

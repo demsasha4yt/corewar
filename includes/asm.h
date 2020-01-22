@@ -25,6 +25,7 @@ typedef struct	s_asm
 	char	*file_name;
 	char	*name;
 	char	*comment;
+
 	//
 	char	*file_path;
 
