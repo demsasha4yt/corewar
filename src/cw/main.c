@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 16:04:22 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/22 16:04:49 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/22 16:32:45 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,11 @@
 
 int main (int argc, char **argv)
 {
+	t_cw	cw;
 	
+	(void)argc;
+	(void)argv;
+	// read && validate
+	(void)cw;
+	//	
 }
