@@ -2,5 +2,5 @@
 
 void    validate(t_cw *cw)
 {
-    terminate(1, &cw);
+    (void)cw;
 }
