@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/22 17:26:40 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/22 21:16:48 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 
 # include "libft.h"
 # include "op.h"
+# include <curses.h>
 
-typedef	struct	s_ply
+typedef	struct		s_ply
 {
 	int				ident_number;
 	char			*name;
@@ -26,37 +27,59 @@ typedef	struct	s_ply
 	char			*file_path;
 	struct s_ply	*next;
 	struct s_ply	*prev;
-}				t_ply;
+}					t_ply;
 
-typedef struct	s_arena
+typedef struct		s_arena
 {
-	int			*data;
-} 				t_arena;
+	int				*data;
+	int				arena_size;
+	int				sections[MAX_PLAYERS];
+} 					t_arena;
 
-typedef struct	s_carry
+typedef struct		s_carry
 {
-	int				num;
+	int				id;
 	int				flag;
 	int				live_cycle;
 	int				cycles_left;
 	int				position;
-	int				registries[REG_NUMBER];
+	int				registers[REG_NUMBER];
+	int				player;
 	struct s_carry	*next;
 	struct s_carry	*prev;
-}				t_carry;
+}					t_carry;
 
-
-typedef struct	s_cw
+typedef struct		s_cw
 {
-	int			count_players;
-	t_arena		*arena;
-	t_carry		*carries;
-	t_ply		*players;
-}				t_cw;
+	int				cycles;
+	int				live_count;
+	int				cycles_to_die;
+	int				count_players;
+	t_arena			*arena;
+	int				carries_count;
+	t_carry			*carries;
+	t_ply			*players;
+	t_ply			*last_alive;
+}					t_cw;
 
-void	terminate(int code, t_cw *cw){
-void	initialize_cw(t_cw *cw);
-void	destroy_cw(t_cw *cw);
+void				terminate(int code, t_cw *cw);
 
+void				initialize_arena(t_cw *cw);
+void				destroy_arena(t_cw *cw);
+int					get_player_in_byte(t_cw *cw, int byte);
+
+t_carry				*new_carry(t_cw *cw);
+void				push_new_carry(t_cw *cw, int byte, int player);
+void				destroy_carry(t_carry *carry);
+void				destroy_all_carries(t_cw *cw);
+
+void				initialize_cw(t_cw *cw);
+void				destroy_cw(t_cw *cw);
+
+
+// visualization
+
+void				clear_screen();
+void				init_screen();
 
 #endif

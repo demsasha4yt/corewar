@@ -13,7 +13,7 @@ I_I = -I $(I_DIR)
 
 #COMPILER OPTIONS
 CC = gcc
-LFLAGS = $(L_LIBFT)
+LFLAGS = $(L_LIBFT) -lncurses
 IFLAGS = $(I_I) $(I_LIBFT)
 DFLAGS = -g
 EFLAGS = -Wall -Wextra -Werror
@@ -30,7 +30,6 @@ COREWAR_OBJS = $(patsubst %.c,%.o,$(COREWAR_SRCS))
 ASM_EXEC = asm
 ASM_SRCS = $(wildcard ./src/_asm/*.c ./src/_asm/**/*.c)
 ASM_OBJS = $(patsubst %.c,%.o,$(ASM_SRCS))
-
 
 all: $(COREWAR_EXEC) $(ASM_EXEC)
 

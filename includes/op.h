@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/10/04 11:33:27 by zaz               #+#    #+#             */
-/*   Updated: 2020/01/01 18:33:27 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/22 20:54:23 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define OP_H
 
 # define IND_SIZE				2
-# define REG_SIZE				4
+# define REG_SIZE				8 
 # define DIR_SIZE				REG_SIZE
 
 

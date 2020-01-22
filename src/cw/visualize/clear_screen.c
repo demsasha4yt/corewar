@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialize.c                                       :+:      :+:    :+:   */
+/*   clear_screen.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/22 17:22:26 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/22 19:49:08 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/22 20:59:49 by bharrold          #+#    #+#             */
+/*   Updated: 2020/01/22 21:02:14 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
+#include <unistd.h>
 
-void	initialize_cw(t_cw *cw)
+void clear_screen()
 {
-	cw->cycles = 0;
-	cw->live_count = 0;
-	cw->cycles_to_die = CYCLE_TO_DIE;
-	cw->count_players = 0;
-	cw->arena = NULL;
-	cw->carries_count = 0;
-	cw->carries = NULL;
-	cw->players = NULL;
-	cw->last_alive = NULL;
+	const char *clean_screen_ansi = "\e[1;1H\e[2J";
+	
+	write(0, clean_screen_ansi, 12);
 }
