@@ -12,6 +12,8 @@ void asm_error(int er_nu)
 		ft_printf("Can't create .cor file\n");
 	else if (er_nu == 4)
 		ft_printf("Malloc error\n");
+	else if (er_nu == 5)
+		ft_printf("Read error\n");
 	exit(0);
 }
 
@@ -19,7 +21,6 @@ int asm_create_file(char *argv, t_asm *asm_ms)
 {
 	int fd;
 	char *temp;
-	char *file_to_create;
 
 	if (!(temp = ft_strsub(argv, 0, ft_strlen(argv) - 2)))
 		asm_error(4);
@@ -56,16 +57,18 @@ void init_asm_ms(t_asm *asm_ms)
 int main(int argc, char **argv)
 {
 	t_asm asm_ms;
+	char *file;
 
 	init_asm_ms(&asm_ms);
 	if (argc != 2)
 		asm_error(0);
 	if (!asm_check_name(argv[1]))
 		asm_error(1);
-	if ((asm.fd_r = open(argv[1], O_RDONLY)) == -1)
+	if ((asm_ms.fd_r = open(argv[1], O_RDONLY)) == -1)
 		asm_error(2);
-	if ((asm.fd_w = asm_create_file(argv[1], &asm_ms)) == -1)
+	if ((asm_ms.fd_w = asm_create_file(argv[1], &asm_ms)) == -1)
 		asm_error(3);
-	asm_read_cycle(&asm_ms);
+	file = asm_read_cycle(&asm_ms);
+	parse_p1(file, &asm_ms);
 	return (0);
 }

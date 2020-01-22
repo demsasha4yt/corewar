@@ -15,6 +15,7 @@
 
 #include <limits.h>
 
+#include <fcntl.h>
 # include "libft.h"
 # include "op.h"
 
@@ -34,23 +35,8 @@ typedef struct	s_asm
 	t_list	*cmds;
 }				t_asm;
 
-t_asm		*create_asm();
-void		destroy_asm(t_asm **_asm);
-
-void		validate_format(t_asm *_asm);
-void		validate_name(char *line, t_asm *_asm);
-void		validate_name_second_str(char *line, t_asm *_asm);
-void		validate_name_last_str(char *line, t_asm *_asm);
-void		validate_comment(char *line, t_asm *_asm);
-void		validate_comment_second_str(char *line, t_asm *_asm);
-void		validate_comment_last_str(char *line, t_asm *_asm);
-int			is_comment_ch(char *line);
-
-void		read_file(t_asm *_asm);
-void		read_name(char *line, int fd, t_asm *_asm);
-void		read_comment(char *line, int fd, t_asm *_asm);
-void		read_cmds(char *line, int fd, t_asm *_asm);
-
-void		terminate(int code, t_asm **_asm);
+void parse_p1(char *file, t_asm *asm_ms);
+char *asm_read_cycle(t_asm *asm_ms);
+void asm_error(int er_nu);
 
 #endif
