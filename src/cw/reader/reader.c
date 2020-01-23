@@ -1,9 +1,11 @@
 #include "corewar.h"
+#include <fcntl.h>
 
 int     reader(t_cw *cw, int ac, char **av)
 {
     int     i;
     int     fd;
+	int     id;
 	char    *name;
 	char    *exec;
 	char    *cmnt;
