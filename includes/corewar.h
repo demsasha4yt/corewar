@@ -18,7 +18,7 @@
 
 typedef	struct	s_ply
 {
-	int				ident_number;
+	int				id;
 	char			*name;
 	char			*comment;
 	int				code_size;
@@ -52,11 +52,12 @@ typedef struct	s_cw
 	t_arena		*arena;
 	t_carry		*carries;
 	t_ply		*players;
+	int         count_cycles;
 }				t_cw;
 
 void	initialize_cw(t_cw *cw);
-void    validate(int fd);
 void    reader(t_cw *cw, int ac, char **av);
+int     validate(int fd, char **name, char **exec, char **cmnt);
 void	terminate(int code, t_cw *cw);
 void	destroy_cw(t_cw *cw);
 

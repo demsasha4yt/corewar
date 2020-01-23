@@ -1,6 +1,20 @@
 #include "corewar.h"
 
-void    validate(t_cw *cw)
+int validate(int fd, char **name, char **exec, char **cmnt)
 {
-    (void)cw;
+	char    *b4;
+	size_t  exec_sz;
+
+	b4 = (char*)malloc(4);
+	read(fd, b4, 4);                    //magic
+	name = (char*)malloc(PROG_NAME_LENGTH);
+	read(fd, *name, PROG_NAME_LENGTH);  //name
+	read(fd, b4, 4);                    //NULL
+	read(fd, b4, 4);                    //exec size
+	exec_sz = ft_atoi_base(b4, 16);
+	comment = (char*)malloc(COMMENT_LENGTH);
+	read(fd, *cmnt, COMMENT_LENGTH);    //comment
+	read(fd, b4, 4);                    //NULL
+	*exec = (char*)malloc(exec_sz);
+	read(fd, b4, );                    //exec
 }
