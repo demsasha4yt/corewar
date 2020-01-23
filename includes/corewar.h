@@ -19,7 +19,7 @@
 
 typedef	struct		s_ply
 {
-	int				ident_number;
+	int				id;
 	char			*name;
 	char			*comment;
 	int				code_size;

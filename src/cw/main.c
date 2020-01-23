@@ -15,10 +15,7 @@
 int main (int argc, char **argv)
 {
 	t_cw	cw;
-
-	(void)argc;
-	(void)argv;
-	initialize_cw(&cw);
+  initialize_cw(&cw);
 	cw.count_players = 4;
 	initialize_arena(&cw);
 	push_new_carry(&cw, 1000, 2);
