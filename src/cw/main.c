@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 16:04:22 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/22 21:15:38 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/23 20:58:59 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int main (int argc, char **argv)
 {
 	t_cw	cw;
-  initialize_cw(&cw);
+	(void)argc;
+	(void)argv;
+  	initialize_cw(&cw);
+	// reader(&cw, argc, argv);
 	cw.count_players = 4;
 	initialize_arena(&cw);
 	push_new_carry(&cw, 1000, 2);

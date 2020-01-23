@@ -19,12 +19,20 @@ int     reader(t_cw *cw, int ac, char **av)
     while (++i < ac)
     {
     	if (ft_strcmp(av[i], "-dump") == 0)
-		    cw->count_cycles = ft_atoi(av[(++i)++]);
+		{
+			cw->count_cycles = ft_atoi(av[(++i)]);
+			i++;
+		}
+		    
 	    id = ++cw->count_players;
 	    if (i >= ac)
 		    return (1);
 	    if (i < ac && ft_strcmp(av[i], "-n") == 0)
-		    id = ft_atoi(av[(++i)++]);
+		{
+			id = ft_atoi(av[(++i)]);
+			i++;
+		}
+		    
 	    if (i < ac && (fd = open(av[i], O_RDONLY)) <= 0)
             terminate(1, cw);
 	    if (i >= ac)
@@ -37,6 +45,7 @@ int     reader(t_cw *cw, int ac, char **av)
 	    plyr = (t_ply*)malloc(sizeof(t_ply));
 	    plyr->id = id;
 	    plyr->name = ft_strdup(name);
+		ft_printf("%p\n", cmnt);
 	    plyr->comment = ft_strdup(cmnt);
 	    plyr->ply_code = ft_strdup(exec);
 	    plyr->file_path = ft_strdup(av[i]);

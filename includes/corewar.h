@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/22 21:16:48 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/23 20:39:03 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef	struct		s_ply
 	char			*name;
 	char			*comment;
 	int				code_size;
-	int				*ply_code;
+	char			*ply_code;
 	char			*file_path;
 	struct s_ply	*next;
 	struct s_ply	*prev;
@@ -52,6 +52,7 @@ typedef struct		s_carry
 typedef struct		s_cw
 {
 	int				cycles;
+	int				count_cycles;
 	int				live_count;
 	int				cycles_to_die;
 	int				count_players;
@@ -76,6 +77,8 @@ void				destroy_all_carries(t_cw *cw);
 void				initialize_cw(t_cw *cw);
 void				destroy_cw(t_cw *cw);
 
+int					reader(t_cw *cw, int ac, char **av);
+int					validate(int fd, char **name, char **exec, char **cmnt);
 
 // visualization
 
