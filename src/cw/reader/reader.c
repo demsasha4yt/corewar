@@ -49,6 +49,8 @@ int     reader(t_cw *cw, int ac, char **av)
 	    }
 	    plyr->prev = prev;
 	    plyr->next = tmp;
+	    if (prev == NULL && tmp == NULL)
+	    	cw->players = plyr;
 	    close(fd);
     }
     return (0);
