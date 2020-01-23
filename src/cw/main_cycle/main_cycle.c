@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 20:07:58 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/23 20:23:20 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/23 23:17:41 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,12 @@
 
 void	main_cycle(t_cw *cw)
 {
-	(void)cw;
+	while (true) 
+	{
+		cw->cycles++;
+		render(cw);
+		if (cw->cycles == 2) {
+			break ;
+		}
+	}
 }

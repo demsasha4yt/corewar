@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 17:38:40 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/22 20:58:08 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/23 22:39:57 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	initialize_map_arena(t_cw *cw)
 {
 	if (cw->arena == NULL)
 		terminate(1, cw);
-	cw->arena->data = (int*)ft_memalloc(sizeof(int) * cw->arena->arena_size);
+	cw->arena->data = (char*)ft_memalloc(REG_SIZE * cw->arena->arena_size);
 	if (!cw->arena->data)
 		terminate(1, cw);
 }

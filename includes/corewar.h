@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/23 20:39:03 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/23 23:10:17 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef	struct		s_ply
 
 typedef struct		s_arena
 {
-	int				*data;
+	char			*data;
 	int				arena_size;
 	int				sections[MAX_PLAYERS];
 } 					t_arena;
@@ -49,10 +49,20 @@ typedef struct		s_carry
 	struct s_carry	*prev;
 }					t_carry;
 
+typedef struct		s_vis
+{
+	int				maxx;
+	int				maxy;
+	WINDOW			*map;
+	WINDOW			*info;
+}					t_vis;
+
 typedef struct		s_cw
 {
+	int				visualize_active;
+	int				dump_cycles;
+	int				d_cycles;
 	int				cycles;
-	int				count_cycles;
 	int				live_count;
 	int				cycles_to_die;
 	int				count_players;
@@ -61,6 +71,7 @@ typedef struct		s_cw
 	t_carry			*carries;
 	t_ply			*players;
 	t_ply			*last_alive;
+	t_vis			*vis;
 }					t_cw;
 
 void				terminate(int code, t_cw *cw);
@@ -80,9 +91,16 @@ void				destroy_cw(t_cw *cw);
 int					reader(t_cw *cw, int ac, char **av);
 int					validate(int fd, char **name, char **exec, char **cmnt);
 
+/*
+ * Main algo 
+*/
+void				main_cycle(t_cw *cw);
+
+
 // visualization
-
-void				clear_screen();
-void				init_screen();
-
+void				init_visualize(t_cw *cw);
+void				destroy_visualize(t_cw *cw);
+void				render(t_cw *cw);
+void				set_color_on(WINDOW *w, short color1, short color2);
+void				set_color_off();
 #endif

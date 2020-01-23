@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_screen.c                                     :+:      :+:    :+:   */
+/*   destroy_visualize.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/22 20:59:49 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/23 20:04:18 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/23 21:39:33 by bharrold          #+#    #+#             */
+/*   Updated: 2020/01/23 22:02:43 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include "corewar.h"
 
-void clear_screen()
+void		destroy_visualize(t_cw *cw)
 {
-	const char *clean_screen_ansi = "\e[1;1H\e[2J";
-	
-	write(0, clean_screen_ansi, 12);
+	if (!cw->vis)
+		return ;
+	free(cw->vis);
+	endwin();
 }

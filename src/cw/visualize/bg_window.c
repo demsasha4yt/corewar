@@ -1,19 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_screen.c                                      :+:      :+:    :+:   */
+/*   bg_window.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/22 21:15:48 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/22 21:18:07 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/23 23:00:02 by bharrold          #+#    #+#             */
+/*   Updated: 2020/01/23 23:20:34 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void		init_screen()
+void	set_color_on(WINDOW *w, short color1, short color2)
 {
-	initscr();
-	raw();
+	init_pair(1, color1, color2);
+	wattron(w, COLOR_PAIR(1));
+}
+
+void	set_color_off()
+{
+	attroff(COLOR_PAIR(1));
 }
