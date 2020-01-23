@@ -11,10 +11,11 @@ int validate(int fd, char **name, char **exec, char **cmnt)
 	read(fd, *name, PROG_NAME_LENGTH);  //name
 	read(fd, b4, 4);                    //NULL
 	read(fd, b4, 4);                    //exec size
-	exec_sz = ft_atoi_base(b4, 16);
+	exec_sz = (exec_sz = ft_atoi_base(b4, 16)) == 0 ? CHAMP_MAX_SIZE : sz;
 	comment = (char*)malloc(COMMENT_LENGTH);
 	read(fd, *cmnt, COMMENT_LENGTH);    //comment
 	read(fd, b4, 4);                    //NULL
 	*exec = (char*)malloc(exec_sz);
-	read(fd, b4, );                    //exec
+	read(fd, b4, exec_sz);              //exec
+	return (0);
 }

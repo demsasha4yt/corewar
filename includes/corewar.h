@@ -56,7 +56,7 @@ typedef struct	s_cw
 }				t_cw;
 
 void	initialize_cw(t_cw *cw);
-void    reader(t_cw *cw, int ac, char **av);
+int     reader(t_cw *cw, int ac, char **av);
 int     validate(int fd, char **name, char **exec, char **cmnt);
 void	terminate(int code, t_cw *cw);
 void	destroy_cw(t_cw *cw);

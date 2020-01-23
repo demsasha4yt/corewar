@@ -1,27 +1,15 @@
 #include "corewar.h"
 
-void parse_to_cw(int fd, t_ply **ply)
+int     reader(t_cw *cw, int ac, char **av)
 {
-	char *name;
-	char *exec;
-	char *cmnt;
-
-	if (validate(fd, &name, &exec, &cmnt) == 0)
-	{
-		// free strings
-		terminate(1, cw);
-	}
-	cw->ply = (t_ply*)malloc(sizeof(t_ply));
-	cw->ply->id = cw->count_players;
-	cw->ply->name = name;
-	cw->ply->comment = cmnt;
-	cw->ply->ply_code = exec;
-	cw->ply->file_path =
-}
-
-void     reader(t_cw *cw, int ac, char **av)
-{
-    int i;
+    int     i;
+    int     fd;
+	char    *name;
+	char    *exec;
+	char    *cmnt;
+	t_ply   *plyr;
+	t_ply   *tmp;
+	t_ply   *prev;
 
     (void)cw;
     i = 0;
@@ -30,15 +18,36 @@ void     reader(t_cw *cw, int ac, char **av)
     {
     	if (ft_strcmp(av[i], "-dump") == 0)
 		    cw->count_cycles = ft_atoi(av[(++i)++]);
+	    id = ++cw->count_players;
+	    if (i >= ac)
+		    return (1);
 	    if (i < ac && ft_strcmp(av[i], "-n") == 0)
 		    id = ft_atoi(av[(++i)++]);
 	    if (i < ac && (fd = open(av[i], O_RDONLY)) <= 0)
             terminate(1, cw);
 	    if (i >= ac)
-		    break;
-	    cw->count_players++;
-	    parse_to_ply(fd, cw);
-	    cw->ply->file_path = av[i];
+		    return (2);
+	    if (validate(fd, &name, &exec, &cmnt) == 1)
+	    {
+		    // free strings
+		    terminate(1, cw);
+	    }
+	    plyr = (t_ply*)malloc(sizeof(t_ply));
+	    plyr->id = id;
+	    plyr->name = ft_strdup(name);
+	    plyr->comment = ft_strdup(cmnt);
+	    plyr->ply_code = ft_strdup(exec);
+	    plyr->file_path = ft_strdup(av[i]);
+	    tmp = cw->players;
+	    prev = NULL;
+	    while (tmp != NULL || tmp->id > plyr->id)
+	    {
+	    	prev = tmp;
+	    	tmp = tmp->next;
+	    }
+	    plyr->prev = prev;
+	    plyr->next = tmp;
 	    close(fd);
     }
+    return (0);
 }
