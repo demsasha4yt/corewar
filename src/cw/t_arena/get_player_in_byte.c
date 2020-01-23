@@ -1,26 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialize.c                                       :+:      :+:    :+:   */
+/*   get_player_in_byte.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/22 17:22:26 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/22 19:49:08 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/22 19:13:41 by bharrold          #+#    #+#             */
+/*   Updated: 2020/01/22 19:35:13 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	initialize_cw(t_cw *cw)
+int		get_player_in_byte(t_cw *cw, int byte)
 {
-	cw->cycles = 0;
-	cw->live_count = 0;
-	cw->cycles_to_die = CYCLE_TO_DIE;
-	cw->count_players = 0;
-	cw->arena = NULL;
-	cw->carries_count = 0;
-	cw->carries = NULL;
-	cw->players = NULL;
-	cw->last_alive = NULL;
+	int	i;
+
+	if (!cw->arena)
+		terminate(1, cw);
+	if (!cw->arena->data)
+		terminate(1, cw);
+	i = 1;
+	if (byte > 4095)
+		byte = byte % 4096;
+	while (i < MAX_PLAYERS && i < cw->count_players)
+	{
+		if (byte < cw->arena->sections[i] && byte >= cw->arena->sections[i - 1])
+			break ;
+		i++;
+	}
+	if (i > 0 && i <= MAX_PLAYERS)
+		return (i);
+	return (-1);
 }

@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialize.c                                       :+:      :+:    :+:   */
+/*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/22 17:22:26 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/22 19:49:08 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/22 18:15:23 by bharrold          #+#    #+#             */
+/*   Updated: 2020/01/22 20:05:22 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	initialize_cw(t_cw *cw)
+void		destroy_carry(t_carry *carry)
 {
-	cw->cycles = 0;
-	cw->live_count = 0;
-	cw->cycles_to_die = CYCLE_TO_DIE;
-	cw->count_players = 0;
-	cw->arena = NULL;
-	cw->carries_count = 0;
-	cw->carries = NULL;
-	cw->players = NULL;
-	cw->last_alive = NULL;
+	if (!carry) 
+		return ;
+	if (carry->next && carry->prev)
+		carry->next->prev = carry->prev;
+	else if (carry->prev && !carry->next)
+		carry->prev->next = NULL;
+	else if (carry->next && !carry->prev)
+		carry->next->prev = NULL;
+	free(carry);
+	carry = NULL;
 }

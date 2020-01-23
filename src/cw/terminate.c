@@ -14,6 +14,8 @@
 
 void		terminate(int code, t_cw *cw)
 {
-    (void)code;
-    (void)cw;
+	(void)code;
+	(void)cw;
+	ft_printf("Error code: %d\n", code);
+	exit(code);
 }
