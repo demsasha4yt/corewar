@@ -73,4 +73,9 @@ typedef struct		header_s
   char				comment[COMMENT_LENGTH + 1];
 }					header_t;
 
+typedef struct		s_op
+{
+
+}					t_op;
+
 #endif

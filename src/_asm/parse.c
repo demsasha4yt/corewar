@@ -1,37 +1,98 @@
 #include "asm.h"
 
-char	*is_space(char *str)
+int	is_space(char **str)
 {
-	while(*str == ' ' || *str == '\t')
+	if(**str == ' ' || **str == '\t')
 	{
-		str++;
+		while (**str == ' ' || **str == '\t')
+		{
+			(*str)++;
+		}
+		return (1);
 	}
-	return (str);
+	return (0);
+}
+
+int is_blank(const char *str)
+{
+	if(!*str)
+		return (1);
+	return (0);
+}
+
+int	check_name_comment(char *str, t_asm *asm_ms)
+{
+	int i;
+
+	if (*str)
+	{
+		if (*str == '#')
+			return (1);
+		if (ft_strncmp(str, NAME_CMD_STRING, 5) == 0)
+		{
+			str += 5;
+			is_space(&str);
+			if(*str++ == '"')
+			{
+				i = 0;
+				while (str[i] != '"')
+				{
+					asm_ms->name[i] = str[i];
+					i++;
+				}
+				return (1);
+			}
+			else
+			{
+				ft_printf("error symbols\n");
+				exit(0);
+			}
+
+		}
+		else if (ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0)
+		{
+			str += 8;
+			is_space(&str);
+			if (*str++ == '"')
+			{
+				i = 0;
+				while (str[i] != '"')
+				{
+					asm_ms->comment[i] = str[i];
+					i++;
+				}
+				return (1);
+			}
+			else
+			{
+				ft_printf("error symbols\n");
+				exit(0);
+			}
+		}
+		else
+		{
+			ft_printf("error symbols\n");
+			exit(0);
+		}
+	}
+	else
+	{
+		return (1);
+	}
 }
 
 void parse_p1(char *file, t_asm *asm_ms)
 {
-	int i;
 	char *str;
 
-	i = 0;
-	str = ft_strstr(file, "\n.name");
-	if(!str)
-		ft_printf("characters before the name\n");
-	else
+	str = file;
+
+	while (get_next_line(asm_ms->fd_r, &str))
 	{
-		str += 6;
-		str = is_space(str);
-		if(*str++ == '"')
-		{
-			while(str[i] != '"')
-			{
-				asm_ms->name[i] = str[i];
-				i++;
-			}
-			str += i;
-		}
-		else
-			ft_printf("characters before name\n");
+		if (is_blank(str))
+			continue ;
+		is_space(&str);
+		if (check_name_comment(str, asm_ms))
+			continue;
 	}
 }

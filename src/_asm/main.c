@@ -57,7 +57,7 @@ void init_asm_ms(t_asm *asm_ms)
 int main(int argc, char **argv)
 {
 	t_asm asm_ms;
-	char *file;
+	char *file = NULL;
 
 	init_asm_ms(&asm_ms);
 	if (argc != 2)
@@ -68,7 +68,7 @@ int main(int argc, char **argv)
 		asm_error(2);
 	if ((asm_ms.fd_w = asm_create_file(argv[1], &asm_ms)) == -1)
 		asm_error(3);
-	file = asm_read_cycle(&asm_ms);
+	//file = asm_read_cycle(&asm_ms);
 	parse_p1(file, &asm_ms);
 	return (0);
 }
