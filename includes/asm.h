@@ -42,6 +42,7 @@ void parse_p1(t_asm *asm_ms);
 char *asm_read_cycle(t_asm *asm_ms);
 void asm_error(int er_nu);
 void	ft_start(char *file, t_asm *asm_ms, int fd);
+void check_name_comment_name_p1(int i, t_asm *asm_ms);
 void check_name_comment_name_p2(int i, t_asm *asm_ms);
 
 #endif

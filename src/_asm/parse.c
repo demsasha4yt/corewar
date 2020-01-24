@@ -52,47 +52,66 @@ int	check_name_comment(char *str1, t_asm *asm_ms)
 					ft_printf("error number symbols (name)\n");
 				if (str[i] == '"')
 				{
+					//CDE
 					//проверка на валидность строки после ковычки
+					i++;
+while (str[i] == ' ' || str[i] == '\t')//проверка на валидность строки после ковычки \0 # ' ' '\t'
+i++;
+if(str[i] != '#' && str[i] != '\0')
+perror("sym after \"");
 					return (1);
 				}
 				else
-					check_name_comment_name_p2(i, asm_ms);
+					check_name_comment_name_p1(i, asm_ms);
 			}
 			else
 			{
 				ft_printf("error symbols\n");
 				exit(0);
 			}
-
 		}
 		else if (ft_strncmp(str, NAME_CMD_STRING, 5) == 0 && asm_ms->name != NULL)
 			ft_printf("second name\n");
-//		else if (ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0)
-//		{
-//			str += 8;
-//			is_space(&str);
-//			if (*str++ == '"')
-//			{
-//				i = 0;
-//				while (str[i] != '"')
-//				{
-//					asm_ms->comment[i] = str[i];
-//					i++;
-//				}
-//				return (1);
-//			}
-//			else
-//			{
-//				ft_printf("error symbols\n");
-//				exit(0);
-//			}
-//		}
-//		else
-//		{
-//			ft_printf("error symbols\n");
-//			exit(0);
-//		}
-	}
+		else if (ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0 && asm_ms->comment == NULL)
+			{
+				if (!(asm_ms->comment = ft_strnew(COMMENT_LENGTH)))
+					asm_error(4);
+				str += 8;
+				is_space(&str);
+				if(*str++ == '"')
+				{
+					i = 0;
+					while (str[i] != '"' && str[i] && i < COMMENT_LENGTH)
+					{
+						asm_ms->comment[i] = str[i];
+						i++;
+					}
+					if (i == COMMENT_LENGTH)
+						ft_printf("error number symbols (comment)\n");
+					if (str[i] == '"')
+					{
+						//CDE
+						//проверка на валидность строки после ковычки
+						i++;
+while (str[i] == ' ' || str[i] == '\t')//проверка на валидность строки после ковычки \0 # ' ' '\t'
+i++;
+if(str[i] != '#' && str[i] != '\0')
+perror("sym after \"");
+						return (1);
+					}
+					else
+						check_name_comment_name_p2(i, asm_ms);
+				}
+				else
+				{
+					ft_printf("error symbols\n");
+					exit(0);
+				}
+
+			}
+		else if (ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0 && asm_ms->comment != NULL)
+			ft_printf("second comment\n");
+		}
 	else
 	{
 		return (1);
