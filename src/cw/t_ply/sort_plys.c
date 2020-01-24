@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 19:25:50 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/24 19:42:05 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/24 21:36:03 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,7 @@ void	sort_plys(t_cw *cw)
 		terminate(3, cw);
 	if (!cw->players)
 		terminate(3, cw);
+	/**
+	 * TODO SORT PLAYERS
+	 */
 }

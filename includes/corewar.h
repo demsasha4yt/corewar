@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/24 20:16:59 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/24 21:30:56 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,10 @@ t_ply				*new_ply(int number, char *name, char *comment,
 								char *code);
 void				push_ply(t_cw *cw, t_ply *ply);
 t_ply				*set_ply_file_path(t_ply *ply, char *file_path, t_cw *cw);
+void				initialize_plys(t_cw *cw);
 void				sort_plys(t_cw *cw);
 void				destroy_ply(t_ply *ply);
+void				destroy_all_plys(t_cw *cw);
 
 /*
  * Carries
@@ -126,4 +128,5 @@ void				destroy_visualize(t_cw *cw);
 void				render(t_cw *cw);
 void				set_color_on(WINDOW *w, short color1, short color2);
 void				set_color_off();
+
 #endif
