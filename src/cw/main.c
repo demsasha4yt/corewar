@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 16:04:22 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/24 21:41:49 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/24 21:46:57 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main (int argc, char **argv)
 	(void)argc;
 	(void)argv;
   	initialize_cw(&cw);
-	cw.visualize_active = 0;
+	// cw.visualize_active = 1;
 
 	// push_ply(&cw, set_ply_file_path(new_ply(3, "name", "comment", "code"), 
 	// 			"file_path", &cw));
