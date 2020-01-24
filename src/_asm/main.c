@@ -39,7 +39,11 @@ int asm_check_name(char *argv)
 {
 	int i;
 
+<<<<<<< HEAD
 	//CDE
+=======
+	//ABC
+>>>>>>> kbessa
 	i = 0;
 	while (argv[i])
 		++i;
