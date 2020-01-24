@@ -32,7 +32,7 @@ int	check_name_comment(char *str1, t_asm *asm_ms)
 	if (*str)
 	{
 		//;
-		if (*str == COMMENT_CHAR	|| *str == ALT_COMMENT_CHAR)
+		if (*str == COMMENT_CHAR || *str == ALT_COMMENT_CHAR)
 			return (1);
 		if (ft_strncmp(str, NAME_CMD_STRING, 5) == 0 && asm_ms->name == NULL)
 		{
@@ -40,7 +40,7 @@ int	check_name_comment(char *str1, t_asm *asm_ms)
 				asm_error(4);
 			str += 5;
 			is_space(&str);
-			if(*str++ == '"')
+			if (*str++ == '"')
 			{
 				i = 0;
 				while (str[i] != '"' && str[i] && i < PROG_NAME_LENGTH)
@@ -55,10 +55,11 @@ int	check_name_comment(char *str1, t_asm *asm_ms)
 					//CDE
 					//проверка на валидность строки после ковычки
 					i++;
-while (str[i] == ' ' || str[i] == '\t')//проверка на валидность строки после ковычки \0 # ' ' '\t'
-i++;
-if(str[i] != '#' && str[i] != '\0')
-perror("sym after \"");
+					while (str[i] == ' ' || str[i]
+						== '\t')//проверка на валидность строки после ковычки \0 # ' ' '\t'
+						i++;
+					if (str[i] != '#' && str[i] != '\0')
+						perror("sym after \" ");
 					return (1);
 				}
 				else
@@ -72,58 +73,59 @@ perror("sym after \"");
 		}
 		else if (ft_strncmp(str, NAME_CMD_STRING, 5) == 0 && asm_ms->name != NULL)
 			ft_printf("second name\n");
-		else if (ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0 && asm_ms->comment == NULL)
+		else if (ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0
+			&& asm_ms->comment == NULL)
+		{
+			if (!(asm_ms->comment = ft_strnew(COMMENT_LENGTH)))
+				asm_error(4);
+			str += 8;
+			is_space(&str);
+			if (*str++ == '"')
 			{
-				if (!(asm_ms->comment = ft_strnew(COMMENT_LENGTH)))
-					asm_error(4);
-				str += 8;
-				is_space(&str);
-				if(*str++ == '"')
+				i = 0;
+				while (str[i] != '"' && str[i] && i < COMMENT_LENGTH)
 				{
-					i = 0;
-					while (str[i] != '"' && str[i] && i < COMMENT_LENGTH)
-					{
-						asm_ms->comment[i] = str[i];
+					asm_ms->comment[i] = str[i];
+					i++;
+				}
+				if (i == COMMENT_LENGTH)
+					ft_printf("error number symbols (comment)\n");
+				if (str[i] == '"')
+				{
+					//CDE
+					//проверка на валидность строки после ковычки
+					i++;
+					while (str[i] && (str[i] == ' ' || str[i]
+						== '\t'))//проверка на валидность строки после ковычки \0 # ' ' '\t'
 						i++;
-					}
-					if (i == COMMENT_LENGTH)
-						ft_printf("error number symbols (comment)\n");
-					if (str[i] == '"')
-					{
-						//CDE
-						//проверка на валидность строки после ковычки
-						i++;
-while (str[i] == ' ' || str[i] == '\t')//проверка на валидность строки после ковычки \0 # ' ' '\t'
-i++;
-if(str[i] != '#' && str[i] != '\0')
-perror("sym after \"");
-						return (1);
-					}
-					else
-						check_name_comment_name_p2(i, asm_ms);
+					if (str[i] && str[i] != '#' && str[i] != '\0')
+						perror("sym after \" ");
+					return (1);
 				}
 				else
-				{
-					ft_printf("error symbols\n");
-					exit(0);
-				}
-
+					check_name_comment_name_p2(i, asm_ms);
 			}
-		else if (ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0 && asm_ms->comment != NULL)
-			ft_printf("second comment\n");
+			else
+			{
+				ft_printf("error symbols\n");
+				exit(0);
+			}
+
 		}
-	else
-	{
-		return (1);
+		else if (ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0
+			&& asm_ms->comment != NULL)
+			ft_printf("second comment\n");
+		else if (!asm_ms->comment || !asm_ms->name)
+			ft_printf("command before name/comment\n");
 	}
+	else
+		return (1);
 }
 
 void parse_p1(t_asm *asm_ms)
 {
 	char *str;
-	int i;
 	char *str1;
-
 
 	while (get_next_line(asm_ms->fd_r, &str) > 0)
 	{
@@ -136,5 +138,7 @@ void parse_p1(t_asm *asm_ms)
 			free(str);
 			continue;
 		}
+		if(asm_ms->name && asm_ms->comment)
+			break ;
 	}
 }
