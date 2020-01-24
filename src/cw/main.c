@@ -7,10 +7,14 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 16:04:22 by bharrold          #+#    #+#             */
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*   Updated: 2020/01/24 21:46:57 by bharrold         ###   ########.fr       */
 =======
 /*   Updated: 2020/01/24 21:35:13 by bharrold         ###   ########.fr       */
 >>>>>>> 26cbcb6... Players wrappers debuged + Players initialize done. TODO: Sort players by ID
+=======
+/*   Updated: 2020/01/24 21:46:57 by bharrold         ###   ########.fr       */
+>>>>>>> b6aa62e... destroy cw on terminate && comented some debug
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +28,14 @@ int main (int argc, char **argv)
 	(void)argv;
   	initialize_cw(&cw);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	// cw.visualize_active = 1;
 =======
 	cw.visualize_active = 0;
 >>>>>>> 26cbcb6... Players wrappers debuged + Players initialize done. TODO: Sort players by ID
+=======
+	// cw.visualize_active = 1;
+>>>>>>> b6aa62e... destroy cw on terminate && comented some debug
 
 	// push_ply(&cw, set_ply_file_path(new_ply(3, "name", "comment", "code"), 
 	// 			"file_path", &cw));
