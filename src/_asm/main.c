@@ -39,6 +39,7 @@ int asm_check_name(char *argv)
 {
 	int i;
 
+	//CDE
 	i = 0;
 	while (argv[i])
 		++i;
