@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/23 23:10:17 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/24 20:16:59 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef	struct		s_ply
 	char			*name;
 	char			*comment;
 	int				code_size;
-	char			*ply_code;
+	char			*code;
 	char			*file_path;
 	struct s_ply	*next;
 	struct s_ply	*prev;
@@ -34,7 +34,7 @@ typedef struct		s_arena
 	char			*data;
 	int				arena_size;
 	int				sections[MAX_PLAYERS];
-} 					t_arena;
+}					t_arena;
 
 typedef struct		s_carry
 {
@@ -76,20 +76,43 @@ typedef struct		s_cw
 
 void				terminate(int code, t_cw *cw);
 
-void				initialize_arena(t_cw *cw);
-void				destroy_arena(t_cw *cw);
-int					get_player_in_byte(t_cw *cw, int byte);
+
+int					reader(t_cw *cw, int ac, char **av);
+int					validate(int fd, char **name, char **exec, char **cmnt);
+
+/*
+ * CoreWar enviroment
+*/
+
+void				initialize_cw(t_cw *cw);
+void				destroy_cw(t_cw *cw);
+
+/*
+ *	Players
+*/
+
+t_ply				*new_ply(int number, char *name, char *comment,
+								char *code);
+void				push_ply(t_cw *cw, t_ply *ply);
+t_ply				*set_ply_file_path(t_ply *ply, char *file_path, t_cw *cw);
+void				sort_plys(t_cw *cw);
+void				destroy_ply(t_ply *ply);
+
+/*
+ * Carries
+*/
 
 t_carry				*new_carry(t_cw *cw);
 void				push_new_carry(t_cw *cw, int byte, int player);
 void				destroy_carry(t_carry *carry);
 void				destroy_all_carries(t_cw *cw);
 
-void				initialize_cw(t_cw *cw);
-void				destroy_cw(t_cw *cw);
-
-int					reader(t_cw *cw, int ac, char **av);
-int					validate(int fd, char **name, char **exec, char **cmnt);
+/*
+ * Arena
+*/
+void				initialize_arena(t_cw *cw);
+void				destroy_arena(t_cw *cw);
+int					get_player_in_byte(t_cw *cw, int byte);
 
 /*
  * Main algo 

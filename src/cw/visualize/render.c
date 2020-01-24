@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 22:28:23 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/24 18:27:03 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/24 19:12:38 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,6 @@
 static void choose_color(t_cw *cw, int byte)
 {
 	const int player = get_player_in_byte(cw, byte);
-	
-	// if (player == 1)
-	// 	set_color_on(cw->vis->map, COLOR_WHITE, COLOR_RED);
-	// else if (player == 2)
-	// 	set_color_on(cw->vis->map, COLOR_WHITE, COLOR_GREEN);
-	// else if (player == 3)
-	// 	set_color_on(cw->vis->map, COLOR_WHITE, COLOR_BLUE);
-	// else if (player == 4)
-	// 	set_color_on(cw->vis->map, COLOR_WHITE, COLOR_YELLOW);
 	wattron(cw->vis->map, COLOR_PAIR(player));
 }
 
@@ -42,7 +33,6 @@ static void	render_map(t_cw *cw)
 		wmove(cw->vis->map, j, k);
 		choose_color(cw, i);
 		wprintw(cw->vis->map, "%.2x", cw->arena->data[i]);
-		// wprintw(cw->vis->map, "%.2d", get_player_in_byte(cw, i));
 		if ((i + 1) % (cw->vis->maxx / 3) == 0)
 		{
 			k = 0;

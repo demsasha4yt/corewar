@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 16:04:22 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/23 23:31:51 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/24 19:38:46 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int main (int argc, char **argv)
 	(void)argv;
   	initialize_cw(&cw);
 	cw.count_players = 4;
-	cw.visualize_active = 1;
+	cw.visualize_active = 0;
 
 	initialize_arena(&cw);
 	init_visualize(&cw);

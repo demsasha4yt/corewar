@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 21:18:59 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/23 23:32:47 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/24 18:53:19 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@ static void		init_screen()
 	noecho();
 	cbreak();
 	start_color();
-	init_pair(1, COLOR_BLACK, COLOR_RED);
-	init_pair(2, COLOR_BLACK, COLOR_GREEN);
-	init_pair(3, COLOR_BLACK, COLOR_BLUE);
-	init_pair(4, COLOR_BLACK, COLOR_YELLOW);
+	init_pair(1, COLOR_RED, COLOR_BLACK);
+	init_pair(2, COLOR_GREEN, COLOR_BLACK);
+	init_pair(3, COLOR_BLUE, COLOR_BLACK);
+	init_pair(4, COLOR_YELLOW, COLOR_BLACK);
+	init_pair(5, COLOR_WHITE, COLOR_RED);
+	init_pair(6, COLOR_WHITE, COLOR_GREEN);
+	init_pair(7, COLOR_WHITE, COLOR_BLUE);
+	init_pair(8, COLOR_BLACK, COLOR_YELLOW);
 }
 
 static void		set_sizes(t_cw *cw)
