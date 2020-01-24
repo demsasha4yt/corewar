@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 16:04:22 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/22 21:15:38 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/24 21:46:57 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,31 @@
 int main (int argc, char **argv)
 {
 	t_cw	cw;
-  initialize_cw(&cw);
-	cw.count_players = 4;
+	
+	(void)argc;
+	(void)argv;
+  	initialize_cw(&cw);
+	// cw.visualize_active = 1;
+
+	// push_ply(&cw, set_ply_file_path(new_ply(3, "name", "comment", "code"), 
+	// 			"file_path", &cw));
+	// push_ply(&cw, set_ply_file_path(new_ply(1, "name", "comment", "code"), 
+	//  	"file_path", &cw));
+	// push_ply(&cw, set_ply_file_path(new_ply(-1, "name", "comment", "code"), 
+	// 		"file_path", &cw));
+	// push_ply(&cw, set_ply_file_path(new_ply(-1, "name", "comment", "code"), 
+	// 		"file_path", &cw));
+	initialize_plys(&cw);
 	initialize_arena(&cw);
-	push_new_carry(&cw, 1000, 2);
-	push_new_carry(&cw, 6000, 3);
-	push_new_carry(&cw, 1025, 4);
-	destroy_cw(&cw);
-	// ft_printf("arena sections: [%i, %i, %i, %i]\n", cw.arena->sections[0],cw.arena->sections[1], cw.arena->sections[2], cw.arena->sections[3]);
-	// ft_printf("%d\n", get_player_in_byte(&cw, 4095 + 1024));
+	// t_ply *ptr;
+	// ptr = cw.players;
+	// while (ptr)
+	// {
+	// 	ft_printf("%p %d\n", ptr, ptr->id);
+	// 	ptr = ptr->next;
+	// }
+	init_visualize(&cw);
+	main_cycle(&cw);
+	destroy_visualize(&cw);
+	destroy_cw(&cw);	
 }
