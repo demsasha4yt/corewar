@@ -141,4 +141,5 @@ void parse_p1(t_asm *asm_ms)
 		if(asm_ms->name && asm_ms->comment)
 			break ;
 	}
+
 }
