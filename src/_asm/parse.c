@@ -13,7 +13,7 @@ int	is_space(char **str)
 	return (0);
 }
 
-int is_blank(const char *str)
+int is_blank(char *str)
 {
 	if(!*str)
 	{
@@ -23,16 +23,18 @@ int is_blank(const char *str)
 	return (0);
 }
 
-int	check_name_comment(char *str, t_asm *asm_ms)
+int	check_name_comment(char *str1, t_asm *asm_ms)
 {
 	int i;
+	char *str;
 
+	str = str1;
 	if (*str)
 	{
 		//;
 		if (*str == COMMENT_CHAR	|| *str == ALT_COMMENT_CHAR)
 			return (1);
-		if (ft_strncmp(str, NAME_CMD_STRING, 5) == 0 && asm_ms->name = NULL)
+		if (ft_strncmp(str, NAME_CMD_STRING, 5) == 0 && asm_ms->name == NULL)
 		{
 			if (!(asm_ms->name = ft_strnew(PROG_NAME_LENGTH)))
 				asm_error(4);
@@ -41,12 +43,12 @@ int	check_name_comment(char *str, t_asm *asm_ms)
 			if(*str++ == '"')
 			{
 				i = 0;
-				while (str[i] != '"' && str[i] && i < 128)
+				while (str[i] != '"' && str[i] && i < PROG_NAME_LENGTH)
 				{
 					asm_ms->name[i] = str[i];
 					i++;
 				}
-				if (i == 128)
+				if (i == PROG_NAME_LENGTH)
 					ft_printf("error number symbols (name)\n");
 				if (str[i] == '"')
 				{
@@ -54,7 +56,7 @@ int	check_name_comment(char *str, t_asm *asm_ms)
 					return (1);
 				}
 				else
-					check_name_comment_name_p2(i, asm_ms, str);
+					check_name_comment_name_p2(i, asm_ms);
 			}
 			else
 			{
@@ -63,31 +65,33 @@ int	check_name_comment(char *str, t_asm *asm_ms)
 			}
 
 		}
-		else if (ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0)
-		{
-			str += 8;
-			is_space(&str);
-			if (*str++ == '"')
-			{
-				i = 0;
-				while (str[i] != '"')
-				{
-					asm_ms->comment[i] = str[i];
-					i++;
-				}
-				return (1);
-			}
-			else
-			{
-				ft_printf("error symbols\n");
-				exit(0);
-			}
-		}
-		else
-		{
-			ft_printf("error symbols\n");
-			exit(0);
-		}
+		else if (ft_strncmp(str, NAME_CMD_STRING, 5) == 0 && asm_ms->name != NULL)
+			ft_printf("second name\n");
+//		else if (ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0)
+//		{
+//			str += 8;
+//			is_space(&str);
+//			if (*str++ == '"')
+//			{
+//				i = 0;
+//				while (str[i] != '"')
+//				{
+//					asm_ms->comment[i] = str[i];
+//					i++;
+//				}
+//				return (1);
+//			}
+//			else
+//			{
+//				ft_printf("error symbols\n");
+//				exit(0);
+//			}
+//		}
+//		else
+//		{
+//			ft_printf("error symbols\n");
+//			exit(0);
+//		}
 	}
 	else
 	{
@@ -95,18 +99,20 @@ int	check_name_comment(char *str, t_asm *asm_ms)
 	}
 }
 
-void parse_p1(char *file, t_asm *asm_ms)
+void parse_p1(t_asm *asm_ms)
 {
 	char *str;
 	int i;
+	char *str1;
 
 
-	while (get_next_line(asm_ms->fd_r, &str))
+	while (get_next_line(asm_ms->fd_r, &str) > 0)
 	{
-		if (is_blank(str))
+		str1 = str;
+		if (is_blank(str1))
 			continue;
-		is_space(&str);
-		if (check_name_comment(str, asm_ms))
+		is_space(&str1);
+		if (check_name_comment(str1, asm_ms))
 		{
 			free(str);
 			continue;
