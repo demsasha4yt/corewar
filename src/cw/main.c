@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 16:04:22 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/24 21:35:13 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/24 21:41:49 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ int main (int argc, char **argv)
 	// 		"file_path", &cw));
 	initialize_plys(&cw);
 	initialize_arena(&cw);
-	t_ply *ptr;
-	ptr = cw.players;
-	while (ptr)
-	{
-		ft_printf("%p %d\n", ptr, ptr->id);
-		ptr = ptr->next;
-	}
+	// t_ply *ptr;
+	// ptr = cw.players;
+	// while (ptr)
+	// {
+	// 	ft_printf("%p %d\n", ptr, ptr->id);
+	// 	ptr = ptr->next;
+	// }
 	init_visualize(&cw);
 	main_cycle(&cw);
 	destroy_visualize(&cw);
