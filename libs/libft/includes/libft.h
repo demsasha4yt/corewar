@@ -99,6 +99,7 @@ void			*ft_memccpy(void *restrict dst, const void *restrict src, int c,
 	** Number Functions
 */
 int				ft_atoi(const char *str);
+int				ft_atoi_base(char *nb, int base);
 char			*ft_itoa(int n);
 int				ft_ulllen(unsigned long long num, int base);
 char			*ft_ulltoa(unsigned long long num, int base);

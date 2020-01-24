@@ -22,7 +22,7 @@ typedef	struct	s_ply
 	char			*name;
 	char			*comment;
 	int				code_size;
-	int				*ply_code;
+	char			*ply_code;
 	char			*file_path;
 	struct s_ply	*next;
 	struct s_ply	*prev;

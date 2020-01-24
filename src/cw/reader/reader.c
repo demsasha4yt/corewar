@@ -1,4 +1,5 @@
 #include "corewar.h"
+#include "libft.h"
 #include <fcntl.h>
 
 int     reader(t_cw *cw, int ac, char **av)
@@ -16,15 +17,20 @@ int     reader(t_cw *cw, int ac, char **av)
     (void)cw;
     i = 0;
     id = 0;
-    while (++i < ac)
-    {
-    	if (ft_strcmp(av[i], "-dump") == 0)
-		    cw->count_cycles = ft_atoi(av[(++i)++]);
+    while (++i < ac) {
+	    if (ft_strcmp(av[i], "-dump") == 0)
+	    {
+		    cw->count_cycles = ft_atoi(av[++i]);
+            ++i;
+	    }
 	    id = ++cw->count_players;
 	    if (i >= ac)
 		    return (1);
 	    if (i < ac && ft_strcmp(av[i], "-n") == 0)
-		    id = ft_atoi(av[(++i)++]);
+	    {
+		    id = ft_atoi(av[++i]);
+	        ++i;
+	    }
 	    if (i < ac && (fd = open(av[i], O_RDONLY)) <= 0)
             terminate(1, cw);
 	    if (i >= ac)
@@ -42,7 +48,7 @@ int     reader(t_cw *cw, int ac, char **av)
 	    plyr->file_path = ft_strdup(av[i]);
 	    tmp = cw->players;
 	    prev = NULL;
-	    while (tmp != NULL || tmp->id > plyr->id)
+	    while (tmp != NULL && tmp->id > plyr->id)
 	    {
 	    	prev = tmp;
 	    	tmp = tmp->next;
