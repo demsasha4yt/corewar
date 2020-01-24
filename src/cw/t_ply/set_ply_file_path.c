@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy.c                                          :+:      :+:    :+:   */
+/*   set_ply_file_path.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/22 17:24:04 by bharrold          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2020/01/22 20:03:26 by bharrold         ###   ########.fr       */
-=======
-/*   Updated: 2020/01/24 20:47:38 by bharrold         ###   ########.fr       */
->>>>>>> 26cbcb6... Players wrappers debuged + Players initialize done. TODO: Sort players by ID
+/*   Created: 2020/01/24 19:21:27 by bharrold          #+#    #+#             */
+/*   Updated: 2020/01/24 21:08:04 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	destroy_cw(t_cw *cw)
+static void	_terminate(t_cw *cw, t_ply *ply)
 {
-	destroy_arena(cw);
-	destroy_all_carries(cw);
-	destroy_all_plys(cw);
+	destroy_ply(ply);
+	terminate(3, cw);
+}
+
+t_ply	*set_ply_file_path(t_ply *ply, char *file_path, t_cw *cw)
+{
+	if (!ply)
+		terminate(3, cw);
+	if (!file_path)
+		_terminate(cw, ply);
+	ply->file_path = ft_strdup(file_path);
+	return (ply);
 }

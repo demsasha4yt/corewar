@@ -6,7 +6,11 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2020/01/22 21:16:48 by bharrold         ###   ########.fr       */
+=======
+/*   Updated: 2020/01/24 21:30:56 by bharrold         ###   ########.fr       */
+>>>>>>> 26cbcb6... Players wrappers debuged + Players initialize done. TODO: Sort players by ID
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +68,39 @@ typedef struct		s_cw
 
 void				terminate(int code, t_cw *cw);
 
+<<<<<<< HEAD
 void				initialize_arena(t_cw *cw);
 void				destroy_arena(t_cw *cw);
 int					get_player_in_byte(t_cw *cw, int byte);
+=======
+
+int					reader(t_cw *cw, int ac, char **av);
+int					validate(int fd, char **name, char **exec, char **cmnt);
+
+/*
+ * CoreWar enviroment
+*/
+
+void				initialize_cw(t_cw *cw);
+void				destroy_cw(t_cw *cw);
+
+/*
+ *	Players
+*/
+
+t_ply				*new_ply(int number, char *name, char *comment,
+								char *code);
+void				push_ply(t_cw *cw, t_ply *ply);
+t_ply				*set_ply_file_path(t_ply *ply, char *file_path, t_cw *cw);
+void				initialize_plys(t_cw *cw);
+void				sort_plys(t_cw *cw);
+void				destroy_ply(t_ply *ply);
+void				destroy_all_plys(t_cw *cw);
+
+/*
+ * Carries
+*/
+>>>>>>> 26cbcb6... Players wrappers debuged + Players initialize done. TODO: Sort players by ID
 
 t_carry				*new_carry(t_cw *cw);
 void				push_new_carry(t_cw *cw, int byte, int player);
@@ -78,8 +112,16 @@ void				destroy_cw(t_cw *cw);
 
 
 // visualization
+<<<<<<< HEAD
 
 void				clear_screen();
 void				init_screen();
+=======
+void				init_visualize(t_cw *cw);
+void				destroy_visualize(t_cw *cw);
+void				render(t_cw *cw);
+void				set_color_on(WINDOW *w, short color1, short color2);
+void				set_color_off();
+>>>>>>> 26cbcb6... Players wrappers debuged + Players initialize done. TODO: Sort players by ID
 
 #endif
