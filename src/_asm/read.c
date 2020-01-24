@@ -11,6 +11,7 @@ char *asm_read_cycle(t_asm *asm_ms)
 	file = 0;
 	temp2 = 0;
 	i = -1;
+	//9 баф сайз
 	while ((i = read(asm_ms->fd_r, temp1, 9)) > 0)
 	{
 		temp1[i] = '\0';
@@ -22,5 +23,7 @@ char *asm_read_cycle(t_asm *asm_ms)
 	if (i == -1)
 		asm_error(5);
 	free(temp1);
+	if (file[ft_strlen(file) - 1] != '\n')
+		asm_error(6);
 	return (file);
 }

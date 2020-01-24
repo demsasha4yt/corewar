@@ -25,8 +25,11 @@ typedef struct	s_asm
 	char	*file_name;
 	char	*name;
 	char	*comment;
-
-	//
+	int name_s;
+	//0 - не задан
+	//1 - задается сейчас
+	//2 - задан
+	int comment_s;
 	char	*file_path;
 	int 	current_line;
 	int 	current_column;

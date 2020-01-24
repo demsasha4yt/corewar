@@ -14,6 +14,10 @@ void asm_error(int er_nu)
 		ft_printf("Malloc error\n");
 	else if (er_nu == 5)
 		ft_printf("Read error\n");
+	else if (er_nu == 6)
+		ft_printf("No \\n at the end of the file\n");
+	else if (er_nu == 7)
+		ft_printf("Can't close the file\n");
 	exit(0);
 }
 
@@ -48,10 +52,11 @@ void init_asm_ms(t_asm *asm_ms)
 	asm_ms->fd_r = -1;
 	asm_ms->fd_w = -1;
 	asm_ms->file_name = NULL;
-	if (!(asm_ms->name = ft_strnew(PROG_NAME_LENGTH)))
-		asm_error(4);
-	if (!(asm_ms->comment = ft_strnew(COMMENT_LENGTH)))
-		asm_error(4);
+	asm_ms->name = NULL;
+	asm_ms->comment = NULL;
+	asm_ms->current_line = 0;
+	// if (!(asm_ms->comment = ft_strnew(COMMENT_LENGTH)))
+	// 	asm_error(4);
 }
 
 int main(int argc, char **argv)
@@ -68,7 +73,11 @@ int main(int argc, char **argv)
 		asm_error(2);
 	if ((asm_ms.fd_w = asm_create_file(argv[1], &asm_ms)) == -1)
 		asm_error(3);
-	//file = asm_read_cycle(&asm_ms);
+	file = asm_read_cycle(&asm_ms);
+	if ((close(asm_ms->fd_r) == -1))
+		asm_error(7);
+	if ((asm_ms.fd_r = open(argv[1], O_RDONLY)) == -1)
+		asm_error(2);
 	parse_p1(file, &asm_ms);
 	return (0);
 }
