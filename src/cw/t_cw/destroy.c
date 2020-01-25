@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 17:24:04 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/22 17:26:42 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/22 20:03:26 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,6 @@
 
 void	destroy_cw(t_cw *cw)
 {
-    (void)cw;
+	destroy_arena(cw);
+	destroy_all_carries(cw);
 }
