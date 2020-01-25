@@ -13,7 +13,7 @@ I_I = -I $(I_DIR)
 
 #COMPILER OPTIONS
 CC = gcc
-LFLAGS = $(L_LIBFT)
+LFLAGS = $(L_LIBFT) -lncurses
 IFLAGS = $(I_I) $(I_LIBFT)
 DFLAGS = -g
 EFLAGS = -Wall -Wextra -Werror
@@ -31,14 +31,13 @@ ASM_EXEC = asm
 ASM_SRCS = $(wildcard ./src/_asm/*.c ./src/_asm/**/*.c)
 ASM_OBJS = $(patsubst %.c,%.o,$(ASM_SRCS))
 
-
 all: $(COREWAR_EXEC) $(ASM_EXEC)
 
-$(COREWAR_EXEC): $(COREWAR_OBJS)
+$(COREWAR_EXEC): libft $(COREWAR_OBJS)
 	@$(CC) $(CCFLAGS) -o $(COREWAR_EXEC) $(COREWAR_OBJS)
 	@echo ...........The $(COREWAR_EXEC) program builded!............
 
-$(ASM_EXEC): $(ASM_OBJS)
+$(ASM_EXEC): libft $(ASM_OBJS)
 	@$(CC) $(CCFLAGS) -o $(ASM_EXEC) $(ASM_OBJS)
 	@echo ...........The $(ASM_EXEC) program builded!............
 
@@ -46,7 +45,7 @@ $(ASM_EXEC): $(ASM_OBJS)
 	@$(CC) $(CFLAGS) $< -c -o $@
 	@echo [OBJS]:    [$@ Builded...]
 
-clean:
+clean: libftclean
 	@$(RM) -f $(COREWAR_OBJS)
 	@$(RM) -f $(ASM_OBJS)
 	@echo [RM]: All .o cleaned!
@@ -56,4 +55,16 @@ fclean: clean
 	@$(RM) -f $(ASM_EXEC)
 	@echo [RM]: All executables cleaned!
 
-re: fclean all
+re: fclean libftfclean all
+
+libft:
+	@echo [LIBFT]: Libft Make
+	@make -C $(D_LIBFT)
+
+libftclean:
+	@echo [LIBFT]: Libft clean
+	@make -C $(D_LIBFT) clean
+
+libftfclean:
+	@echo [LIBFT]: Libft fclean
+	@make -C $(D_LIBFT) fclean
