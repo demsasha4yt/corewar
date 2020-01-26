@@ -3,98 +3,73 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tlynesse <tlynesse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 20:44:50 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/23 20:44:59 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/26 19:26:23 by tlynesse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	get_base_length(char *base)
-{
-	int	base_length;
-	int	j;
+#include "libft.h"
 
-	base_length = 0;
-	while (base[base_length])
-	{
-		if (base[base_length] == '-' || base[base_length] == '+')
-			return (0);
-		j = base_length + 1;
-		while (base[j])
-		{
-			if (base[base_length] == base[j])
-				return (0);
-			++j;
-		}
-		++base_length;
-	}
-	if (base_length < 2)
+static int			ft_power(int nb, int power)
+{
+	if (power == 0)
+		return (1);
+	else if (power < 0)
 		return (0);
-	return (base_length);
+	return (nb * ft_power(nb, power - 1));
 }
 
-int	check_errors(char *str, char *base)
+static int			convert_and_check_nb(char c, int base)
 {
-	int	i;
-	int	j;
-	int	start;
+	int		result;
 
-	start = 0;
-	while (str[start] != '\0' && (str[start] == ' ' || str[start] == '\t' ||
-		str[start] == '\r' || str[start] == '\n' || str[start] == '\v' ||
-		str[start] == '\f'))
-		start++;
-	i = start;
-	while (str[i])
-	{
-		j = 0;
-		while (base[j] && (str[i] != base[j] ||
-				(str[i] == '-' || str[i] == '+')))
-			++j;
-		if (str[i] != base[j] && str[i] != '-' && str[i] != '+')
-			return (0);
-		i++;
-	}
-	if (i == 0)
-		return (0);
-	return (1);
+	if (c >= '0' && c <= '9')
+		result = c - 48;
+	else if (c >= 'a' && c <= 'z')
+		result = c - 97 + 10;
+	else if (c >= 'A' && c <= 'Z')
+		result = c - 65 + 10;
+	else
+		result = -1;
+	if (result < base && result != -1)
+		return (result);
+	else
+		return (-1);
 }
 
-int	get_nb(char c, char *base)
+static int			length_number(char *str, int base)
 {
-	int	i;
+	int		length;
 
-	i = 0;
-	while (base[i] && base[i] != c)
-		i++;
-	return (i);
+	length = 0;
+	while (str[length])
+	{
+		if (convert_and_check_nb(str[length], base) == -1)
+			break ;
+		length++;
+	}
+	return (length);
 }
 
-int	ft_atoi_base(char *str, char *base)
+int					ft_atoi_base(char *nb, int base)
 {
-	int	s;
-	int	i;
-	int	res;
-	int	negative;
-	int	base_length;
+	int			result;
+	long long	length;
 
-	if (!(base_length = get_base_length(base)) || !check_errors(str, base))
-		return (0);
-	s = 0;
-	while (str[s] != '\0' && (str[s] == ' ' || str[s] == '\t' || str[s] == '\r'
-			|| str[s] == '\n' || str[s] == '\v' || str[s] == '\f'))
-		s++;
-	i = s - 1;
-	res = 0;
-	negative = 1;
-	while (str[++i] && (((str[i] == '-' || str[i] == '+') && i == s) ||
-			(str[i] != '-' && str[i] != '+')))
+	if (base == 10)
+		return (ft_atoi(nb));
+	while (*nb == ' ' || *nb == '\t' || *nb == '\n'
+		|| *nb == '\v' || *nb == '\r' || *nb == '\f')
+		nb++;
+	result = 0;
+	length = length_number(nb, base) - 1;
+	while (*nb && length >= 0 && convert_and_check_nb(*nb, base) != -1)
 	{
-		if (str[i] == '-')
-			negative = -1;
-		else if (str[i] != '+')
-			res = (res * base_length) + (get_nb(str[i], base));
+		result += convert_and_check_nb(*nb, base) * ft_power(base, length);
+		nb++;
+		length--;
 	}
-	return (res * negative);
+	return ((int)result);
 }
