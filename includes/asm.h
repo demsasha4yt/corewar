@@ -18,6 +18,19 @@
 # include "libft.h"
 # include "op.h"
 
+typedef struct s_op
+{
+	char *name;
+	int args_num;
+	int args_types[3];
+	int code;
+	int cycles;
+		char *description;
+				int args_types_code;
+	int t_dir_size;
+} t_op;
+
+extern t_op op_tab[17];
 typedef struct s_label
 {
 	char *name;
@@ -37,19 +50,6 @@ typedef struct s_token
 	int arg_nu;
 	struct s_token *next;
 } t_token;
-
-typedef struct s_op
-{
-	char *name;
-
-	int args_num;
-	int args_types[3];
-	int code;
-	int cycles;
-		char *description;
-				int args_types_code;
-	int t_dir_size;
-} t_op;
 
 typedef struct	s_asm
 {
@@ -81,7 +81,6 @@ int is_comment(char *str);
 int	check_name_comment(char *str1, t_asm *asm_ms);
 void init_asm_ms(t_asm *asm_ms);
 int is_blank(char *str);
-void init_op(t_asm *asm_ms);
 t_token *init_token_p1(t_asm *asm_ms);
 int init_label(char **str, t_label *label, t_asm *asm_ms, int i);
 int check_label(char **str, t_asm *asm_ms);
