@@ -20,12 +20,11 @@ int is_blank(char *str)
 	i = 0;
 	while (str[i] == ' ' || str[i] == '\t')
 		++i;
-	if (!(str[i]) || str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR);
+	if (!(str[i]) || str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR)
 	{
 		free(str);
 		return (1);
 	}
-	()
 	return (0);
 }
 

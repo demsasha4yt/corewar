@@ -11,16 +11,16 @@ void parse_p2(t_asm *asm_ms)
 		if (is_blank(str1))
 			continue;
 		is_space(&str1);
-		if (check_label(str1, asm_ms))
-		{
-			// if ((get_next_line(asm_ms->fd_r, &str1) > 0) &&
-			// (check_command(str1, asm_ms)))
-			// check_command(str1)
-		}
-		else if (check_command(str1, asm_ms))
-		{
-
-		}
+		// if (check_label(str1, asm_ms))
+		// {
+		// 	// if ((get_next_line(asm_ms->fd_r, &str1) > 0) &&
+		// 	// (check_command(str1, asm_ms)))
+		// 	// check_command(str1)
+		// }
+		// else if (check_command(str1, asm_ms))
+		// {
+		//
+		// }
 		// //check_comment
 		// if (check_label(str1, asm_ms))
 		// {
