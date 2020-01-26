@@ -6,6 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
+
 /*   Updated: 2020/01/24 21:38:27 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -77,6 +78,10 @@ typedef struct		s_cw
 void				terminate(int code, t_cw *cw);
 
 
+void				initialize_arena(t_cw *cw);
+void				destroy_arena(t_cw *cw);
+int					get_player_in_byte(t_cw *cw, int byte);
+
 int					reader(t_cw *cw, int ac, char **av);
 int					validate(int fd, char **name, char **exec, char **cmnt);
 
@@ -122,11 +127,13 @@ int					get_player_in_byte(t_cw *cw, int byte);
 void				main_cycle(t_cw *cw);
 
 
-// visualization
+
+void				clear_screen();
+void				init_screen();
+
 void				init_visualize(t_cw *cw);
 void				destroy_visualize(t_cw *cw);
 void				render(t_cw *cw);
 void				set_color_on(WINDOW *w, short color1, short color2);
 void				set_color_off();
-
 #endif

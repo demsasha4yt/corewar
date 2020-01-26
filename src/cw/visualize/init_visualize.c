@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_visualize.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tlynesse <tlynesse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 21:18:59 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/24 18:53:19 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/26 19:44:46 by tlynesse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void		init_screen()
+void		init_screen()
 {
 	initscr();
 	raw();

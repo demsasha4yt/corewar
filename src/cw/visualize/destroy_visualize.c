@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   destroy_visualize.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tlynesse <tlynesse@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/23 21:39:33 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/23 22:02:43 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/26 19:43:27 by tlynesse          #+#    #+#             */
+/*   Updated: 2020/01/26 19:43:56 by tlynesse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "corewar.h"
 
