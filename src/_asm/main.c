@@ -39,11 +39,6 @@ int asm_check_name(char *argv)
 {
 	int i;
 
-<<<<<<< HEAD
-	//CDE
-=======
-	//ABC
->>>>>>> kbessa
 	i = 0;
 	while (argv[i])
 		++i;
@@ -60,6 +55,7 @@ void init_asm_ms(t_asm *asm_ms)
 	asm_ms->name = NULL;
 	asm_ms->comment = NULL;
 	asm_ms->current_line = 0;
+	asm_ms->first = NULL;
 	// if (!(asm_ms->comment = ft_strnew(COMMENT_LENGTH)))
 	// 	asm_error(4);
 }

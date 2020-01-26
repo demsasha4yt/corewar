@@ -18,6 +18,16 @@
 # include "libft.h"
 # include "op.h"
 
+typedef struct s_token
+{
+	char *label;
+	char *command;
+	char *arg1;
+	char *arg2;
+	char *arg3;
+	s_token *next;
+} t_asm;
+
 typedef struct	s_asm
 {
 	int fd_r;
@@ -26,6 +36,7 @@ typedef struct	s_asm
 	char	*name;
 	char	*comment;
 	int name_s;
+	s_token *first;
 	//0 - не задан
 	//1 - задается сейчас
 	//2 - задан
@@ -35,6 +46,7 @@ typedef struct	s_asm
 	int 	current_column;
 	char	*label;
 	char	*output;
+
 	t_list	*cmds;
 }				t_asm;
 
