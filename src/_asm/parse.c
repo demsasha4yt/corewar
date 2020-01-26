@@ -7,10 +7,14 @@ void parse_p2(t_asm *asm_ms)
 
 	while (get_next_line(asm_ms->fd_r, &str) > 0)
 	{
+		t_token token;
+		ft_bzero(&token, sizeof(t_token));
 		str1 = str;
 		if (is_blank(str1))
 			continue;
 		is_space(&str1);
+		if(*str == '\t')
+			check_command(asm_ms, str1, &token);
 		// if (check_label(str1, asm_ms))
 		// {
 		// 	// if ((get_next_line(asm_ms->fd_r, &str1) > 0) &&
@@ -50,10 +54,7 @@ void parse_p1(t_asm *asm_ms)
 			continue;
 		is_space(&str1);
 		if (check_name_comment(str1, asm_ms))
-		{
 			free(str);
-			continue;
-		}
 		if(asm_ms->name && asm_ms->comment)
 			break ;
 	}

@@ -56,7 +56,6 @@ void init_asm_ms(t_asm *asm_ms)
 	asm_ms->comment = NULL;
 	asm_ms->current_line = 0;
 	asm_ms->first = NULL;
-	init_op(asm_ms);
 	// if (!(asm_ms->comment = ft_strnew(COMMENT_LENGTH)))
 	// 	asm_error(4);
 }

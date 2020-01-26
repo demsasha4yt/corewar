@@ -18,9 +18,14 @@
 # include "libft.h"
 # include "op.h"
 
+typedef  struct s_label
+{
+	char *name;
+	int byte;
+}t_label;
+
 typedef struct s_token
 {
-	char *label;
 	char *command;
 	char *arg1;
 	char *arg2;
@@ -29,21 +34,25 @@ typedef struct s_token
 	int size2;
 	int size3;
 	int arg_nu;
+	int command_size;
+	int byte;
+	int index;
 	struct s_token *next;
 } t_token;
 
 typedef struct s_op
 {
 	char *name;
-
 	int args_num;
 	int args_types[3];
 	int code;
 	int cycles;
-		char *description;
-				int args_types_code;
+	char *description;
+	int args_types_code;
 	int t_dir_size;
 } t_op;
+
+extern t_op op_tab[17];
 
 typedef struct	s_asm
 {
@@ -63,7 +72,7 @@ typedef struct	s_asm
 	int 	current_column;
 	char	*label;
 	char	*output;
-	t_op **op;
+	int current_byte; ///+размер команды
 	t_list	*cmds;
 }				t_asm;
 
@@ -71,16 +80,15 @@ typedef struct	s_asm
 
 
 
-void parse_p1(t_asm *asm_ms);
-char *asm_read_cycle(t_asm *asm_ms);
-void asm_error(int er_nu);
+void	parse_p1(t_asm *asm_ms);
+char	*asm_read_cycle(t_asm *asm_ms);
+void	asm_error(int er_nu);
 void	ft_start(char *file, t_asm *asm_ms, int fd);
-int	is_space(char **str);
-int is_comment(char *str);
-int	check_name_comment(char *str1, t_asm *asm_ms);
-
-int is_blank(char *str);
-void init_op(t_asm *asm_ms);
+int		is_space(char **str);
+int		is_comment(char *str);
+int		check_name_comment(char *str1, t_asm *asm_ms);
+int		is_blank(char *str);
+int		check_command(t_asm *asm_ms, char *str, t_token *current);
 
 
 #endif
