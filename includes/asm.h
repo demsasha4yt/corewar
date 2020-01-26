@@ -56,6 +56,7 @@ char *asm_read_cycle(t_asm *asm_ms);
 void asm_error(int er_nu);
 void	ft_start(char *file, t_asm *asm_ms, int fd);
 int	is_space(char **str);
+int is_comment(char *str);
 int	check_name_comment(char *str1, t_asm *asm_ms);
 
 
