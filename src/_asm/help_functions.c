@@ -2,9 +2,9 @@
 
 int	is_space(char **str)
 {
-	if(**str == ' ' || **str == '\t')
+	if(**str && (**str == ' ' || **str == '\t'))
 	{
-		while (**str == ' ' || **str == '\t')
+		while (**str && (**str == ' ' || **str == '\t'))
 		{
 			(*str)++;
 		}
@@ -18,7 +18,7 @@ int is_blank(char *str)
 	int i;
 
 	i = 0;
-	while (str[i] == ' ' || str[i] == '\t')
+	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 		++i;
 	if (!(str[i]) || str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR)
 	{

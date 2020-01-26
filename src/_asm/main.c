@@ -47,20 +47,6 @@ int asm_check_name(char *argv)
 	return (0);
 }
 
-void init_asm_ms(t_asm *asm_ms)
-{
-	asm_ms->fd_r = -1;
-	asm_ms->fd_w = -1;
-	asm_ms->file_name = NULL;
-	asm_ms->name = NULL;
-	asm_ms->comment = NULL;
-	asm_ms->current_line = 0;
-	asm_ms->first = NULL;
-	init_op(asm_ms);
-	// if (!(asm_ms->comment = ft_strnew(COMMENT_LENGTH)))
-	// 	asm_error(4);
-}
-
 int main(int argc, char **argv)
 {
 	t_asm asm_ms;

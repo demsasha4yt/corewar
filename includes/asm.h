@@ -18,9 +18,15 @@
 # include "libft.h"
 # include "op.h"
 
+typedef struct s_label
+{
+	char *name;
+	int byte;
+	struct s_label *next;
+} t_label;
+
 typedef struct s_token
 {
-	char *label;
 	char *command;
 	char *arg1;
 	char *arg2;
@@ -54,22 +60,17 @@ typedef struct	s_asm
 	char	*comment;
 	int name_s;
 	struct s_token *first;
-	//0 - не задан
-	//1 - задается сейчас
-	//2 - задан
+	struct s_label *label;
+	int current_byte;
+	//
 	int comment_s;
 	char	*file_path;
 	int 	current_line;
 	int 	current_column;
-	char	*label;
 	char	*output;
 	t_op **op;
 	t_list	*cmds;
 }				t_asm;
-
-
-
-
 
 void parse_p1(t_asm *asm_ms);
 char *asm_read_cycle(t_asm *asm_ms);
@@ -78,9 +79,12 @@ void	ft_start(char *file, t_asm *asm_ms, int fd);
 int	is_space(char **str);
 int is_comment(char *str);
 int	check_name_comment(char *str1, t_asm *asm_ms);
-
+void init_asm_ms(t_asm *asm_ms);
 int is_blank(char *str);
 void init_op(t_asm *asm_ms);
+t_token *init_token_p1(t_asm *asm_ms);
+int init_label(char **str, t_label *label, t_asm *asm_ms, int i);
+int check_label(char **str, t_asm *asm_ms);
 
 
 #endif
