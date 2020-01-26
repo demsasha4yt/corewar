@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 18:16:42 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/23 20:45:50 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/26 20:46:46 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,8 @@ char			*ft_strtrim(char const *s);
 char			**ft_strsplit(char const *s, char c);
 void			ft_strclr(char *s);
 void			ft_putendl_fd(char const *s, int fd);
-
+int				ft_isnumeric(char *str);
+int				ft_isnumber(char *str);
 /*
 	** WideChar Functions
 */
