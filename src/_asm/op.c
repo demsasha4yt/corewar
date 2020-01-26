@@ -41,5 +41,12 @@ t_op    op_tab[17] =
 };
 
 void init_op(t_asm *asm_ms) {
-	asm_ms->op = op_tab;
+	int i;
+
+	i = -1;
+	if (!(asm_ms->op = malloc(sizeof(t_op *) * 17)))
+		asm_error(4);
+	while(++i < 16)
+		asm_ms->op[i] = &op_tab[i];
+	asm_ms->op[i] = 0;
 }

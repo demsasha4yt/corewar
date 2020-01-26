@@ -18,6 +18,33 @@
 # include "libft.h"
 # include "op.h"
 
+typedef struct s_token
+{
+	char *label;
+	char *command;
+	char *arg1;
+	char *arg2;
+	char *arg3;
+	int size1;
+	int size2;
+	int size3;
+	int arg_nu;
+	struct s_token *next;
+} t_token;
+
+typedef struct s_op
+{
+	char *name;
+
+	int args_num;
+	int args_types[3];
+	int code;
+	int cycles;
+		char *description;
+				int args_types_code;
+	int t_dir_size;
+} t_op;
+
 typedef struct	s_asm
 {
 	int fd_r;
@@ -26,6 +53,7 @@ typedef struct	s_asm
 	char	*name;
 	char	*comment;
 	int name_s;
+	struct s_token *first;
 	//0 - не задан
 	//1 - задается сейчас
 	//2 - задан
@@ -35,14 +63,24 @@ typedef struct	s_asm
 	int 	current_column;
 	char	*label;
 	char	*output;
+	t_op **op;
 	t_list	*cmds;
 }				t_asm;
+
+
+
+
 
 void parse_p1(t_asm *asm_ms);
 char *asm_read_cycle(t_asm *asm_ms);
 void asm_error(int er_nu);
 void	ft_start(char *file, t_asm *asm_ms, int fd);
-void check_name_comment_name_p1(int i, t_asm *asm_ms);
-void check_name_comment_name_p2(int i, t_asm *asm_ms);
+int	is_space(char **str);
+int is_comment(char *str);
+int	check_name_comment(char *str1, t_asm *asm_ms);
+
+int is_blank(char *str);
+void init_op(t_asm *asm_ms);
+
 
 #endif
