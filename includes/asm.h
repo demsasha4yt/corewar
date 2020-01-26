@@ -25,8 +25,9 @@ typedef struct s_token
 	char *arg1;
 	char *arg2;
 	char *arg3;
-	s_token *next;
-} t_asm;
+	int arg_nu;
+	struct s_token *next;
+} t_token;
 
 typedef struct	s_asm
 {
@@ -36,7 +37,7 @@ typedef struct	s_asm
 	char	*name;
 	char	*comment;
 	int name_s;
-	s_token *first;
+	struct s_token *first;
 	//0 - не задан
 	//1 - задается сейчас
 	//2 - задан
@@ -54,7 +55,8 @@ void parse_p1(t_asm *asm_ms);
 char *asm_read_cycle(t_asm *asm_ms);
 void asm_error(int er_nu);
 void	ft_start(char *file, t_asm *asm_ms, int fd);
-void check_name_comment_name_p1(int i, t_asm *asm_ms);
-void check_name_comment_name_p2(int i, t_asm *asm_ms);
+int	is_space(char **str);
+int	check_name_comment(char *str1, t_asm *asm_ms);
+
 
 #endif
