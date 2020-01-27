@@ -84,6 +84,6 @@ int is_blank(char *str);
 t_token *init_token_p1(t_asm *asm_ms);
 int init_label(char **str, t_label *label, t_asm *asm_ms, int i);
 int check_label(char **str, t_asm *asm_ms);
-
+void write_champ_code(t_asm *asm_ms);
 
 #endif

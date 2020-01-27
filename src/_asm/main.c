@@ -31,7 +31,7 @@ int asm_create_file(char *argv, t_asm *asm_ms)
 	if (!(asm_ms->file_name = ft_strjoin(temp, ".cor")))
 		asm_error(4);
 	free(temp);
-	fd = open(asm_ms->file_name, O_WRONLY);
+	fd = open(asm_ms->file_name, O_RDWR | O_CREAT, S_IREAD|S_IWRITE);
 	return (fd);
 }
 
@@ -52,6 +52,7 @@ int main(int argc, char **argv)
 	t_asm asm_ms;
 	char *file = NULL;
 
+	printf("%d\n", COREWAR_EXEC_MAGIC);
 	init_asm_ms(&asm_ms);
 	if (argc != 2)
 		asm_error(0);
@@ -67,5 +68,7 @@ int main(int argc, char **argv)
 	if ((asm_ms.fd_r = open(argv[1], O_RDONLY)) == -1)
 		asm_error(2);
 	parse_p1(&asm_ms);
+	write_champ_code(&asm_ms);
+	//free_all(&asm_ms);
 	return (0);
 }
