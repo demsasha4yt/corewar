@@ -4,6 +4,7 @@
 		"libft.h": "c",
 		"asm.h": "c",
 		"get_next_line.h": "c",
-		"limits.h": "c"
+		"limits.h": "c",
+		"inttypes.h": "c"
 	}
 }

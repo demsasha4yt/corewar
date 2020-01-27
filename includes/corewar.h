@@ -6,8 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-
-/*   Updated: 2020/01/24 21:38:27 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/26 23:00:47 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +16,9 @@
 # include "libft.h"
 # include "op.h"
 # include <curses.h>
+# include <inttypes.h>
+
+# define INT_SIZE 4
 
 typedef	struct		s_ply
 {
@@ -77,13 +79,29 @@ typedef struct		s_cw
 
 void				terminate(int code, t_cw *cw);
 
+/*
+**	Reader
+*/
+void				reader(t_cw *cw, int ac, char **av);
+void				read_champion(t_cw *cw, char *file);
+void				read_n_flag(t_cw *cw, int *i, char **argv);
+void				read_dump_flag(t_cw *cw, int *i, char **argv);
+void				read_d_flag(t_cw *cw, int *i, char **argv);
+void				read_v_flag(t_cw *cw, int *i, char **argv);
+void				skip_bytes(int fd, t_cw *cw);
 
-void				initialize_arena(t_cw *cw);
-void				destroy_arena(t_cw *cw);
-int					get_player_in_byte(t_cw *cw, int byte);
+void				read_magic(int fd, t_cw *cw);
+char				*read_name(int fd, t_cw *cw);
+int					read_code_size(int fd, t_cw *cw);
+char				*read_comment(int fd, t_cw *cw);
+char				*read_code(int fd, int size, t_cw *cw);
 
-int					reader(t_cw *cw, int ac, char **av);
-int					validate(int fd, char **name, char **exec, char **cmnt);
+/*
+**	Validators
+*/
+
+int					cw_is_flag(char *str, char *flag);
+int					cw_is_champion_file(char *str);
 
 /*
  * CoreWar enviroment
@@ -127,13 +145,18 @@ int					get_player_in_byte(t_cw *cw, int byte);
 void				main_cycle(t_cw *cw);
 
 
+/*
+** UTILS
+*/
 
-void				clear_screen();
-void				init_screen();
+int					calc_addr(int addr);
+int					bytes_to_int(char *bytes, size_t size);
 
+// visualization
 void				init_visualize(t_cw *cw);
 void				destroy_visualize(t_cw *cw);
 void				render(t_cw *cw);
 void				set_color_on(WINDOW *w, short color1, short color2);
 void				set_color_off();
+
 #endif

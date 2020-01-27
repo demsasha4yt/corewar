@@ -56,7 +56,7 @@ int				print_oux(t_spec *spec, t_buff *buff, va_list *ap)
 		print_oux_helper(spec, buff, (unsigned long long)va_arg(*ap,
 													unsigned long long));
 	else if (spec->modif == e_modif_z)
-		print_oux_helper(spec, buff, (uintmax_t)va_arg(*ap, intmax_t));
+		print_oux_helper(spec, buff, (__uintmax_t)va_arg(*ap, __intmax_t));
 	else if (spec->modif == e_modif_j)
 		print_oux_helper(spec, buff, (size_t)va_arg(*ap, size_t));
 	return (0);

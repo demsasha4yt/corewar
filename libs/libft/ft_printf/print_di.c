@@ -49,7 +49,7 @@ int				print_di(t_spec *spec, t_buff *buff, va_list *ap)
 	else if (spec->modif == e_modif_ll)
 		print_di_helper(spec, buff, (long long)va_arg(*ap, long long));
 	else if (spec->modif == e_modif_z)
-		print_di_helper(spec, buff, (intmax_t)va_arg(*ap, intmax_t));
+		print_di_helper(spec, buff, (__intmax_t)va_arg(*ap, __intmax_t));
 	else if (spec->modif == e_modif_j)
 		print_di_helper(spec, buff, (ssize_t)va_arg(*ap, ssize_t));
 	return (0);
