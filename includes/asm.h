@@ -26,10 +26,11 @@ typedef  struct s_label
 
 typedef struct s_token
 {
-	char *command;
-	char *arg1;
-	char *arg2;
-	char *arg3;
+	char *name;
+	int code_operation;
+	int arg1;
+	int arg2;
+	int arg3;
 	int size1;
 	int size2;
 	int size3;
@@ -79,7 +80,7 @@ typedef struct	s_asm
 
 
 
-
+void	error(char *str);
 void	parse_p1(t_asm *asm_ms);
 char	*asm_read_cycle(t_asm *asm_ms);
 void	asm_error(int er_nu);
@@ -89,6 +90,9 @@ int		is_comment(char *str);
 int		check_name_comment(char *str1, t_asm *asm_ms);
 int		is_blank(char *str);
 int		check_command(t_asm *asm_ms, char *str, t_token *current);
+int _live_check(char *str);
+void _ld_check(t_asm *asm_ms, char *str, t_token *current);
+
 
 
 #endif

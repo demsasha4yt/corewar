@@ -60,6 +60,13 @@ void init_asm_ms(t_asm *asm_ms)
 	// 	asm_error(4);
 }
 
+void					error(char *str)
+{
+	ft_printf("\x1B[31mError, \033[0m", str);
+	ft_printf("\x1B[31m%s\033[0m\n", str);
+	exit(-1);
+}
+
 int main(int argc, char **argv)
 {
 	t_asm asm_ms;
