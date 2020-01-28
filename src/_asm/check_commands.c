@@ -10,6 +10,8 @@ int	check_and_save_command(t_asm *asm_ms, char *str, t_token *current)
 		if(ft_strncmp(str,op_tab[i].name, ft_strlen(op_tab[i].name)) == 0)
 		{
 			current->name = op_tab[i].name;
+			current->arg_numbers = op_tab[i].args_num;
+			current->code_operation = op_tab[i].code;
 			current->index = i;
 			return (1);
 		}
@@ -36,8 +38,8 @@ int	check_and_save_command(t_asm *asm_ms, char *str, t_token *current)
 
 void check_valid_commands(t_asm *asm_ms, char *str, t_token *current)
 {
-	if(ft_strcmp(current->name, "live") == 0)
-		_live_check(str);
+	if(ft_strcmp(current->name, "live") == 0 || ft_strcmp(current->name, "fork") == 0 || ft_strcmp(current->name, "lfork") == 0 || ft_strcmp(current->name, "zjmp") == 0)
+		_live_check_fork_lfork(asm_ms, str, current);
 	else if(ft_strcmp(current->name, "ld") == 0)
 		_ld_check(asm_ms, str, current);
 }
