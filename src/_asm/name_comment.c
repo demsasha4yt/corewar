@@ -60,7 +60,7 @@ void check_comment_p2(int i, t_asm *asm_ms)
 
 int check_name_p1(char *str, t_asm *asm_ms, int i)
 {
-	if (!(asm_ms->name = ft_strnew(PROG_NAME_LENGTH)))
+	if (!(asm_ms->name = (char *)ft_memalloc((sizeof(char) * PROG_NAME_LENGTH))))
 		asm_error(4);
 	str += 5;
 	is_space(&str);
@@ -94,7 +94,7 @@ int check_name_p1(char *str, t_asm *asm_ms, int i)
 
 int check_comment_p1(char *str, t_asm *asm_ms, int i)
 {
-	if (!(asm_ms->comment = ft_strnew(COMMENT_LENGTH)))
+	if (!(asm_ms->comment = (char *)ft_memalloc(sizeof(char) * COMMENT_LENGTH)))
 		asm_error(4);
 	str += 8;
 	is_space(&str);

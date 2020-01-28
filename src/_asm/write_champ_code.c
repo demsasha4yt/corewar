@@ -1,22 +1,22 @@
 #include "asm.h"
 
-int char_to_int(char c)
-{
-	if (c >= '0' && c <= '9')
-		return (c - '0');
-	else if (c == 'a')
-		return (10);
-	else if (c == 'b')
-		return (11);
-	else if (c == 'c')
-		return (12);
-	else if (c == 'd')
-		return (13);
-	else if (c == 'e')
-		return (14);
-	else
-		return (15);
-}
+// int char_to_int(char c)
+// {
+// 	if (c >= '0' && c <= '9')
+// 		return (c - '0');
+// 	else if (c == 'a')
+// 		return (10);
+// 	else if (c == 'b')
+// 		return (11);
+// 	else if (c == 'c')
+// 		return (12);
+// 	else if (c == 'd')
+// 		return (13);
+// 	else if (c == 'e')
+// 		return (14);
+// 	else
+// 		return (15);
+// }
 
 void write_magic_header(t_asm *asm_ms)
 {
@@ -28,6 +28,7 @@ void write_magic_header(t_asm *asm_ms)
 	i = COREWAR_EXEC_MAGIC;
 	write(asm_ms->fd_w, &ch, 1);
 	char_to_print = (char *)(&i);
+	ft_printf("%d", ft_strlen(char_to_print));
 	write(asm_ms->fd_w, char_to_print, 3);
 }
 

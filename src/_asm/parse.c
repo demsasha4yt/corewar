@@ -1,5 +1,23 @@
 #include "asm.h"
 
+void parse_p3(t_asm *asm_ms)
+{
+	t_token *temp;
+
+	temp = asm_ms->first;
+	asm_ms->current_byte = 0;
+	while (temp)
+	{
+		if ((token->type_args / 100) != 0)
+			create_args(token, 1, asm_ms);
+		else if (*(token->command) != (char)16)
+			((create_dir_arg(token, 1, 1, asm_ms)))
+		// else
+		// 	//create_reg_arg
+		temp = temp->next;
+	}
+}
+
 void parse_p2(t_asm *asm_ms)
 {
 	char *str;
@@ -20,6 +38,7 @@ void parse_p2(t_asm *asm_ms)
 		}
 		free(str);
 	}
+	//parse_p3(t_asm *asm);
 }
 
 void parse_p1(t_asm *asm_ms)

@@ -40,6 +40,12 @@ int is_comment(char *str)
 //1 - T_REG
 //2 - T-DIR
 //3 - T-IND
+
+char shell_arg_byte(int type_args)
+{
+	return (arg_byte(type_args / 100, (type_args / 10) % 10, type_args % 10));
+}
+
 char arg_byte(int arg1, int arg2, int arg3)
 {
 	int res;
