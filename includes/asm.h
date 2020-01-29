@@ -47,6 +47,7 @@ typedef struct s_token
 	int size1;
 	int size2;
 	int size3;
+	int type_args;
 	int arg_nu;
 	struct s_token *next;
 } t_token;
@@ -86,5 +87,11 @@ int init_label(char **str, t_label *label, t_asm *asm_ms, int i);
 int check_label(char **str, t_asm *asm_ms);
 void write_champ_code(t_asm *asm_ms);
 void create_command(t_token *token);
+int create_reg_arg(t_token *token, int byte, int arg_nu, t_asm *asm_ms);
+int create_dir_arg(t_token *token, int byte, int arg_nu, t_asm *asm_ms);
+int create_ind_arg(t_token *token, int byte, int arg_nu, t_asm *asm_ms);
+void create_args(t_token *token, t_asm *asm_ms);
+int count_label(t_asm *asm_ms, char *str, int byte);
+int add(t_token *token, int to_add, int byte, int size);
 
 #endif

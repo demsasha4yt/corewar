@@ -41,11 +41,6 @@ int is_comment(char *str)
 //2 - T-DIR
 //3 - T-IND
 
-char shell_arg_byte(int type_args)
-{
-	return (arg_byte(type_args / 100, (type_args / 10) % 10, type_args % 10));
-}
-
 char arg_byte(int arg1, int arg2, int arg3)
 {
 	int res;
@@ -55,21 +50,26 @@ char arg_byte(int arg1, int arg2, int arg3)
 		res += 4;
 	else if (arg3 == 2)
 	 	res += 8;
-	else
+	else if (arg3 == 3)
 		res += 12;
 	if (arg2 == 1)
 		res += 16;
 	else if (arg2 == 2)
 		res += 32;
-	else
+	else if (arg2 == 3)
 		res += 48;
 	if (arg1 == 1)
 		res += 64;
 	else if (arg1 == 2)
 	 	res += 128;
-	else
+	else if (arg1 == 3)
 		res += 192;
 	return ((char)res);
+}
+
+char shell_arg_byte(int type_args)
+{
+	return (arg_byte(type_args / 100, (type_args / 10) % 10, type_args % 10));
 }
 
 int count_label(t_asm *asm_ms, char *str, int byte)

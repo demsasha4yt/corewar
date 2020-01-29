@@ -2,19 +2,19 @@
 
 void parse_p3(t_asm *asm_ms)
 {
-	t_token *temp;
+	t_token *token;
 
-	temp = asm_ms->first;
+	token = asm_ms->first;
 	asm_ms->current_byte = 0;
-	while (temp)
+	while (token)
 	{
-		if ((token->type_args / 100) != 0)
-			create_args(token, 1, asm_ms);
-		else if (*(token->command) != (char)16)
-			((create_dir_arg(token, 1, 1, asm_ms)))
+		if (token->type_args == 200)
+			((create_dir_arg(token, 1, 1, asm_ms)));
+		else
+			create_args(token, asm_ms);
 		// else
 		// 	//create_reg_arg
-		temp = temp->next;
+		token = token->next;
 	}
 }
 
