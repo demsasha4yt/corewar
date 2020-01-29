@@ -6,14 +6,14 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 20:23:02 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/29 19:47:04 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/29 21:48:54 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include <fcntl.h>
 
-static t_ply *_read_champion_file(int fd, int id, t_cw *cw, char *code)
+static t_ply *_read_champion_file(int fd, int id, t_cw *cw, uint8_t *code)
 {
 	char	*name;
 	int		code_size;
@@ -27,7 +27,8 @@ static t_ply *_read_champion_file(int fd, int id, t_cw *cw, char *code)
 	comment = read_comment(fd, cw);
 	skip_bytes(fd, cw);
 	code = read_code(fd, code_size, cw);
-	ply = new_ply(id, name, comment, code);
+	ply = set_ply_code(set_ply_code_size(new_ply(id, name, comment, code),
+			 code_size, cw), code, code_size, cw);
 	free(name);
 	free(comment);
 	free(code);

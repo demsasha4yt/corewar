@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/26 23:00:47 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/29 21:46:42 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef	struct		s_ply
 	char			*name;
 	char			*comment;
 	int				code_size;
-	char			*code;
+	uint8_t			*code;
 	char			*file_path;
 	struct s_ply	*next;
 	struct s_ply	*prev;
@@ -34,7 +34,7 @@ typedef	struct		s_ply
 
 typedef struct		s_arena
 {
-	char			*data;
+	uint8_t			*data;
 	int				arena_size;
 	int				sections[MAX_PLAYERS];
 }					t_arena;
@@ -94,7 +94,7 @@ void				read_magic(int fd, t_cw *cw);
 char				*read_name(int fd, t_cw *cw);
 int					read_code_size(int fd, t_cw *cw);
 char				*read_comment(int fd, t_cw *cw);
-char				*read_code(int fd, int size, t_cw *cw);
+uint8_t				*read_code(int fd, int size, t_cw *cw);
 
 /*
 **	Validators
@@ -115,8 +115,11 @@ void				destroy_cw(t_cw *cw);
 */
 
 t_ply				*new_ply(int number, char *name, char *comment,
-								char *code);
+								uint8_t *code);
 void				push_ply(t_cw *cw, t_ply *ply);
+t_ply				*set_ply_code_size(t_ply *ply, int code_size, t_cw *cw);
+t_ply 				*set_ply_code(t_ply *ply, uint8_t *code, 
+						int code_size, t_cw *cw);
 t_ply				*set_ply_file_path(t_ply *ply, char *file_path, t_cw *cw);
 void				initialize_plys(t_cw *cw);
 void				sort_plys(t_cw *cw);
@@ -150,7 +153,7 @@ void				main_cycle(t_cw *cw);
 */
 
 int					calc_addr(int addr);
-int					bytes_to_int(char *bytes, size_t size);
+int					bytes_to_int(int8_t *bytes, size_t size);
 
 // visualization
 void				init_visualize(t_cw *cw);

@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 17:38:40 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/23 22:39:57 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/29 21:42:28 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,29 @@ static void	initialize_map_arena(t_cw *cw)
 {
 	if (cw->arena == NULL)
 		terminate(1, cw);
-	cw->arena->data = (char*)ft_memalloc(REG_SIZE * cw->arena->arena_size);
+	cw->arena->data = (uint8_t*)ft_memalloc(cw->arena->arena_size);
+	ft_bzero(cw->arena->data, 4096);
 	if (!cw->arena->data)
 		terminate(1, cw);
+}
+
+static void	initialize_plys_code(t_cw *cw)
+{
+	int		i;
+	t_ply	*ply;
+
+	i = 0;
+	ply = cw->players;
+	while (ply)
+	{
+		if (!ply->code)
+			continue;
+		if (ply->code_size > 0)
+			ft_memcpy(cw->arena->data + cw->arena->sections[i], ply->code,
+				 ply->code_size);
+		i++;
+		ply = ply->next;
+	}
 }
 
 void		initialize_arena(t_cw *cw)
@@ -51,4 +71,5 @@ void		initialize_arena(t_cw *cw)
 	cw->arena->arena_size = MEM_SIZE;
 	initialize_map_arena(cw);
 	initialize_arena_sections(cw);
+	initialize_plys_code(cw);
 }
