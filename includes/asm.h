@@ -29,15 +29,15 @@ typedef struct s_token
 	char *name;
 	int code_operation;
 	int type_args; ///230 если надо - смотреть в таблице!
-	int arg_numbers;
+	int arg_numbers; ///
 	char  *arg1; ///записать %:lebel00
 	char  *arg2;
 	char  *arg3;
-	int size1;
-	int size2;
-	int size3;
+	//int size1;
+	//int size2;
+	//int size3;
 	int command_size; ///длина выделяемой строки
-	int byte;
+	//int byte;
 	int index;
 	struct s_token *next;
 } t_token;
@@ -89,9 +89,8 @@ int		is_comment(char *str);
 int		check_name_comment(char *str1, t_asm *asm_ms);
 int		is_blank(char *str);
 int		check_command(t_asm *asm_ms, char *str, t_token *current);
-int _live_check_fork_lfork(t_asm *asm_ms, char *str, t_token *current);
-void _ld_check(t_asm *asm_ms, char *str, t_token *current);
-
+int 	_one_argument(t_asm *asm_ms, char *str, t_token *current);
+char 	shell_arg_byte(int type_args);
 
 
 #endif
