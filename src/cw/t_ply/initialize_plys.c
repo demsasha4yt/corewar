@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 21:05:54 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/24 21:35:39 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/29 19:46:18 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static void _set_ids(t_cw *cw, int ids[MAX_PLAYERS])
 	ptr = cw->players;
 	while (ptr)
 	{
+		if (ptr->id > cw->count_players)
+			terminate(8, cw);
 		if (ptr->id == -1)
 		{
 			ptr->id = _get_free_id(ids) + 1;

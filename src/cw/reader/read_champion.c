@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 20:23:02 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/26 23:04:07 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/29 19:47:04 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,12 @@ static void	_read_champion(t_cw *cw, char *file, int id)
 	t_ply *ply;
 
 	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		terminate(7, cw);
 	ply = _read_champion_file(fd, id, cw, NULL);
 	push_ply(cw, set_ply_file_path(ply, file, cw));
-	close(fd);
+	if (close(fd) != 0)
+		terminate(8, cw);
 }
 
 void	read_champion(t_cw *cw, char *file)
@@ -58,7 +61,7 @@ void	read_n_flag(t_cw *cw, int *i, char **argv)
 	if (!ft_isnumber(argv[*i]))
 		terminate(5, cw);
 	id = ft_atoi(argv[*i]);
-	if (id < 0 || id > MAX_PLAYERS)
+	if (id < 1 || id > MAX_PLAYERS)
 		terminate(5, cw);
 	*i += 1;
 	if (!cw_is_champion_file(argv[*i]))

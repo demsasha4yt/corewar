@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/corewar",
-			"args": ["resources/champs/toto.cor"],
+			"args": ["-n", "2", "resources/champs/toto.cor", "resources/champs/toto.cor"], 
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],
