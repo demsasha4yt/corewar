@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 18:41:52 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/22 19:59:48 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/29 22:03:32 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	push_in_carries_list(t_cw *cw, t_carry *carry)
 	cw->carries = carry;
 }
 
-void		push_new_carry(t_cw *cw, int byte, int player)
+t_carry		*push_new_carry(t_cw *cw, int byte, int player)
 {
 	t_carry		*carry;
 
@@ -39,4 +39,5 @@ void		push_new_carry(t_cw *cw, int byte, int player)
 	carry->registers[0] = get_player_in_byte(cw, byte) * -1;
 	carry->player = player;
 	push_in_carries_list(cw, carry);
+	return (carry);
 }

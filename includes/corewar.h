@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/29 21:46:42 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/29 22:06:30 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,10 @@ void				destroy_all_plys(t_cw *cw);
 */
 
 t_carry				*new_carry(t_cw *cw);
-void				push_new_carry(t_cw *cw, int byte, int player);
+t_carry				*push_new_carry(t_cw *cw, int byte, int player);
 void				destroy_carry(t_carry *carry);
 void				destroy_all_carries(t_cw *cw);
+void				initialize_carries(t_cw *cw);
 
 /*
  * Arena
