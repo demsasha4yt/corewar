@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 19:35:53 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/31 21:32:56 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <inttypes.h>
 
 # define INT_SIZE 4
+# define OP_SIZE 1
 
 typedef	struct		s_ply
 {
@@ -28,6 +29,8 @@ typedef	struct		s_ply
 	int				code_size;
 	uint8_t			*code;
 	char			*file_path;
+	int				lives_num;
+	int				prev_lives_num;
 	struct s_ply	*next;
 	struct s_ply	*prev;
 }					t_ply;
@@ -42,13 +45,14 @@ typedef struct		s_arena
 typedef struct		s_carry
 {
 	int				id;
-	int				flag;
 	int				carry;
 	int				live_cycle;
-	int				cycles_left;
 	int				position;
 	int				registers[REG_NUMBER];
 	int				player;
+	int				op;
+	int				cycles_to_exec;
+	int				step;
 	struct s_carry	*next;
 	struct s_carry	*prev;
 }					t_carry;
@@ -67,6 +71,7 @@ typedef struct		s_cw
 	int				dump_cycles;
 	int				d_cycles;
 	int				cycles;
+	int				cycles_to_check;
 	int				live_count;
 	int				cycles_to_die;
 	int				count_players;
@@ -126,6 +131,7 @@ void				initialize_plys(t_cw *cw);
 void				sort_plys(t_cw *cw);
 void				destroy_ply(t_ply *ply);
 void				destroy_all_plys(t_cw *cw);
+void				introduce_plys(t_cw *cw);
 
 /*
  * Carries
@@ -146,10 +152,15 @@ int					get_player_in_byte(t_cw *cw, int byte);
 uint8_t				*get_bytes_at_position(t_cw *cw, int position);
 
 /*
- * Main algo 
+** Mayn cycle 
 */
 void				main_cycle(t_cw *cw);
-void				cycle_read_command(t_carry *carry, t_cw *cw);
+
+/*
+** Check
+*/
+
+void				check(t_cw *cw);
 
 /*
 ** UTILS

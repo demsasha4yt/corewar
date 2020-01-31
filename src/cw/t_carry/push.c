@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 18:41:52 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/29 22:03:32 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/31 20:10:21 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ t_carry		*push_new_carry(t_cw *cw, int byte, int player)
 		terminate(1, cw);
 	carry->id = ++(cw->carries_count);
 	carry->position = byte;
-	carry->flag = -1;
-	carry->live_cycle = -1;
+	carry->carry = 0;
+	carry->live_cycle = 0;
 	carry->prev = NULL;
 	carry->registers[0] = get_player_in_byte(cw, byte) * -1;
 	carry->player = player;

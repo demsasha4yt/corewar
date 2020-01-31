@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   live.c                                             :+:      :+:    :+:   */
+/*   introduce_plys.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 18:32:51 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 20:13:48 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/31 21:02:47 by bharrold          #+#    #+#             */
+/*   Updated: 2020/01/31 21:12:36 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "cw_ops.h"
 
-void	cw_live(t_cw *cw, t_carry *carry)
+void		introduce_plys(t_cw *cw)
 {
-	int		id;
-	t_ply	*player;
+	t_ply	*ply;
 
-	carry->position += 1;
+	ply = cw->players;
+	if (!ply)
+		terminate(1, cw);
+	ft_printf("Introducing contestants...\n");
+	while (ply)
+	{
+		ft_printf("* Player %d, weighing %d bytes, \"%s\" (\"%s\") !\n",
+			ply->id, ply->code_size, ply->name, ply->comment);
+		ply = ply->next;
+	}
 }
