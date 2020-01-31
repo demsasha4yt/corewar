@@ -13,7 +13,7 @@ int	check_and_save_command(t_asm *asm_ms, char *str, t_token *current)
 			current->arg_numbers = op_tab[i].args_num;
 			current->code_operation = op_tab[i].code;
 			current->index = i;
-			current->type_args = current->index == 15 ? 100 :  200;
+			current->type_args = current->index == 15 ? 100 : 0; /// вместо 0 - 200??
 			return (1);
 		}
 		i++;
@@ -41,6 +41,8 @@ void check_valid_commands(t_asm *asm_ms, char *str, t_token *current)
 {
 	if(ft_strcmp(current->name, "live") == 0 || ft_strcmp(current->name, "fork") == 0 || ft_strcmp(current->name, "lfork") == 0 || ft_strcmp(current->name, "zjmp") == 0 || ft_strcmp(current->name, "aff") == 0)
 		_one_argument(asm_ms, str, current);
+	else
+		_two_three_arguments(asm_ms, str, current);
 }
 
 int check_command(t_asm *asm_ms, char *str, t_token *current) //token-туда записывать

@@ -27,15 +27,18 @@ typedef  struct s_label
 typedef struct s_token
 {
 	char *name;
+	char *itog;
+	char cod_tipa_argumentov;
 	int code_operation;
 	int type_args; ///230 если надо - смотреть в таблице!
+	int type_args_byte;
 	int arg_numbers; ///
 	char  *arg1; ///записать %:lebel00
 	char  *arg2;
 	char  *arg3;
-	//int size1;
-	//int size2;
-	//int size3;
+	int size1;
+	int size2;
+	int size3;
 	int command_size; ///длина выделяемой строки
 	//int byte;
 	int index;
@@ -91,6 +94,7 @@ int		is_blank(char *str);
 int		check_command(t_asm *asm_ms, char *str, t_token *current);
 int 	_one_argument(t_asm *asm_ms, char *str, t_token *current);
 char 	shell_arg_byte(int type_args);
+int		_two_three_arguments(t_asm *asm_ms, char *str, t_token *current);
 
 
 #endif

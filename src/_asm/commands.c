@@ -43,18 +43,20 @@ int _save_info(t_asm *asm_ms, char *str, t_token *current, int last)
 	if(current->code_operation == 16)
 	{
 		last > 3 ? error("invalid T_REG") : 0;
-		current->arg1 = ft_memalloc(sizeof(char) * 3);
-		current->arg1[0] = (char)(current->code_operation);
+		current->itog = ft_memalloc(sizeof(char) * 3); ///включает +1 под код типа арг
+		current->cod_tipa_argumentov = shell_arg_byte(current->type_args);
+		current->itog[0] = (char)current->code_operation;
+		current->itog[1] = current->cod_tipa_argumentov;
 		current->command_size = 3;
 		asm_ms->current_byte += 3;
 		current->arg1 = ft_strsub(str, 0, last);
+		current->type_args_byte = shell_arg_byte(current->type_args);
 	}
 	else
 	{
 		size = current->code_operation == 1 ? 4 : 2;
-		current->arg1 =
-			ft_memalloc(sizeof(char) * size + 1); ///+1 под код типа не нужен
-		current->arg1[0] = (char) (current->code_operation);
+		current->itog = ft_memalloc(sizeof(char) * size + 1); ///+1 под код типа не нужен
+		current->itog[0] = (char) (current->code_operation);
 		current->command_size += size + 1;
 		asm_ms->current_byte += size + 1;
 		current->arg1 = ft_strsub(str, 0, last);
@@ -84,9 +86,9 @@ int _one_argument(t_asm *asm_ms, char *str, t_token *current)///проверка
 	}
 	else
 		error("wrong separator");
-	if (str[i++] == LABEL_CHAR)
+	if (str[i] && str[i] == LABEL_CHAR)
 	{
-		//i++;
+		i++;
 		while (str[i] && _is_label_char(str[i]))
 			i++;
 		j = i;
@@ -96,8 +98,8 @@ int _one_argument(t_asm *asm_ms, char *str, t_token *current)///проверка
 	}
 	else if ((str[i] == '-' || _is_number_char(str[i])) && str[i])
 	{
-		str[i] == '-' && ((!str[i + 1] || !_is_number_char (str[i + 1]))) ? error("error symbols afetr -") : 0;
-		i++;
+		str[i] == '-' && ((!str[i + 1] || !_is_number_char (str[i + 1]))) ? error("error symbols afetr -") : i++;
+		//i++; ///в тернарник!!!
 		while (str[i] && _is_number_char(str[i]))
 			i++;
 		j = i;
@@ -110,21 +112,53 @@ int _one_argument(t_asm *asm_ms, char *str, t_token *current)///проверка
 	_save_info(asm_ms, str, current, j);
 	exit (0);
 }
-//	else if (*str >= '0' && *str <= '9')
-//	{
-//
-//	}
-//	while (str[i] && str[i] != ' ' && str[i] != '\t')
-//	{
-//		if(str[i] >= '0' && str[i] <= '9')
-//		{
-//			i++;
-//			continue;
-//		}
-//		else
-//			error("wrong argument");
-//	}
-//	str += i;
-//	is_space(&str);
-//	if(*str != COMMENT_CHAR && *str != ALT_COMMENT_CHAR && *str != '\0')
-//		error("symbols after");
+
+int		_two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
+{
+	int a;
+	int i;
+	int j;
+
+	a = 0;
+	i = 0;
+	j = 0;
+	while (a < op_tab[current->index].args_num)
+	{
+		if(str[i] && str[i] == DIRECT_CHAR) ///%
+		{
+			i++;
+			if(str[i] && (str[i] == '-' || _is_number_char(str[i])))
+			{
+				str[i] == '-' && ((!str[i + 1] || !_is_number_char (str[i + 1]))) ? error("error symbols afetr -") : i++;
+				while (str[i] && _is_label_char(str[i]))
+					i++;
+				j = i;
+				is_spacei(str, &i);
+
+			}
+			else if(str[i] && _is_number_char(str[i]))
+			{
+
+			}
+			else
+				error("lexical");
+
+		}
+		else if(str[i] && str[i] == LABEL_CHAR) ///:
+		{
+
+		}
+		else if(str[i] && str[i] == REGISTER_CHAR) ///r
+		{
+
+		}
+		else if(str[i] && _is_number_char(str[i])) ///0-9
+		{
+
+		}
+		else
+			error("lexical");
+		a++;
+	}
+	return (0);
+}
