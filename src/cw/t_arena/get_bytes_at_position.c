@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmds.c                                             :+:      :+:    :+:   */
+/*   get_bytes_at_position.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/17 21:40:42 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 19:02:29 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/31 19:15:34 by bharrold          #+#    #+#             */
+/*   Updated: 2020/01/31 19:18:31 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "corewar.h"
 
-void	read_cmds(char *line, int fd, t_asm *_asm)
+uint8_t		*get_bytes_at_position(t_cw *cw, int position)
 {
-	(void)line;
-	(void)fd;
-	(void)_asm;
-	ft_printf("%s\n", line);
+	position = calc_addr(position);
+	ft_printf("%d\n", position);
+	if (position < 0 || position > MEM_SIZE)
+		terminate(10, cw);
+	return (cw->arena->data + position);
 }

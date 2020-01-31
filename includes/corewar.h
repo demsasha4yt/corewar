@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/29 22:06:30 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/31 19:35:53 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct		s_carry
 {
 	int				id;
 	int				flag;
+	int				carry;
 	int				live_cycle;
 	int				cycles_left;
 	int				position;
@@ -142,12 +143,13 @@ void				initialize_carries(t_cw *cw);
 void				initialize_arena(t_cw *cw);
 void				destroy_arena(t_cw *cw);
 int					get_player_in_byte(t_cw *cw, int byte);
+uint8_t				*get_bytes_at_position(t_cw *cw, int position);
 
 /*
  * Main algo 
 */
 void				main_cycle(t_cw *cw);
-
+void				cycle_read_command(t_carry *carry, t_cw *cw);
 
 /*
 ** UTILS

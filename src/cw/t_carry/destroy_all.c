@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 19:40:11 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/22 20:54:33 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/31 19:13:40 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	destroy_all_carries(t_cw *cw)
 		return ;
 	ptr = cw->carries;
 	while (ptr) {
-		ft_printf("%p\n", ptr);
 		next = ptr->next;
 		destroy_carry(ptr);
 		ptr = next;

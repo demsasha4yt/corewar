@@ -6,8 +6,14 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:33:34 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/24 18:33:35 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/31 19:31:33 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "cw_ops.h"
+
+void	cw_sti(t_cw *cw, t_carry *carry)
+{
+	
+}

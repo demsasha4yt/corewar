@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmds.c                                             :+:      :+:    :+:   */
+/*   read_command.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/17 21:40:42 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 19:02:29 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/31 19:09:08 by bharrold          #+#    #+#             */
+/*   Updated: 2020/01/31 19:22:14 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "corewar.h"
 
-void	read_cmds(char *line, int fd, t_asm *_asm)
+void	cycle_read_command(t_carry *carry, t_cw *cw)
 {
-	(void)line;
-	(void)fd;
-	(void)_asm;
-	ft_printf("%s\n", line);
+	ft_printf("%d\n", carry->position);
+	ft_printf("%.2x\n", *get_bytes_at_position(cw, carry->position));
 }
