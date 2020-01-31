@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 21:32:56 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/31 22:17:32 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,6 +155,7 @@ uint8_t				*get_bytes_at_position(t_cw *cw, int position);
 ** Mayn cycle 
 */
 void				main_cycle(t_cw *cw);
+void				move_carry(t_carry *carry, t_cw *cw);
 
 /*
 ** Check

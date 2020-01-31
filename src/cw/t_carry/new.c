@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 18:15:34 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 21:33:13 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/31 21:53:16 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_carry		*new_carry(t_cw *cw)
 	carry->prev = NULL;
 	carry->player = -1;
 	carry->carry = -1;
-	carry->cycles_to_exec = -1;
+	carry->cycles_to_exec = 0;
 	carry->op = -1;
 	carry->step = 0;
 	initialize_new_registers(carry);

@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ld.c                                               :+:      :+:    :+:   */
+/*   zjmp.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 18:32:07 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 20:04:31 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/24 18:34:00 by bharrold          #+#    #+#             */
+/*   Updated: 2020/01/31 21:50:04 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- #include "corewar.h"
- #include "cw_ops.h"
+#include "corewar.h"
+#include "cw_ops.h"
 
-void	cw_ld(t_cw *cw, t_carry *carry)
+void	cw_zjmp(t_cw *cw, t_carry *carry)
 {
-	
+	(void)cw;
+	(void)carry;
 }
+

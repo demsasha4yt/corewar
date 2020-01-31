@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   or.c                                               :+:      :+:    :+:   */
+/*   ldi.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 18:33:19 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 19:31:00 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/24 18:32:23 by bharrold          #+#    #+#             */
+/*   Updated: 2020/01/31 21:49:34 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "cw_ops.h"
 
-void	cw_or(t_cw *cw, t_carry *carry)
+void	cw_ldi(t_cw *cw, t_carry *carry)
 {
-	
+	(void)cw;
+	(void)carry;
 }

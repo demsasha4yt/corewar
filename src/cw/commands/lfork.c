@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   and.c                                              :+:      :+:    :+:   */
+/*   lfork.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 18:42:58 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 19:29:55 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/24 18:32:35 by bharrold          #+#    #+#             */
+/*   Updated: 2020/01/31 21:49:36 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "cw_ops.h"
 
-void	cw_and(t_cw *cw, t_carry *carry)
+void	cw_lfork(t_cw *cw, t_carry *carry)
 {
-	
+	(void)cw;
+	(void)carry;
 }

@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fork.c                                             :+:      :+:    :+:   */
+/*   lldi.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 18:31:41 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 19:30:04 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/24 18:45:47 by bharrold          #+#    #+#             */
+/*   Updated: 2020/01/31 21:49:45 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "cw_ops.h"
 
-void	cw_fork(t_cw *cw, t_carry *carry)
+void	cw_lldi(t_cw *cw, t_carry *carry)
 {
-	
+	(void)cw;
+	(void)carry;
 }

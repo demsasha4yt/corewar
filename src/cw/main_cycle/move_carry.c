@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sub.c                                              :+:      :+:    :+:   */
+/*   move_carry.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 18:33:43 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 19:31:37 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/31 22:16:55 by bharrold          #+#    #+#             */
+/*   Updated: 2020/01/31 22:17:50 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "cw_ops.h"
 
-void	cw_sub(t_cw *cw, t_carry *carry)
+void	move_carry(t_carry *carry, t_cw *cw)
 {
-	
+	(void)cw;
+	(void)carry;
 }
-

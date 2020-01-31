@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   xor.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/22 16:04:22 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 21:51:46 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/24 18:43:47 by bharrold          #+#    #+#             */
+/*   Updated: 2020/01/31 21:49:56 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "cw_ops.h"
 
-int main (int argc, char **argv)
+void	cw_xor(t_cw *cw, t_carry *carry)
 {
-	t_cw	cw;
-	
-  	initialize_cw(&cw);
-	reader(&cw, argc, argv);
-	initialize_plys(&cw);
-	initialize_arena(&cw);
-	initialize_carries(&cw);
-	introduce_plys(&cw);
-	init_visualize(&cw);
-	main_cycle(&cw);
-	destroy_cw(&cw);	
+	(void)cw;
+	(void)carry;
 }
+
