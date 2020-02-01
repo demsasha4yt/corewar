@@ -21,6 +21,16 @@ int	check_and_save_command(t_asm *asm_ms, char *str, t_token *current)
 	return (0);
 }
 
+int _save_info2all(t_asm *asm_ms, char *str, t_token *current)
+{
+	int size;
+
+	if (1)
+	{
+
+	}
+}
+
 //int arg_types(t_asm *asm_ms, char *str, t_token *current)
 //{
 //	if(op_tab[current->index].args_num == 1)

@@ -1,5 +1,22 @@
 #include "asm.h"
 
+char	*ft_strsub2(char const *s, unsigned int start, size_t len)
+{
+	char	*new;
+	size_t	i;
+
+	i = 0;
+	if (!(new = ft_strnew(len)))
+		return (NULL);
+	if (s)
+		while (i < len)
+		{
+			new[i] = s[start + i];
+			i++;
+		}
+	return (new);
+}
+
 int	_is_label_char(char c)
 {
 	int i;
@@ -32,9 +49,7 @@ int _is_number_char(char c)
 void is_spacei(const char *s, int *i)
 {
 	while(s[*i] && (s[*i] == ' ' || s[*i] == '\t'))
-	{
 		*i += 1;
-	}
 }
 
 int _save_info(t_asm *asm_ms, char *str, t_token *current, int last)
@@ -61,6 +76,7 @@ int _save_info(t_asm *asm_ms, char *str, t_token *current, int last)
 		asm_ms->current_byte += size + 1;
 		current->arg1 = ft_strsub(str, 0, last);
 	}
+	return (0);
 }
 
 int _one_argument(t_asm *asm_ms, char *str, t_token *current)///проверка %0 - T_DIR с числом
@@ -75,6 +91,7 @@ int _one_argument(t_asm *asm_ms, char *str, t_token *current)///проверка
 	else if(str[i] && str[i] == LABEL_CHARS[17] && _is_number_char(str[i + 1])) ///если регистр 'r'
 	{
 		i++;
+		_is_number_char(str[i]) ? 0 : error("wrong symbols");
 		while (str[i] && _is_number_char(str[i]))
 			i++;
 		j = i;
@@ -113,32 +130,89 @@ int _one_argument(t_asm *asm_ms, char *str, t_token *current)///проверка
 	exit (0);
 }
 
+void	_direct_size(t_asm *asm_ms, char *str, t_token *current)
+{
+	if (current->code_operation == 10 || current->code_operation == 11 || current->code_operation == 14)
+	{
+		if(current->size1 == 0)
+			current->size1 = 2;
+		else if(current->size2 == 0)
+			current->size2 = 2;
+		else if(current->size3 == 0)
+			current->size3 = 2;
+	}
+	else
+	{
+		if(current->size1 == 0)
+			current->size1 = 4;
+		else if(current->size2 == 0)
+			current->size2 = 4;
+		else if (current->size3 == 0)
+			current->size3 = 4;
+	}
+}
+
+void	_register_size(t_asm *asm_ms, char *str, t_token *current)
+{
+	if(current->size1 == 0)
+		current->size1 = 1;
+	else if(current->size2 == 0)
+		current->size2 = 1;
+	else if(current->size3 == 0)
+		current->size3 = 1;
+}
+
+void _arg(char *str, t_token *current, int start, int end)
+{
+	if(!current->arg1)
+		current->arg1 = ft_strsub2(str, start, end);
+	else if(!current->arg2)
+		current->arg2 = ft_strsub2(str, start, end);
+	else if(!current->arg3)
+		current->arg3 = ft_strsub2(str, start, end);
+}
+
 int		_two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
 {
 	int a;
 	int i;
 	int j;
+	int start;
 
 	a = 0;
 	i = 0;
-	j = 0;
-	while (a < op_tab[current->index].args_num)
+	while (a < current->arg_numbers)
 	{
+		j = 0;
+		is_spacei(str, &i);
 		if(str[i] && str[i] == DIRECT_CHAR) ///%
 		{
+			start = i;
 			i++;
 			if(str[i] && (str[i] == '-' || _is_number_char(str[i])))
 			{
 				str[i] == '-' && ((!str[i + 1] || !_is_number_char (str[i + 1]))) ? error("error symbols afetr -") : i++;
-				while (str[i] && _is_label_char(str[i]))
+				while (str[i] && _is_number_char(str[i]))
 					i++;
 				j = i;
+				_direct_size(asm_ms, str, current);
+				_arg(str, current, start, j);
 				is_spacei(str, &i);
-
+				if(a + 1 == current->arg_numbers)
+				{
+					is_spacei(str, &i);
+					if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
+						error("symbols after");
+				}
+				else if(str[i++] == SEPARATOR_CHAR)
+				{
+					a++;
+					continue;
+				}
 			}
-			else if(str[i] && _is_number_char(str[i]))
+			else if(str[i] && str[i] == LABEL_CHAR)
 			{
-
+				///////////////////////////////////////////////////////////////////////////////////
 			}
 			else
 				error("lexical");
@@ -146,15 +220,35 @@ int		_two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
 		}
 		else if(str[i] && str[i] == LABEL_CHAR) ///:
 		{
-
+			////////////////////////////////////////////////////////////////////////////////////////
 		}
 		else if(str[i] && str[i] == REGISTER_CHAR) ///r
 		{
-
+			j = 0;
+			start = i;
+			i++;
+			_is_number_char(str[i]) ? 0 : error("wrong symbols");
+			while (str[i] && _is_number_char(str[i]))
+				i++;
+			j = i;
+			_register_size(asm_ms, str, current);
+			_arg(str, current, start, j);
+			is_spacei(str, &i);
+			if(a + 1 == current->arg_numbers)
+			{
+				is_spacei(str, &i);
+				if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
+					error("symbols after");
+			}
+			else if(str[i++] == SEPARATOR_CHAR)
+			{
+				a++;
+				continue;
+			}
 		}
 		else if(str[i] && _is_number_char(str[i])) ///0-9
 		{
-
+				/////////////////////////////////////////////////////////////////////////////////
 		}
 		else
 			error("lexical");
