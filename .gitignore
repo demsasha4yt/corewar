@@ -2,3 +2,10 @@ corewar
 champs
 asm
 *.o
+resources
+cmake-build-debug
+.vscode
+CMakeLists.txt
+src/cw
+libs
+
