@@ -152,6 +152,16 @@ void	_direct_size(t_asm *asm_ms, char *str, t_token *current)
 	}
 }
 
+void	_indirect_size(t_asm *asm_ms, char *str, t_token *current)
+{
+	if(current->size1 == 0)
+		current->size1 = 4;
+	else if(current->size2 == 0)
+		current->size2 = 4;
+	else if(current->size3 == 0)
+		current->size3 = 4;
+}
+
 void	_register_size(t_asm *asm_ms, char *str, t_token *current)
 {
 	if(current->size1 == 0)
@@ -183,13 +193,12 @@ int		_two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
 	i = 0;
 	while (a < current->arg_numbers)
 	{
-		j = 0;
 		is_spacei(str, &i);
-		if(str[i] && str[i] == DIRECT_CHAR) ///%
+		if(str[i] && str[i] == DIRECT_CHAR) /////////////  %...   ////////////
 		{
 			start = i;
 			i++;
-			if(str[i] && (str[i] == '-' || _is_number_char(str[i])))
+			if(str[i] && (str[i] == '-' || _is_number_char(str[i])))////// %5 or %-5 //////////
 			{
 				str[i] == '-' && ((!str[i + 1] || !_is_number_char (str[i + 1]))) ? error("error symbols afetr -") : i++;
 				while (str[i] && _is_number_char(str[i]))
@@ -210,27 +219,62 @@ int		_two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
 					continue;
 				}
 			}
-			else if(str[i] && str[i] == LABEL_CHAR)
+			else if(str[i] && str[i] == LABEL_CHAR)//////////   %:  ////////////
 			{
-				///////////////////////////////////////////////////////////////////////////////////
+				i++;
+				while (str[i] && _is_label_char(str[i]))
+					i++;
+				j = i;
+				_direct_size(asm_ms, str, current);
+				_arg(str, current, start, j);
+				is_spacei(str, &i);
+				if(a + 1 == current->arg_numbers)
+				{
+					is_spacei(str, &i);
+					if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
+						error("symbols after");
+				}
+				else if(str[i++] == SEPARATOR_CHAR)
+				{
+					a++;
+					continue;
+				}
 			}
 			else
 				error("lexical");
 
 		}
-		else if(str[i] && str[i] == LABEL_CHAR) ///:
+		else if(str[i] && str[i] == LABEL_CHAR) ///////   :   ///////
 		{
-			////////////////////////////////////////////////////////////////////////////////////////
+			start = i;
+			i++;
+			while (str[i] && _is_label_char(str[i]))
+				i++;
+			j = i;
+			_direct_size(asm_ms, str, current);
+			_arg(str, current, start, j);
+			is_spacei(str, &i);
+			if(a + 1 == current->arg_numbers)
+			{
+				is_spacei(str, &i);
+				if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
+					error("symbols after");
+			}
+			else if(str[i++] == SEPARATOR_CHAR)
+			{
+				a++;
+				continue;
+			}
 		}
-		else if(str[i] && str[i] == REGISTER_CHAR) ///r
+		else if(str[i] && str[i] == REGISTER_CHAR) ///////   r99   ////////
 		{
-			j = 0;
 			start = i;
 			i++;
 			_is_number_char(str[i]) ? 0 : error("wrong symbols");
 			while (str[i] && _is_number_char(str[i]))
 				i++;
 			j = i;
+			j - start > 3 ? error("invalid T_REG") : 0;
 			_register_size(asm_ms, str, current);
 			_arg(str, current, start, j);
 			is_spacei(str, &i);
@@ -246,9 +290,27 @@ int		_two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
 				continue;
 			}
 		}
-		else if(str[i] && _is_number_char(str[i])) ///0-9
+		else if(str[i] && (str[i] == '-' || _is_number_char(str[i]))) //////   from -1000... to 1000...   //////
 		{
-				/////////////////////////////////////////////////////////////////////////////////
+			start = i;
+			str[i] == '-' && ((!str[i + 1] || !_is_number_char (str[i + 1]))) ? error("error symbols afetr -") : i++;
+			while (str[i] && _is_number_char(str[i]))
+				i++;
+			j = i;
+			_direct_size(asm_ms, str, current);
+			_arg(str, current, start, j);
+			is_spacei(str, &i);
+			if(a + 1 == current->arg_numbers)
+			{
+				is_spacei(str, &i);
+				if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
+					error("symbols after");
+			}
+			else if(str[i++] == SEPARATOR_CHAR)
+			{
+				a++;
+				continue;
+			}
 		}
 		else
 			error("lexical");

@@ -53,7 +53,7 @@
 */
 
 typedef char	t_arg_type;
-/////1 - T_REG
+////1 - T_REG
 ////2 - T-DIR
 ////3 - T-IND
 # define T_REG					1
