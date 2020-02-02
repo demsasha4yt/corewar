@@ -95,6 +95,6 @@ int		check_command(t_asm *asm_ms, char *str, t_token *current);
 int 	_one_argument(t_asm *asm_ms, char *str, t_token *current);
 char 	shell_arg_byte(int type_args);
 int		_two_three_arguments(t_asm *asm_ms, char *str, t_token *current);
-int		_save_info2all(t_asm *asm_ms, char *str, t_token *current);
+int		_save_all_info(t_asm *asm_ms, char *str, t_token *current);
 
 #endif

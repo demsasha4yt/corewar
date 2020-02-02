@@ -316,5 +316,16 @@ int		_two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
 			error("lexical");
 		a++;
 	}
+
 	return (0);
+}
+
+int _save_all_info(t_asm *asm_ms, char *str, t_token *current)
+{
+	int size;
+
+	if (1)
+	{
+
+	}
 }
