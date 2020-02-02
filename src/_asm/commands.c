@@ -316,14 +316,50 @@ int		_two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
 			error("lexical");
 		a++;
 	}
-
+	_save_all_info(asm_ms, str, current);
 	return (0);
+}
+
+int _size_code(int size, t_token *current)
+{
+	if (current->arg1)
+	{
+		if(current->arg1[0] == '%')
+			size = 2;
+		else if(current->arg1[0] == 'r')
+			size = 1;
+		else
+			size = 3;
+	}
+	if (current->arg2)
+	{
+		if(current->arg2[0] == '%')
+			size = (size * 10) + 2;
+		else if(current->arg2[0] == 'r')
+			size = (size * 10) + 1;
+		else
+			size = (size * 10) + 3;
+	}
+	if (current->arg3)
+	{
+		if(current->arg3[0] == '%')
+			size = (size * 10) + 2;
+		else if(current->arg3[0] == 'r')
+			size = (size * 10) + 1;
+		else
+			size = (size * 10) +  3;
+	}
+	return (size);
 }
 
 int _save_all_info(t_asm *asm_ms, char *str, t_token *current)
 {
-	if (1)
-	{
+	int size;
 
-	}
+	size = 0;
+	size = _size_code(size, current);
+	current->cod_tipa_argumentov = shell_arg_byte(size);
+	current->itog = ft_memalloc(sizeof(char) * 1 + 1 + (current->size1 + current->size2 + current->size3));
+	current->itog[0] = (char)current->code_operation;
+	current->itog[1] = current->cod_tipa_argumentov;
 }
