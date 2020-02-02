@@ -8,4 +8,5 @@ cmake-build-debug
 CMakeLists.txt
 src/cw
 libs
-
+.idea
+.DS_Store
