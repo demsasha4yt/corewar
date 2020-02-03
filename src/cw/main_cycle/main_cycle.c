@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 20:07:58 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 22:18:15 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/01/31 22:20:30 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ static void	_update_op(t_carry *carry, t_cw *cw)
 
 static void	_cycle_carry(t_carry *carry, t_cw *cw)
 {
-	(void)cw;
 	if (carry->cycles_to_exec == 0)
 		_update_op(carry, cw);
 	if (carry->cycles_to_exec > 0)
