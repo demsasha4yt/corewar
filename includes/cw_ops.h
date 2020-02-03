@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:27:25 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/03 22:06:36 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/03 22:24:25 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ int					is_arg_types_valid(t_carry *carry, t_op *op);
 int					is_args_valid(t_carry *carry, t_cw *cw, t_op *op);
 uint32_t			step_size(uint8_t arg_type, t_op *op);
 int					calc_step(t_carry *carry, t_op *op);
+void				clear_args(t_cw *cw, t_carry *carry);
+
 
 static t_op		g_op[16] = {
 	{

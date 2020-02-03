@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 21:25:28 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/03 22:04:42 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/03 22:27:47 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static int	is_register(t_cw *cw, t_carry *carry, int32_t step)
 {
 	int8_t r_id;
 
-	r_id = carry_get_byte(cw, carry, step);
+	r_id = arena_get_byte(cw, carry->position, step);
 	return (r_id >= 1 && r_id <= REG_NUMBER);
 }
 

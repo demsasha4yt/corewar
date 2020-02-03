@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 20:07:58 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/03 22:19:32 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/03 22:23:28 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,7 @@ static int	_do_op(t_carry *carry, t_cw *cw)
 		if (is_arg_types_valid(carry, op) && is_args_valid(carry, cw, op))
 			op->func(cw, carry);
 		else 
-		{
-			ft_printf("INVALID\n");
 			carry->step = calc_step(carry, op);
-		}
 		return (1);
 	}	
 	else

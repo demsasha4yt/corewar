@@ -6,6 +6,7 @@
 		"get_next_line.h": "c",
 		"limits.h": "c",
 		"inttypes.h": "c",
-		"cw_ops.h": "c"
+		"cw_ops.h": "c",
+		"curses.h": "c"
 	}
 }
