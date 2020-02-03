@@ -6,13 +6,13 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 21:26:16 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/29 21:29:04 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/03 20:40:20 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void	_terminate(t_cw *cw, int8_t *ptr)
+static void	_terminate(t_cw *cw, uint8_t *ptr)
 {
 	free(ptr);
 	terminate(1, cw);
@@ -21,7 +21,7 @@ static void	_terminate(t_cw *cw, int8_t *ptr)
 int	read_code_size(int fd, t_cw *cw)
 {
 	int		result;
-	int8_t	*ptr;
+	uint8_t	*ptr;
 
 	result = 0;
 	if (!(ptr = ft_memalloc(INT_SIZE)))

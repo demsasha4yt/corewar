@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   live.c                                             :+:      :+:    :+:   */
+/*   get_byte_value.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 18:32:51 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/03 20:02:53 by bharrold         ###   ########.fr       */
+/*   Created: 2020/02/03 20:22:00 by bharrold          #+#    #+#             */
+/*   Updated: 2020/02/03 20:26:08 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "cw_ops.h"
 
-void	cw_live(t_cw *cw, t_carry *carry)
+inline int8_t		carry_get_byte(t_cw *cw, t_carry *carry, int step)
 {
-	ft_printf("Do op: \"live\" [CYCLE: %d]\n", cw->cycles);
-	(void)cw;
-	(void)carry;
+	return (cw->arena->data[calc_addr(carry->position + step)]);
 }

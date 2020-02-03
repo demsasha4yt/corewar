@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 21:26:21 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/29 21:25:31 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/03 20:45:38 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	read_magic(int fd, t_cw *cw)
 {
-	int8_t	*ptr;
+	uint8_t	*ptr;
 	int		magic;
-
-	if (!(ptr = (int8_t*)ft_memalloc(INT_SIZE)))
+ 
+	if (!(ptr = (uint8_t*)ft_memalloc(INT_SIZE)))
 		terminate(1, cw);
 	ft_bzero(ptr, INT_SIZE);
 	if (read(fd, ptr, INT_SIZE) != INT_SIZE)

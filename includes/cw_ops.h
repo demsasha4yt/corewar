@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:27:25 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 21:46:14 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/03 22:06:36 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@ typedef struct	s_op
 	int			modify_carry;
 	uint8_t		t_dir_size;
 	uint32_t	cycles;
-	void		(*func)(t_cw *, t_carry *c);
+	void		(*func)(t_cw *, t_carry *);
 }				t_op;
 
+
+/*
+**	Commands 
+*/
 void			cw_add(t_cw *cw, t_carry *carry);
 void			cw_aff(t_cw *cw, t_carry *carry);
 void			cw_and(t_cw *cw, t_carry *carry);
@@ -42,6 +46,16 @@ void			cw_sti(t_cw *cw, t_carry *carry);
 void			cw_sub(t_cw *cw, t_carry *carry);
 void			cw_xor(t_cw *cw, t_carry *carry);
 void			cw_zjmp(t_cw *cw, t_carry *carry);
+
+/*
+** Main Cycle
+*/
+void				parse_args(t_cw *cw, t_carry *carry, t_op *op);
+void				clear_args(t_cw *cw, t_carry *carry);
+int					is_arg_types_valid(t_carry *carry, t_op *op);
+int					is_args_valid(t_carry *carry, t_cw *cw, t_op *op);
+uint32_t			step_size(uint8_t arg_type, t_op *op);
+int					calc_step(t_carry *carry, t_op *op);
 
 static t_op		g_op[16] = {
 	{

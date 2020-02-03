@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 20:07:58 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 22:20:30 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/03 22:19:32 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,17 @@ static int	_do_op(t_carry *carry, t_cw *cw)
 	
 	code = cw->arena->data[calc_addr(carry->position)];
 	if (code >= 0x01 && code <= 0x10)
-		op = &g_op[code];
+		op = &g_op[code - 1];
 	if (op)
 	{
-		// TODO: do operation
-		ft_printf("do_op cycle = %d | OP = %#.2x | OP_TAB = %p\n", 
-		cw->cycles, cw->arena->data[calc_addr(carry->position)], op);
+		parse_args(cw, carry, op);
+		if (is_arg_types_valid(carry, op) && is_args_valid(carry, cw, op))
+			op->func(cw, carry);
+		else 
+		{
+			ft_printf("INVALID\n");
+			carry->step = calc_step(carry, op);
+		}
 		return (1);
 	}	
 	else
@@ -80,12 +85,12 @@ void	main_cycle(t_cw *cw)
 			return ; // DELETE!
 		if (cw->cycles == cw->dump_cycles)
 		{
-			// TODO: print arena (dump mode)
+			print_arena(cw->arena->data, 32);
 			terminate(0, cw);
 		}
 		if (cw->cycles == cw->d_cycles)
 		{
-			// TODO: print arena (d mode)
+			print_arena(cw->arena->data, 64);
 			terminate(0, cw);
 		}
 		_cycle(cw);

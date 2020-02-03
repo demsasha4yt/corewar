@@ -6,13 +6,13 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 21:30:05 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/29 21:21:43 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/03 20:31:21 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int	bytes_to_int(int8_t *bytes, size_t size)
+int	bytes_to_int(uint8_t *bytes, size_t size)
 {
 	int result;
 	int i;

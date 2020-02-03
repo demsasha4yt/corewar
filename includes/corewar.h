@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 22:17:32 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/03 22:12:01 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@
 
 # define INT_SIZE 4
 # define OP_SIZE 1
+# define ARGS_SIZE 1
+# define REG_LEN 1
+
+static uint8_t			g_arg_code[3] = {
+	T_REG,
+	T_DIR,
+	T_IND
+};
 
 typedef	struct		s_ply
 {
@@ -51,6 +59,7 @@ typedef struct		s_carry
 	int				registers[REG_NUMBER];
 	int				player;
 	int				op;
+	uint8_t			args_types[3];
 	int				cycles_to_exec;
 	int				step;
 	struct s_carry	*next;
@@ -150,12 +159,15 @@ void				initialize_arena(t_cw *cw);
 void				destroy_arena(t_cw *cw);
 int					get_player_in_byte(t_cw *cw, int byte);
 uint8_t				*get_bytes_at_position(t_cw *cw, int position);
+uint8_t				arena_get_byte(t_cw *cw, int position, int step);
 
 /*
 ** Mayn cycle 
 */
+
 void				main_cycle(t_cw *cw);
 void				move_carry(t_carry *carry, t_cw *cw);
+void				print_arena(uint8_t *arena, int print_mode);
 
 /*
 ** Check
@@ -168,7 +180,8 @@ void				check(t_cw *cw);
 */
 
 int					calc_addr(int addr);
-int					bytes_to_int(int8_t *bytes, size_t size);
+int					bytes_to_int(uint8_t *bytes, size_t size);
+int8_t		carry_get_byte(t_cw *cw, t_carry *carry, int step);
 
 // visualization
 void				init_visualize(t_cw *cw);
