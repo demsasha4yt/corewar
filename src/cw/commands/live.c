@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:32:51 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/05 21:32:25 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/05 22:09:18 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,18 @@ static t_ply	*get_ply(t_cw *cw, int id)
 void	cw_live(t_cw *cw, t_carry *carry)
 {
 	ft_printf("Do op: \"live\" [CYCLE: %d CARRY: %d]\n", cw->cycles, carry->id);
-	int32_t		ply_id;
+	int		id;
 	t_ply		*ply;
 
 	printf("do op live\n");
 	carry->step += OP_SIZE;
-	ply_id = get_argument(cw, carry, 1, false);
+	id = get_argument(cw, carry, 1, false);
 	cw->lives_num++;
 	carry->live_cycle = cw->cycles;
 	ply = NULL;
-	if (ply_id <= -1 && ply_id >= -((int32_t)cw->count_players))
+	if (id <= -1 && id >= -((int)cw->count_players))
 	{
-		ply = get_ply(cw, -ply_id);
+		ply = get_ply(cw, -id);
 		if (!ply)
 			terminate(10, cw);
 		ply->live_cycle = cw->cycles;
