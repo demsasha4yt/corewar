@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 20:07:58 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/03 22:23:28 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/05 21:35:38 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,11 @@
 static int	_do_op(t_carry *carry, t_cw *cw)
 {
 	t_op	*op;
-	int		code;
 	op = NULL;
 	
-	code = cw->arena->data[calc_addr(carry->position)];
-	if (code >= 0x01 && code <= 0x10)
-		op = &g_op[code - 1];
+	// code = cw->arena->data[calc_addr(carry->position)];
+	if (carry->op >= 0x01 && carry->op <= 0x10)
+		op = &g_op[carry->op - 1];
 	if (op)
 	{
 		parse_args(cw, carry, op);
@@ -42,8 +41,9 @@ static void	_update_op(t_carry *carry, t_cw *cw)
 	if (!carry)
 		terminate(10, cw);
 	code = cw->arena->data[calc_addr(carry->position)];
+	carry->op = code;
 	if (code >= 0x01 && code <= 0x10)
-		carry->cycles_to_exec = g_op[code].cycles;
+		carry->cycles_to_exec = g_op[code - 1].cycles;
 }
 
 static void	_cycle_carry(t_carry *carry, t_cw *cw)
@@ -78,7 +78,7 @@ void	main_cycle(t_cw *cw)
 {
 	while (cw->carries)
 	{
-		if (cw->cycles == 3000)
+		if (cw->cycles == 2000)
 			return ; // DELETE!
 		if (cw->cycles == cw->dump_cycles)
 		{

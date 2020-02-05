@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/03 22:12:01 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/05 21:28:31 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef	struct		s_ply
 	uint8_t			*code;
 	char			*file_path;
 	int				lives_num;
+	int				live_cycle;
 	int				prev_lives_num;
 	struct s_ply	*next;
 	struct s_ply	*prev;
@@ -84,6 +85,7 @@ typedef struct		s_cw
 	int				live_count;
 	int				cycles_to_die;
 	int				count_players;
+	int				lives_num;
 	t_arena			*arena;
 	int				carries_count;
 	t_carry			*carries;
@@ -169,6 +171,7 @@ void				main_cycle(t_cw *cw);
 void				move_carry(t_carry *carry, t_cw *cw);
 void				print_arena(uint8_t *arena, int print_mode);
 
+
 /*
 ** Check
 */
@@ -181,7 +184,10 @@ void				check(t_cw *cw);
 
 int					calc_addr(int addr);
 int					bytes_to_int(uint8_t *bytes, size_t size);
-int8_t		carry_get_byte(t_cw *cw, t_carry *carry, int step);
+int					arena_bytes_to_int(const uint8_t *arena, int32_t addr, int32_t size);
+void				int_to_bytecode(t_cw *cw, int32_t addr, int32_t val, int32_t size);
+int8_t				carry_get_byte(t_cw *cw, t_carry *carry, int step);
+
 
 // visualization
 void				init_visualize(t_cw *cw);

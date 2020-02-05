@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:45:47 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/03 20:02:46 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/05 18:52:04 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	cw_lldi(t_cw *cw, t_carry *carry)
 {
-	ft_printf("Do op: \"lldi\" [CYCLE: %d]\n", cw->cycles);
+	ft_printf("Do op: \"lldi\" [CYCLE: %d CARRY: %d]\n", cw->cycles, carry->id);
 	(void)cw;
 	(void)carry;
 }

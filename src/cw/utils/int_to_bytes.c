@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aff.c                                              :+:      :+:    :+:   */
+/*   int_to_bytes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 18:31:30 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/05 18:52:20 by bharrold         ###   ########.fr       */
+/*   Created: 2020/02/05 19:06:51 by bharrold          #+#    #+#             */
+/*   Updated: 2020/02/05 21:15:55 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cw_ops.h"
+#include "corewar.h"
 
-void	cw_aff(t_cw *cw, t_carry *carry)
+void	int_to_bytecode(t_cw *cw, int32_t addr, int32_t val, int32_t size)
 {
-	ft_printf("Do op: \"aff\" [CYCLE: %d CARRY: %d]\n", cw->cycles, carry->id);
-	(void)cw;
-	(void)carry;
+	int8_t i;
+
+	i = 0;
+	while (size)
+	{
+		cw->arena->data[calc_addr(addr + size - 1)] = (uint8_t)((val >> i) & 0xFF);
+		i += 8;
+		size--;
+	}
 }

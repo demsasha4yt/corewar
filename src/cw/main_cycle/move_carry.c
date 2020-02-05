@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 22:16:55 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/03 22:24:33 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/05 19:13:44 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,5 @@ void	move_carry(t_carry *carry, t_cw *cw)
 {
 	clear_args(cw, carry);
 	carry->position = calc_addr(carry->position + carry->step);
+	carry->step = 0;
 }

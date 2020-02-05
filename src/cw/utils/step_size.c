@@ -6,14 +6,14 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 22:00:36 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/03 22:06:37 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/05 20:51:10 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cw_ops.h"
 #include "corewar.h"
 
-uint32_t	step_size(uint8_t arg_type, t_op *op)
+int	step_size(uint8_t arg_type, t_op *op)
 {
 	if (arg_type & T_REG)
 		return (REG_LEN);

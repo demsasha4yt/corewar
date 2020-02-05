@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 17:22:26 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 21:23:41 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/05 21:29:13 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ void	initialize_cw(t_cw *cw)
 	cw->carries = NULL;
 	cw->players = NULL;
 	cw->last_alive = NULL;
+	cw->lives_num = 0;
 	cw->vis = NULL;
 }

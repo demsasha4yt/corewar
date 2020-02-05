@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:43:47 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/03 20:02:17 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/05 22:02:16 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,19 @@
 
 void	cw_xor(t_cw *cw, t_carry *carry)
 {
-	ft_printf("Do op: \"xor\" [CYCLE: %d]\n", cw->cycles);
-	(void)cw;
-	(void)carry;
+	int	val1;
+	int	val2;
+	int	res;
+	int	r;
+
+	ft_printf("Do op: \"xor\" [CYCLE: %d CARRY: %d]\n", cw->cycles, carry->id);
+	carry->step += OP_SIZE + ARGS_SIZE;
+	val1 = get_argument(cw, carry, 1, true);
+	val2 = get_argument(cw, carry, 2, true);
+	res = val1 ^ val2;
+	carry->carry = (!res) ? 1: 0;
+	r = arena_get_byte(cw, carry->position, carry->step);
+	carry->registers[r - 1] = res;
+	carry->step += REG_LEN;
 }
 
