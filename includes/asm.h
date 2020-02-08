@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/08 11:25:25 by kbessa           ###   ########.fr       */
+/*   Updated: 2020/02/08 18:41:31 by kbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct		s_token
 {
 	char			*name;
 	unsigned char	*output;
-	char			cod_tipa_argumentov;
+	char			arg_type_code;
 	int				code_operation;
 	int				type_args;
 	int				arg_numbers;
@@ -77,7 +77,7 @@ typedef struct		s_asm
 
 void				parse_p1(t_asm *asm_ms);
 char				*asm_read_cycle(t_asm *asm_ms);
-void				asm_error(int er_nu, int line);
+void				asm_error(int er_nu, int line, t_asm *asm_ms);
 int					is_space(char **str);
 int					is_comment(char *str);
 int					check_name_comment(char *str1, t_asm *asm_ms);

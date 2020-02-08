@@ -49,7 +49,7 @@ void check_valid_commands(t_asm *asm_ms, char *str, t_token *current)
 int check_command(t_asm *asm_ms, char *str, t_token *current) //token-туда записывать
 {
 	if (!check_and_save_command(str, current))
-        asm_error(8, current->current_line);
+        asm_error(8, current->current_line, asm_ms);
 	str += ft_strlen(current->name);
 	is_space(&str);
 	check_valid_commands(asm_ms, str, current);

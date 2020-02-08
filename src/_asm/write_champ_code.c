@@ -62,5 +62,5 @@ void write_champ_code(t_asm *asm_ms)
 	write_null(asm_ms);
 	write_code(asm_ms);
 	if ((close(asm_ms->fd_w)) == -1)
-		asm_error(7, -1);
+		asm_error(7, -1, asm_ms);
 }

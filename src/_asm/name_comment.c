@@ -13,14 +13,14 @@ void check_name_p2(int i, t_asm *asm_ms)
 		while (str[j] != '"' && str[j] && i < PROG_NAME_LENGTH)
 			asm_ms->name[i++] = str[j++];
 		if (i == PROG_NAME_LENGTH)
-			asm_error(17, asm_ms->current_line);
+			asm_error(17, asm_ms->current_line, asm_ms);
 		if (str[j] == '"')
 		{
 			j++;
 			while (str[j] == ' ' || str[j] == '\t')
 				j++;
 			if (str[j] != '#' && str[j] != '\0')
-				asm_error(18, asm_ms->current_line);
+				asm_error(18, asm_ms->current_line, asm_ms);
 			return;
 		}
 		if (!(*str))
@@ -42,14 +42,14 @@ void check_comment_p2(int i, t_asm *asm_ms)
 		while (str[j] != '"' && str[j] && i < COMMENT_LENGTH)
 			asm_ms->comment[i++] = str[j++];
 		if (i == COMMENT_LENGTH)
-			asm_error(19, asm_ms->current_line);
+			asm_error(19, asm_ms->current_line, asm_ms);
 		if (str[j] == '"')
 		{
 			j++;
 			while (str[j] == ' ' || str[j] == '\t')
 				j++;
 			if (str[j] != '#' && str[j] != '\0')
-                asm_error(20, asm_ms->current_line);
+                asm_error(20, asm_ms->current_line, asm_ms);
 			return;
 		}
 		if (!(*str))
@@ -61,7 +61,7 @@ void check_comment_p2(int i, t_asm *asm_ms)
 int check_name_p1(char *str, t_asm *asm_ms, int i)
 {
 	if (!(asm_ms->name = (char *)ft_memalloc((sizeof(char) * PROG_NAME_LENGTH))))
-		asm_error(4, -1);
+		asm_error(4, -1, asm_ms);
 	str += 5;
 	is_space(&str);
 	if (*str++ == '"')
@@ -72,27 +72,27 @@ int check_name_p1(char *str, t_asm *asm_ms, int i)
 			i++;
 		}
 		if (i == PROG_NAME_LENGTH)
-			asm_error(17, asm_ms->current_line);
+			asm_error(17, asm_ms->current_line, asm_ms);
 		if (str[i] == '"')
 		{
 			i++;
 			while (str[i] == ' ' || str[i] == '\t')
 				i++;
 			if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i] != '\0')
-				asm_error(18, asm_ms->current_line);
+				asm_error(18, asm_ms->current_line, asm_ms);
 		}
 		else
 			check_name_p2(i, asm_ms);
 	}
 	else
-		asm_error(21, asm_ms->current_line);
+		asm_error(21, asm_ms->current_line, asm_ms);
 	return (1);
 }
 
 int check_comment_p1(char *str, t_asm *asm_ms, int i)
 {
 	if (!(asm_ms->comment = (char *)ft_memalloc(sizeof(char) * COMMENT_LENGTH)))
-		asm_error(4, -1);
+		asm_error(4, -1, asm_ms);
 	str += 8;
 	is_space(&str);
 	if (*str++ == '"')
@@ -103,20 +103,20 @@ int check_comment_p1(char *str, t_asm *asm_ms, int i)
 			i++;
 		}
 		if (i == COMMENT_LENGTH)
-			asm_error(19, asm_ms->current_line);
+			asm_error(19, asm_ms->current_line, asm_ms);
 		if (str[i] == '"')
 		{
 			i++;
 			while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 				i++;
 			if (str[i] && str[i] != '#' && str[i] != '\0')
-				asm_error(20, asm_ms->current_line);
+				asm_error(20, asm_ms->current_line, asm_ms);
 		}
 		else
 			check_comment_p2(i, asm_ms);
 	}
 	else
-		asm_error(22, asm_ms->current_line);
+		asm_error(22, asm_ms->current_line, asm_ms);
 	return (1);
 }
 
@@ -132,15 +132,15 @@ int	check_name_comment(char *str1, t_asm *asm_ms)
 		if (ft_strncmp(str, NAME_CMD_STRING, 5) == 0 && asm_ms->name == NULL)
 			check_name_p1(str, asm_ms, 0);
 		else if (ft_strncmp(str, NAME_CMD_STRING, 5) == 0 && asm_ms->name != NULL)
-			asm_error(23, asm_ms->current_line);
+			asm_error(23, asm_ms->current_line, asm_ms);
 		else if (ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0
 			&& asm_ms->comment == NULL)
 			check_comment_p1(str, asm_ms, 0);
 		else if (ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0
 			&& asm_ms->comment != NULL)
-			asm_error(24, asm_ms->current_line);
+			asm_error(24, asm_ms->current_line, asm_ms);
 		else if (!asm_ms->comment || !asm_ms->name)
-			asm_error(25, asm_ms->current_line);
+			asm_error(25, asm_ms->current_line, asm_ms);
 	}
 	return (1);
 }

@@ -59,13 +59,13 @@ int _save_info(t_asm *asm_ms, char *str, t_token *current, int last)
 	if(current->code_operation == 16)
 	{
         current->arg1 = ft_strsub(str, 0, last);
-        current->arg1[0] != 'r' ? asm_error(9, current->current_line) : 0;
-		last > 3 ? asm_error(14, current->current_line) : 0;
+        current->arg1[0] != 'r' ? asm_error(9, current->current_line, asm_ms) : 0;
+		last > 3 ? asm_error(14, current->current_line, asm_ms) : 0;
 		if(!(current->output = ft_memalloc(sizeof(char) * 3)))
-            asm_error(4, current->current_line);
-		current->cod_tipa_argumentov = shell_arg_byte(current->type_args);
+            asm_error(4, current->current_line, asm_ms);
+		current->arg_type_code = shell_arg_byte(current->type_args);
 		current->output[0] = (char)current->code_operation;
-		current->output[1] = current->cod_tipa_argumentov;
+		current->output[1] = current->arg_type_code;
 		current->command_size = 3;
 		asm_ms->current_byte += 3;
 		current->size1 = asm_ms->current_byte - 3;
@@ -74,10 +74,10 @@ int _save_info(t_asm *asm_ms, char *str, t_token *current, int last)
 	else
 	{
         current->arg1 = ft_strsub(str, 0, last);
-        current->arg1[0] != '%' ? asm_error(9, current->current_line) : 0;
+        current->arg1[0] != '%' ? asm_error(9, current->current_line, asm_ms) : 0;
 		size = current->code_operation == 1 ? 4 : 2;
 		if(!(current->output = ft_memalloc(sizeof(char) * size + 1)))
-            asm_error(4, current->current_line);
+            asm_error(4, current->current_line, asm_ms);
 		current->output[0] = (char) (current->code_operation);
 		current->command_size += size + 1;
 		asm_ms->current_byte += size + 1;
@@ -100,18 +100,18 @@ int one_argument(t_asm *asm_ms, char *str, t_token *current)///проверка 
 	else if(str[i] && str[i] == LABEL_CHARS[17] && _is_number_char(str[i + 1])) ///если регистр 'r'
 	{
 		i++;
-		_is_number_char(str[i]) ? 0 : asm_error(14, current->current_line);
+		_is_number_char(str[i]) ? 0 : asm_error(14, current->current_line, asm_ms);
 		while (str[i] && _is_number_char(str[i]))
 			i++;
 		j = i;
 		is_spacei(str, &i);
 		if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
-            asm_error(14, current->current_line);
+            asm_error(14, current->current_line, asm_ms);
 		_save_info(asm_ms, str, current, j);
 		return (0);
 	}
 	else
-        asm_error(14, current->current_line);
+        asm_error(14, current->current_line, asm_ms);
 	if (str[i] && str[i] == LABEL_CHAR)
 	{
 		i++;
@@ -120,20 +120,20 @@ int one_argument(t_asm *asm_ms, char *str, t_token *current)///проверка 
 		j = i;
 		is_spacei(str, &i);
 		if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
-            asm_error(14, current->current_line);
+            asm_error(14, current->current_line, asm_ms);
 	}
 	else if ((str[i] == '-' || _is_number_char(str[i])) && str[i])
 	{
-		str[i] == '-' && ((!str[i + 1] || !_is_number_char (str[i + 1]))) ? asm_error(14, current->current_line) : i++;
+		str[i] == '-' && ((!str[i + 1] || !_is_number_char (str[i + 1]))) ? asm_error(14, current->current_line, asm_ms) : i++;
 		while (str[i] && _is_number_char(str[i]))
 			i++;
 		j = i;
 		is_spacei(str, &i);
 		if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
-            asm_error(14, current->current_line);
+            asm_error(14, current->current_line, asm_ms);
 	}
 	else
-        asm_error(14, current->current_line);
+        asm_error(14, current->current_line, asm_ms);
 	_save_info(asm_ms, str, current, j);
 	return (0);
 }
@@ -183,20 +183,21 @@ void	_register_size(t_token *current)
 
 void    _check_arg(t_token *current, char *arg, int num)
 {
+	t_asm kostyl;
+
+	kostyl.file_name = "42.cor";
     if (g_op_tab[current->index].args_types[num] == 1)
-        +arg[0] != 'r' ? asm_error(9+num, current->current_line) : 0;
+        arg[0] != 'r' ? asm_error(9+num, current->current_line, &kostyl) : 0;
     else if (g_op_tab[current->index].args_types[num] == 2)
-        +arg[0] != '%' ? asm_error(9+num, current->current_line) : 0;
+        arg[0] != '%' ? asm_error(9+num, current->current_line, &kostyl) : 0;
     else if (g_op_tab[current->index].args_types[num] == 3)
-        +arg[0] == 'r' || arg[0] == '%' ? 0 : asm_error(9+num, current->current_line);
+        arg[0] == 'r' || arg[0] == '%' ? 0 : asm_error(9+num, current->current_line, &kostyl);
     else if (g_op_tab[current->index].args_types[num] == 4)
-        +arg[0] != 'r' && arg[0] != '%' ? 0 : asm_error(9+num, current->current_line);
+        arg[0] != 'r' && arg[0] != '%' ? 0 : asm_error(9+num, current->current_line, &kostyl);
     else if (g_op_tab[current->index].args_types[num] == 5)
-        arg[0] != '%' ? 0 : asm_error(9+num, current->current_line);
+        arg[0] != '%' ? 0 : asm_error(9+num, current->current_line, &kostyl);
     else if (g_op_tab[current->index].args_types[num] == 6)
-        arg[0] != 'r' ? 0 : asm_error(9+num, current->current_line);
-    else
-        return ;
+        arg[0] != 'r' ? 0 : asm_error(9+num, current->current_line, &kostyl);
 }
 
 void _arg(char *str, t_token *current, int start, int end)
@@ -239,7 +240,7 @@ int		two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
 			if(str[i] && (str[i] == '-' || _is_number_char(str[i])))////// %5 or %-5 //////////
 			{
 				str[i] == '-' ? j++ : 0;
-				str[i] == '-' && ((!str[i + 1] || !_is_number_char (str[i + 1]))) ? asm_error(14 + a, current->current_line) : 0;
+				str[i] == '-' && ((!str[i + 1] || !_is_number_char (str[i + 1]))) ? asm_error(14 + a, current->current_line, asm_ms) : 0;
 				str[i] == '-' ? i++ : 0;
 				while (str[i] && _is_number_char(str[i]))
 				{
@@ -253,7 +254,7 @@ int		two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
 				{
 					is_spacei(str, &i);
 					if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
-                        asm_error(14 + a, current->current_line);
+                        asm_error(14 + a, current->current_line, asm_ms);
 				}
 				else if(str[i++] == SEPARATOR_CHAR)
 				{
@@ -277,7 +278,7 @@ int		two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
 				{
 					is_spacei(str, &i);
 					if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
-                        asm_error(14 + a, current->current_line);
+                        asm_error(14 + a, current->current_line, asm_ms);
 				}
 				else if(str[i++] == SEPARATOR_CHAR)
 				{
@@ -286,7 +287,7 @@ int		two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
 				}
 			}
 			else
-                asm_error(14 + a, current->current_line);
+                asm_error(14 + a, current->current_line, asm_ms);
 
 		}
 		else if(str[i] && str[i] == LABEL_CHAR) ///////   :   ///////
@@ -306,7 +307,7 @@ int		two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
 			{
 				is_spacei(str, &i);
 				if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
-                    asm_error(14 + a, current->current_line);
+                    asm_error(14 + a, current->current_line, asm_ms);
 			}
 			else if(str[i++] == SEPARATOR_CHAR)
 			{
@@ -319,13 +320,13 @@ int		two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
 			start = i;
 			i++;
 			j++;
-			_is_number_char(str[i]) ? 0 : asm_error(14 + a, current->current_line);
+			_is_number_char(str[i]) ? 0 : asm_error(14 + a, current->current_line, asm_ms);
 			while (str[i] && _is_number_char(str[i]))
 			{
 				i++;
 				j++;
 			}
-			j > 3 ? asm_error(14 + a, current->current_line) : 0;
+			j > 3 ? asm_error(14 + a, current->current_line, asm_ms) : 0;
 			_register_size(current);
 			_arg(str, current, start, j);
 			is_spacei(str, &i);
@@ -333,7 +334,7 @@ int		two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
 			{
 				is_spacei(str, &i);
 				if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
-                    asm_error(14 + a, current->current_line);
+                    asm_error(14 + a, current->current_line, asm_ms);
 			}
 			else if(str[i++] == SEPARATOR_CHAR)
 			{
@@ -346,7 +347,7 @@ int		two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
 			j++;
 			start = i;
 			str[i] == '-' ? j++ : 0;
-			str[i] == '-' && ((!str[i + 1] || !(_is_number_char) (str[i + 1]))) ? asm_error(14 + a, current->current_line) : i++;
+			str[i] == '-' && ((!str[i + 1] || !(_is_number_char) (str[i + 1]))) ? asm_error(14 + a, current->current_line, asm_ms) : i++;
 			while (str[i] && _is_number_char(str[i]))
 			{
 				i++;
@@ -359,7 +360,7 @@ int		two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
 			{
 				is_spacei(str, &i);
 				if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
-                    asm_error(14 + a, current->current_line);
+                    asm_error(14 + a, current->current_line, asm_ms);
 			}
 			else if(str[i++] == SEPARATOR_CHAR)
 			{
@@ -368,7 +369,7 @@ int		two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
 			}
 		}
 		else
-            asm_error(14 + a, current->current_line);
+            asm_error(14 + a, current->current_line, asm_ms);
 		a++;
 	}
 	save_all_info(asm_ms, current);
@@ -414,11 +415,11 @@ void save_all_info(t_asm *asm_ms, t_token *current)
 	size = 0;
 	size = _size_code(size, current);
 	current->type_args = size;
-	current->cod_tipa_argumentov = shell_arg_byte(size);
+	current->arg_type_code = shell_arg_byte(size);
 	if(!(current->output = ft_memalloc(sizeof(char) * 1 + 1 + (current->size1 + current->size2 + current->size3))))
-	    asm_error(4, current->current_line);
+	    asm_error(4, current->current_line, asm_ms);
 	current->output[0] = (char)current->code_operation;
-	current->output[1] = current->cod_tipa_argumentov;
+	current->output[1] = current->arg_type_code;
 	asm_ms->current_byte += 1 + 1 + (current->size1 + current->size2 + current->size3);
 	current->len = 1 + 1 + (current->size1 + current->size2 + current->size3);
 	current->size1 = asm_ms->current_byte - current->size1 - current->size2 - current->size3 - 2;

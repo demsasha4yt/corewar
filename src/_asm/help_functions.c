@@ -89,6 +89,6 @@ int count_label(t_asm *asm_ms, char *str, int byte, t_token *token)
 
 		label = label->next;
 	}
-	asm_error(13, token->current_line);
+	asm_error(13, token->current_line, asm_ms);
 	return (0);
 }

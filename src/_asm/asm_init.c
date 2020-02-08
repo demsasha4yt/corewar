@@ -8,7 +8,7 @@ int init_label(char **str, t_label *label, t_asm *asm_ms, int i)
 	label->next = NULL;
 	label->byte = asm_ms->current_byte;
 	if (!(label->name = ft_strsub(*str, 0, i)))
-		asm_error(4, -1);
+		asm_error(4, -1, asm_ms);
 	*str += i + 1;
 	is_space(str);
 	if (!(is_comment(*str)) && (**str))
@@ -37,7 +37,7 @@ t_token *init_token_p1(t_asm *asm_ms)
 	if (!(asm_ms->first))
 	{
 		if (!(asm_ms->first = (t_token *)(ft_memalloc(sizeof(t_token)))))
-			asm_error(4, -1);
+			asm_error(4, -1, asm_ms);
 		temp = asm_ms->first;
 	}
 	else
@@ -45,7 +45,7 @@ t_token *init_token_p1(t_asm *asm_ms)
 		while (temp->next)
 			temp = temp->next;
 		if (!(temp->next = (t_token *)(ft_memalloc(sizeof(t_token)))))
-			asm_error(4, -1);
+			asm_error(4, -1, asm_ms);
 		temp = temp->next;
 	}
 	temp->current_line = asm_ms->current_line;

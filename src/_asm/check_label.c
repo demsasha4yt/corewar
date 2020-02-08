@@ -24,7 +24,7 @@ int check_label(char **str, t_asm *asm_ms)
 	if (!asm_ms->label)
 	{
 		if (!(asm_ms->label = (t_label *)(malloc(sizeof(t_label)))))
-			asm_error(4, -1);
+			asm_error(4, -1, asm_ms);
 		temp = asm_ms->label;
 	}
 	else
@@ -33,7 +33,7 @@ int check_label(char **str, t_asm *asm_ms)
 		while (temp->next)
 			temp = temp->next;
 		if (!(temp->next = (t_label *)(malloc(sizeof(t_label)))))
-			asm_error(4, -1);
+			asm_error(4, -1, asm_ms);
 		temp = temp->next;
 	}
 	return (init_label(str, temp, asm_ms, i));
