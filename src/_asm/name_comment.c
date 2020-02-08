@@ -8,19 +8,19 @@ void check_name_p2(int i, t_asm *asm_ms)
 	asm_ms->name[i++] = '\n';
 	while (get_next_line(asm_ms->fd_r, &str))
 	{
+		asm_ms->current_line += 1;
 		j = 0;
 		while (str[j] != '"' && str[j] && i < PROG_NAME_LENGTH)
 			asm_ms->name[i++] = str[j++];
 		if (i == PROG_NAME_LENGTH)
-			ft_printf("error number symbols (name)\n");
+			asm_error(17, asm_ms->current_line);
 		if (str[j] == '"')
 		{
-			//проверка на валидность строки после ковычки
 			j++;
-			while (str[j] == ' ' || str[j] == '\t')//проверка на валидность строки после ковычки \0 # ' ' '\t'
+			while (str[j] == ' ' || str[j] == '\t')
 				j++;
 			if (str[j] != '#' && str[j] != '\0')
-				perror("sym after \" ");
+				asm_error(18, asm_ms->current_line);
 			return;
 		}
 		if (!(*str))
@@ -37,19 +37,19 @@ void check_comment_p2(int i, t_asm *asm_ms)
 	asm_ms->comment[i++] = '\n';
 	while (get_next_line(asm_ms->fd_r, &str))
 	{
+		asm_ms->current_line += 1;
 		j = 0;
 		while (str[j] != '"' && str[j] && i < COMMENT_LENGTH)
 			asm_ms->comment[i++] = str[j++];
 		if (i == COMMENT_LENGTH)
-			ft_printf("error number symbols (comment)\n");
+			asm_error(19, asm_ms->current_line);
 		if (str[j] == '"')
 		{
-			//проверка на валидность строки после ковычки
 			j++;
-			while (str[j] == ' ' || str[j] == '\t')//проверка на валидность строки после ковычки \0 # ' ' '\t'
+			while (str[j] == ' ' || str[j] == '\t')
 				j++;
 			if (str[j] != '#' && str[j] != '\0')
-				perror("sym after \" ");
+                asm_error(20, asm_ms->current_line);
 			return;
 		}
 		if (!(*str))
@@ -60,8 +60,8 @@ void check_comment_p2(int i, t_asm *asm_ms)
 
 int check_name_p1(char *str, t_asm *asm_ms, int i)
 {
-	if (!(asm_ms->name = ft_strnew(PROG_NAME_LENGTH)))
-		asm_error(4);
+	if (!(asm_ms->name = (char *)ft_memalloc((sizeof(char) * PROG_NAME_LENGTH))))
+		asm_error(4, -1);
 	str += 5;
 	is_space(&str);
 	if (*str++ == '"')
@@ -72,30 +72,27 @@ int check_name_p1(char *str, t_asm *asm_ms, int i)
 			i++;
 		}
 		if (i == PROG_NAME_LENGTH)
-			ft_printf("error number symbols (name)\n");
+			asm_error(17, asm_ms->current_line);
 		if (str[i] == '"')
 		{
 			i++;
 			while (str[i] == ' ' || str[i] == '\t')
 				i++;
 			if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i] != '\0')
-				perror("sym after \" ");
+				asm_error(18, asm_ms->current_line);
 		}
 		else
 			check_name_p2(i, asm_ms);
 	}
 	else
-	{
-		ft_printf("error symbols\n");
-		exit(0);
-	}
+		asm_error(21, asm_ms->current_line);
 	return (1);
 }
 
 int check_comment_p1(char *str, t_asm *asm_ms, int i)
 {
-	if (!(asm_ms->comment = ft_strnew(COMMENT_LENGTH)))
-		asm_error(4);
+	if (!(asm_ms->comment = (char *)ft_memalloc(sizeof(char) * COMMENT_LENGTH)))
+		asm_error(4, -1);
 	str += 8;
 	is_space(&str);
 	if (*str++ == '"')
@@ -106,23 +103,20 @@ int check_comment_p1(char *str, t_asm *asm_ms, int i)
 			i++;
 		}
 		if (i == COMMENT_LENGTH)
-			ft_printf("error number symbols (comment)\n");
+			asm_error(19, asm_ms->current_line);
 		if (str[i] == '"')
 		{
 			i++;
 			while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 				i++;
 			if (str[i] && str[i] != '#' && str[i] != '\0')
-				perror("sym after \" ");
+				asm_error(20, asm_ms->current_line);
 		}
 		else
 			check_comment_p2(i, asm_ms);
 	}
 	else
-	{
-		ft_printf("error symbols\n");
-		exit(0);
-	}
+		asm_error(22, asm_ms->current_line);
 	return (1);
 }
 
@@ -138,15 +132,15 @@ int	check_name_comment(char *str1, t_asm *asm_ms)
 		if (ft_strncmp(str, NAME_CMD_STRING, 5) == 0 && asm_ms->name == NULL)
 			check_name_p1(str, asm_ms, 0);
 		else if (ft_strncmp(str, NAME_CMD_STRING, 5) == 0 && asm_ms->name != NULL)
-			ft_printf("second name\n");
+			asm_error(23, asm_ms->current_line);
 		else if (ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0
 			&& asm_ms->comment == NULL)
 			check_comment_p1(str, asm_ms, 0);
 		else if (ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0
 			&& asm_ms->comment != NULL)
-			ft_printf("second comment\n");
+			asm_error(24, asm_ms->current_line);
 		else if (!asm_ms->comment || !asm_ms->name)
-			ft_printf("command/label before name/comment\n");
+			asm_error(25, asm_ms->current_line);
 	}
 	return (1);
 }

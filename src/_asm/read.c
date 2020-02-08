@@ -1,5 +1,20 @@
 #include "asm.h"
 
+int check_last_row(char *file)
+{
+	int i;
+
+	i = ft_strlen(file) - 1;
+	while (file[i] != '\n')
+		--i;
+	++i;
+	while (file[i] && (file[i] == ' ' || file[i] == '\t'))
+		++i;
+	if (file[i] && file[i] != COMMENT_CHAR && file[i] != ALT_COMMENT_CHAR)
+		return (0);
+	return (1);
+}
+
 char *asm_read_cycle(t_asm *asm_ms)
 {
 	char *file;
@@ -11,19 +26,19 @@ char *asm_read_cycle(t_asm *asm_ms)
 	file = 0;
 	temp2 = 0;
 	i = -1;
-	//9 баф сайз
 	while ((i = read(asm_ms->fd_r, temp1, 9)) > 0)
 	{
 		temp1[i] = '\0';
-		temp2 = ft_strjoin(file, temp1);
+		if (!(temp2 = ft_strjoin(file, temp1)))
+			asm_error(4, -1);
 		if (file)
 			free(file);
 		file = temp2;
 	}
 	if (i == -1)
-		asm_error(5);
+		asm_error(5, -1);
 	free(temp1);
-	if (file[ft_strlen(file) - 1] != '\n')
-		asm_error(6);
+	if (!check_last_row(file))
+		asm_error(6, -1);
 	return (file);
 }

@@ -2,9 +2,9 @@
 
 int	is_space(char **str)
 {
-	if(**str == ' ' || **str == '\t')
+	if(**str && (**str == ' ' || **str == '\t'))
 	{
-		while (**str == ' ' || **str == '\t')
+		while (**str && (**str == ' ' || **str == '\t'))
 		{
 			(*str)++;
 		}
@@ -18,7 +18,7 @@ int is_blank(char *str)
 	int i;
 
 	i = 0;
-	while (str[i] == ' ' || str[i] == '\t')
+	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 		++i;
 	if (!(str[i]) || str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR)
 	{
@@ -35,6 +35,12 @@ int is_comment(char *str)
 	return (0);
 }
 
+
+//arg1 - arg1 type
+//1 - T_REG
+//2 - T-DIR
+//3 - T-IND
+
 char arg_byte(int arg1, int arg2, int arg3)
 {
 	int res;
@@ -43,20 +49,20 @@ char arg_byte(int arg1, int arg2, int arg3)
 	if (arg3 == 1)
 		res += 4;
 	else if (arg3 == 2)
-		res += 8;
-	else
+	 	res += 8;
+	else if (arg3 == 3)
 		res += 12;
 	if (arg2 == 1)
 		res += 16;
 	else if (arg2 == 2)
 		res += 32;
-	else
+	else if (arg2 == 3)
 		res += 48;
 	if (arg1 == 1)
 		res += 64;
 	else if (arg1 == 2)
-		res += 128;
-	else
+	 	res += 128;
+	else if (arg1 == 3)
 		res += 192;
 	return ((char)res);
 }
@@ -64,4 +70,25 @@ char arg_byte(int arg1, int arg2, int arg3)
 char shell_arg_byte(int type_args)
 {
 	return (arg_byte(type_args / 100, (type_args / 10) % 10, type_args % 10));
+}
+
+int count_label(t_asm *asm_ms, char *str, int byte, t_token *token)
+{
+	t_label *label;
+
+	label = asm_ms->label;
+	while (label)
+	{
+		if (!(ft_strcmp(label->name, str)))
+		{
+			if (label->byte > byte)
+				return (label->byte - byte);
+			else
+				return (label->byte - byte);
+		}
+
+		label = label->next;
+	}
+	asm_error(13, token->current_line);
+	return (0);
 }
