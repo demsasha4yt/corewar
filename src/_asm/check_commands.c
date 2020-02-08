@@ -39,7 +39,7 @@ int	check_and_save_command(char *str, t_token *current)
 void check_valid_commands(t_asm *asm_ms, char *str, t_token *current)
 {
 	if(current->code_operation == 1 || current->code_operation == 9 ||
-	current->code_operation == 12 || current->code_operation == 16 ||
+	current->code_operation == 12 || current->code_operation == 15 ||
 	current->code_operation == 16)
 		one_argument(asm_ms, str, current);
 	else
