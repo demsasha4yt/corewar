@@ -32,7 +32,7 @@ char *asm_read_cycle(t_asm *asm_ms)
 			free(file);
 		file = temp2;
 	}
-	if (i == -1 || i == 0)
+	if (i == -1 || !file)
 		asm_error(5, -1, asm_ms);
 	if (!check_last_row(file))
 		asm_error(6, -1, asm_ms);

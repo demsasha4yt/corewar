@@ -24,7 +24,7 @@ void check_name_p2(int i, t_asm *asm_ms)
 			j++;
 			while (str[j] == ' ' || str[j] == '\t')
 				j++;
-			if (str[j] != '#' && str[j] != '\0')
+			if (str[j] != COMMENT_CHAR && str[j] != ALT_COMMENT_CHAR && str[j])
 				asm_error(18, asm_ms->current_line, asm_ms);
 			return;
 		}
@@ -52,7 +52,7 @@ int check_name_p1(char *str, t_asm *asm_ms, int i)
 			i++;
 			while (str[i] == ' ' || str[i] == '\t')
 				i++;
-			if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i] != '\0')
+			if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
 				asm_error(18, asm_ms->current_line, asm_ms);
 		}
 		else
@@ -90,7 +90,7 @@ void check_comment_p2(int i, t_asm *asm_ms)
 			j++;
 			while (str[j] == ' ' || str[j] == '\t')
 				j++;
-			if (str[j] != '#' && str[j] != '\0')
+			if (str[j] != COMMENT_CHAR && str[j] != ALT_COMMENT_CHAR && str[j])
 				asm_error(20, asm_ms->current_line, asm_ms);
 			return;
 		}
@@ -118,7 +118,7 @@ int check_comment_p1(char *str, t_asm *asm_ms, int i)
 			i++;
 			while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 				i++;
-			if (str[i] && str[i] != '#' && str[i] != '\0')
+			if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
 				asm_error(20, asm_ms->current_line, asm_ms);
 		}
 		else
