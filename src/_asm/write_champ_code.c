@@ -44,6 +44,8 @@ void write_code(t_asm *asm_ms)
 {
 	t_token *token;
 
+	if (asm_ms->current_byte == 0)
+		asm_error(5, -1, asm_ms);
 	token = asm_ms->first;
 	while (token)
 	{
