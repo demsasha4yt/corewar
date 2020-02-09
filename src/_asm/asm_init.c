@@ -19,7 +19,7 @@ int init_label(char **str, t_label *label, t_asm *asm_ms, int i)
 	return (1);
 }
 
-void init_token_p2(t_token *token)
+void init_token_p2(t_token *token) ///НАХ надо???
 {
 	token->next = 0;
 	token->arg1 = 0;

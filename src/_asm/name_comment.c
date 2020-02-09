@@ -4,14 +4,19 @@ void check_name_p2(int i, t_asm *asm_ms)
 {
 	int j;
 	char *str;
+	int check;
 
-	asm_ms->name[i++] = '\n';
 	while (get_next_line(asm_ms->fd_r, &str))
 	{
+		check = 0;
+		if(!ft_strchr(str, '"'))
+			check = 1;
 		asm_ms->current_line += 1;
 		j = 0;
 		while (str[j] != '"' && str[j] && i < PROG_NAME_LENGTH)
 			asm_ms->name[i++] = str[j++];
+		if(check)
+			asm_ms->name[i++] = '\n';
 		if (i == PROG_NAME_LENGTH)
 			asm_error(17, asm_ms->current_line, asm_ms);
 		if (str[j] == '"')
@@ -23,37 +28,6 @@ void check_name_p2(int i, t_asm *asm_ms)
 				asm_error(18, asm_ms->current_line, asm_ms);
 			return;
 		}
-		if (!(*str))
-			asm_ms->name[i++] = '\n';
-		free(str);
-	}
-}
-
-void check_comment_p2(int i, t_asm *asm_ms)
-{
-	int j;
-	char *str;
-
-	asm_ms->comment[i++] = '\n';
-	while (get_next_line(asm_ms->fd_r, &str))
-	{
-		asm_ms->current_line += 1;
-		j = 0;
-		while (str[j] != '"' && str[j] && i < COMMENT_LENGTH)
-			asm_ms->comment[i++] = str[j++];
-		if (i == COMMENT_LENGTH)
-			asm_error(19, asm_ms->current_line, asm_ms);
-		if (str[j] == '"')
-		{
-			j++;
-			while (str[j] == ' ' || str[j] == '\t')
-				j++;
-			if (str[j] != '#' && str[j] != '\0')
-                asm_error(20, asm_ms->current_line, asm_ms);
-			return;
-		}
-		if (!(*str))
-			asm_ms->comment[i++] = '\n';
 		free(str);
 	}
 }
@@ -82,11 +56,46 @@ int check_name_p1(char *str, t_asm *asm_ms, int i)
 				asm_error(18, asm_ms->current_line, asm_ms);
 		}
 		else
+		{
+			asm_ms->name[i++] = '\n';
 			check_name_p2(i, asm_ms);
+		}
 	}
 	else
 		asm_error(21, asm_ms->current_line, asm_ms);
 	return (1);
+}
+
+void check_comment_p2(int i, t_asm *asm_ms)
+{
+	int j;
+	char *str;
+	int check;
+
+	while (get_next_line(asm_ms->fd_r, &str))
+	{
+		check = 0;
+		if(!ft_strchr(str, '"'))
+			check = 1;
+		asm_ms->current_line += 1;
+		j = 0;
+		while (str[j] != '"' && str[j] && i < COMMENT_LENGTH)
+			asm_ms->comment[i++] = str[j++];
+		if(check)
+			asm_ms->comment[i++] = '\n';
+		if (i == COMMENT_LENGTH)
+			asm_error(19, asm_ms->current_line, asm_ms);
+		if (str[j] == '"')
+		{
+			j++;
+			while (str[j] == ' ' || str[j] == '\t')
+				j++;
+			if (str[j] != '#' && str[j] != '\0')
+				asm_error(20, asm_ms->current_line, asm_ms);
+			return;
+		}
+		free(str);
+	}
 }
 
 int check_comment_p1(char *str, t_asm *asm_ms, int i)
@@ -113,7 +122,10 @@ int check_comment_p1(char *str, t_asm *asm_ms, int i)
 				asm_error(20, asm_ms->current_line, asm_ms);
 		}
 		else
+		{
+			asm_ms->comment[i++] = '\n';
 			check_comment_p2(i, asm_ms);
+		}
 	}
 	else
 		asm_error(22, asm_ms->current_line, asm_ms);

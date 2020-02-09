@@ -20,15 +20,12 @@ int add(t_token *token, int to_add, int byte, int size)
 
 	if (size == 2)
 		to_add = (to_add >= 0) ? (unsigned short)to_add : (unsigned short)((~(-to_add) + 1));
-
 	char_to_add = (unsigned char *)(&(to_add));
 	len = ft_strlen_asm(char_to_add);
 	while (++len <= size)
 		token->output[byte++] = '\0';
 	len = ft_strlen_asm(char_to_add);
 	while (len--)
-	{
 		token->output[byte++] = char_to_add[len];
-	}
 	return (size);
 }

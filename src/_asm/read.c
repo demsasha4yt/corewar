@@ -18,14 +18,11 @@ int check_last_row(char *file)
 char *asm_read_cycle(t_asm *asm_ms)
 {
 	char *file;
-	char *temp1;
+	char temp1[10];
 	char *temp2;
 	int i;
 
-	temp1 = ft_strnew(10);
 	file = 0;
-	temp2 = 0;
-	i = -1;
 	while ((i = read(asm_ms->fd_r, temp1, 9)) > 0)
 	{
 		temp1[i] = '\0';
@@ -35,9 +32,8 @@ char *asm_read_cycle(t_asm *asm_ms)
 			free(file);
 		file = temp2;
 	}
-	if (i == -1)
+	if (i == -1 || i == 0)
 		asm_error(5, -1, asm_ms);
-	free(temp1);
 	if (!check_last_row(file))
 		asm_error(6, -1, asm_ms);
 	return (file);

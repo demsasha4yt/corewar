@@ -80,13 +80,7 @@ int count_label(t_asm *asm_ms, char *str, int byte, t_token *token)
 	while (label)
 	{
 		if (!(ft_strcmp(label->name, str)))
-		{
-			if (label->byte > byte)
-				return (label->byte - byte);
-			else
-				return (label->byte - byte);
-		}
-
+			return (label->byte - byte);
 		label = label->next;
 	}
 	asm_error(13, token->current_line, asm_ms);
