@@ -17,7 +17,7 @@ void check_name_p2(int i, t_asm *asm_ms)
 			asm_ms->name[i++] = str[j++];
 		if(check)
 			asm_ms->name[i++] = '\n';
-		if (i == PROG_NAME_LENGTH)
+		if (i > PROG_NAME_LENGTH)
 			asm_error(17, asm_ms->current_line, asm_ms);
 		if (str[j] == '"')
 		{
@@ -45,7 +45,7 @@ int check_name_p1(char *str, t_asm *asm_ms, int i)
 			asm_ms->name[i] = str[i];
 			i++;
 		}
-		if (i == PROG_NAME_LENGTH)
+		if (i > PROG_NAME_LENGTH)
 			asm_error(17, asm_ms->current_line, asm_ms);
 		if (str[i] == '"')
 		{
@@ -83,7 +83,7 @@ void check_comment_p2(int i, t_asm *asm_ms)
 			asm_ms->comment[i++] = str[j++];
 		if(check)
 			asm_ms->comment[i++] = '\n';
-		if (i == COMMENT_LENGTH)
+		if (i > COMMENT_LENGTH)
 			asm_error(19, asm_ms->current_line, asm_ms);
 		if (str[j] == '"')
 		{
@@ -111,7 +111,7 @@ int check_comment_p1(char *str, t_asm *asm_ms, int i)
 			asm_ms->comment[i] = str[i];
 			i++;
 		}
-		if (i == COMMENT_LENGTH)
+		if (i > COMMENT_LENGTH)
 			asm_error(19, asm_ms->current_line, asm_ms);
 		if (str[i] == '"')
 		{

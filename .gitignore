@@ -2,6 +2,8 @@ corewar
 champs
 asm
 *.o
+*.cor
+*.s
 resources
 cmake-build-debug
 .vscode
