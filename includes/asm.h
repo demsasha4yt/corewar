@@ -67,6 +67,7 @@ typedef struct		s_asm
 	char			*file_name;
 	char			*name;
 	char			*comment;
+	char 			*error_name;
 	struct s_token	*first;
 	struct s_label	*label;
 	int				current_byte;

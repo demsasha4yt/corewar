@@ -19,23 +19,23 @@ void asm_error(int er_nu, int line, t_asm *asm_ms)
     else if (er_nu == 7)
         ft_printf("\x1B[31mCan't close the file\n\033[0m");
     else if (er_nu == 8)
-        ft_printf("%s.s:%d \x1B[31mInvalid command\n\033[0m",asm_ms->name, line);
+        ft_printf("%s:%d \x1B[31mInvalid command\n\033[0m",asm_ms->error_name, line);
     else if (er_nu == 9)
-        ft_printf("%s.s:%d \x1B[31mInvalid type of first argument\n\033[0m", asm_ms->name, line);
+        ft_printf("%s:%d \x1B[31mInvalid type of first argument\n\033[0m", asm_ms->error_name, line);
     else if (er_nu == 10)
-        ft_printf("%s.s:%d \x1B[31mInvalid type of second argument\n\033[0m", asm_ms->name, line);
+        ft_printf("%s:%d \x1B[31mInvalid type of second argument\n\033[0m", asm_ms->error_name, line);
     else if (er_nu == 11)
-        ft_printf("%s.s:%d \x1B[31mInvalid type of third argument\n\033[0m", asm_ms->name, line);
+        ft_printf("%s:%d \x1B[31mInvalid type of third argument\n\033[0m", asm_ms->error_name, line);
     else if (er_nu == 12)
-        ft_printf("%s.s:%d \x1B[31mWrong arguments number\n\033[0m", asm_ms->name, line);
+        ft_printf("%s:%d \x1B[31mWrong arguments number\n\033[0m", asm_ms->error_name, line);
     else if (er_nu == 13)
-        ft_printf("%s.s:%d \x1B[31mWrong label name\n\033[0m", asm_ms->name, line);
+        ft_printf("%s:%d \x1B[31mWrong label name\n\033[0m", asm_ms->error_name, line);
     else if (er_nu == 14)
-        ft_printf("%s.s:%d \x1B[31mInvalid instruction in first argument\n\033[0m", asm_ms->name, line);
+        ft_printf("%s:%d \x1B[31mInvalid instruction in first argument\n\033[0m", asm_ms->error_name, line);
     else if (er_nu == 15)
-        ft_printf("%s.s:%d \x1B[31mInvalid instruction in second argument\n\033[0m", asm_ms->name, line);
+        ft_printf("%s:%d \x1B[31mInvalid instruction in second argument\n\033[0m", asm_ms->error_name, line);
     else if (er_nu == 16)
-        ft_printf("%s.s:%d \x1B[31mInvalid instruction in third argument\n\033[0m", asm_ms->name, line);
+        ft_printf("%s:%d \x1B[31mInvalid instruction in third argument\n\033[0m", asm_ms->error_name, line);
     else if (er_nu == 17)
         ft_printf("\x1B[31mBad name length\n\033[0m");
     else if (er_nu == 18)
@@ -45,15 +45,15 @@ void asm_error(int er_nu, int line, t_asm *asm_ms)
     else if (er_nu == 20)
         ft_printf("\x1B[31mBad symbols after comment declaration\n\033[0m");
     else if (er_nu == 21)
-        ft_printf("%s.s:%d \x1B[31mBad character. No quotation mark met after name declaration\n\033[0m", asm_ms->name, line);
+        ft_printf("%s:%d \x1B[31mBad character. No quotation mark met after name declaration\n\033[0m", asm_ms->error_name, line);
     else if (er_nu == 22)
-        ft_printf("%s.s:%d \x1B[31mBad character. No quotation mark met after comment declaration\n\033[0m", asm_ms->name, line);
+        ft_printf("%s:%d \x1B[31mBad character. No quotation mark met after comment declaration\n\033[0m", asm_ms->error_name, line);
     else if (er_nu == 23)
-        ft_printf("%s.s:%d \x1B[31mSecond declaration of name\n\033[0m", asm_ms->name, line);
+        ft_printf("%s:%d \x1B[31mSecond declaration of name\n\033[0m", asm_ms->error_name, line);
     else if (er_nu == 24)
-        ft_printf("%s.s:%d \x1B[31mSecond declaration of comment\n\033[0m", asm_ms->name, line);
+        ft_printf("%s:%d \x1B[31mSecond declaration of comment\n\033[0m", asm_ms->error_name, line);
     else if (er_nu == 26)
-        ft_printf("%s.s:%d \x1B[31mCommand before name/comment declaration.\n\033[0m", asm_ms->name, line);
+        ft_printf("%s:%d \x1B[31mCommand before name/comment declaration.\n\033[0m", asm_ms->error_name, line);
     exit(er_nu);
 }
 
@@ -71,11 +71,12 @@ int asm_create_file(char *argv, t_asm *asm_ms)
 	return (fd);
 }
 
-int asm_check_name(char *argv)
+int asm_check_name(char *argv, t_asm *asm_ms)
 {
 	int i;
 
 	i = 0;
+	asm_ms->error_name = argv;
 	while (argv[i])
 		++i;
 	if (argv[i - 1] && argv[i - 1] == 's' && argv[i - 2] && argv[i - 2] == '.')
@@ -92,7 +93,7 @@ int main(int argc, char **argv)
 	init_asm_ms(&asm_ms);
 	if (argc != 2)
 		asm_error(0, -1, &asm_ms);
-	if (!asm_check_name(argv[1]))
+	if (!asm_check_name(argv[1], &asm_ms))
 		asm_error(1, -1, &asm_ms);
 	if ((asm_ms.fd_r = open(argv[1], O_RDONLY)) == -1)
 		asm_error(2, -1, &asm_ms);
