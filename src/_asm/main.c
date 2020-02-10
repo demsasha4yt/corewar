@@ -6,7 +6,7 @@
 /*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 16:55:04 by kturnips          #+#    #+#             */
-/*   Updated: 2020/02/10 17:12:17 by kturnips         ###   ########.fr       */
+/*   Updated: 2020/02/10 20:18:40 by kbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,26 @@
 void	asm_error(int er_nu, int line, t_asm *asm_ms)
 {
 	if (er_nu == 0)
-		ft_printf("\x1B[31mWrong argument number\n\033[0m");
+		ft_printf("\x1B[31merror Wrong argument number\n\033[0m");
 	else if (er_nu == 1)
-		ft_printf("\x1B[31mWrong file extention\n\033[0m");
+		ft_printf("\x1B[31merror Wrong file extention\n\033[0m");
 	else if (er_nu == 2)
-		ft_printf("\x1B[31mCan't open file\n\033[0m");
+		ft_printf("\x1B[31merror Can't open file\n\033[0m");
 	else if (er_nu == 3)
-		ft_printf("\x1B[31mCan't create .cor file\n\033[0m");
+		ft_printf("\x1B[31merror Can't create .cor file\n\033[0m");
 	else if (er_nu == 4)
-		ft_printf("\x1B[31mMalloc error\n\033[0m");
+		ft_printf("\x1B[31merror Malloc error\n\033[0m");
 	else if (er_nu == 5)
-		ft_printf("\x1B[31mRead error\n\033[0m");
+		ft_printf("\x1B[31merror Read error\n\033[0m");
 	else if (er_nu == 6)
-		ft_printf("\x1B[31mNo \\n at the end of the file\n\033[0m");
+		ft_printf("\x1B[31merror No \\n at the end of the file\n\033[0m");
 	else if (er_nu == 7)
-		ft_printf("\x1B[31mCan't close the file\n\033[0m");
+		ft_printf("\x1B[31merror Can't close the file\n\033[0m");
 	else if (er_nu == 8)
-		ft_printf("%s:%d \x1B[31mInvalid command\n\033[0m", asm_ms->error_name,
+		ft_printf("%s:%d \x1B[31merror Invalid command\n\033[0m", asm_ms->error_name,
 				line);
 	else if (er_nu == 9)
-		ft_printf("%s:%d \x1B[31mInvalid type of first argument\n\033[0m",
+		ft_printf("%s:%d \x1B[31merror Invalid type of first argument\n\033[0m",
 				asm_ms->error_name, line);
 	asm_error_p2(er_nu, line, asm_ms);
 }
@@ -89,5 +89,4 @@ int		main(int argc, char **argv)
 	parse_p1(&asm_ms);
 	write_champ_code(&asm_ms);
 	exit(0);
-	return (0);
 }

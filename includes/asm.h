@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/10 18:18:48 by kturnips         ###   ########.fr       */
+/*   Updated: 2020/02/10 21:46:04 by kbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ typedef struct		s_token
 {
 	char			*name;
 	unsigned char	*output;
-	char			arg_type_code;
 	int				code_operation;
 	int				type_args;
 	int				arg_numbers;
@@ -76,6 +75,14 @@ typedef struct		s_asm
 	int				len;
 }					t_asm;
 
+typedef struct		s_variables
+{
+	int a;
+	int i;
+	int j;
+	int start;
+}					t_var;
+
 void				parse_p1(t_asm *asm_ms);
 char				*asm_read_cycle(t_asm *asm_ms);
 void				asm_error(int er_nu, int line, t_asm *asm_ms);
@@ -105,10 +112,9 @@ int					two_three_arguments(t_asm *asm_ms, char *str,
 						t_token *current);
 void				save_all_info(t_asm *asm_ms, t_token *current);
 int					ft_atoi_asm_ed(const char *str);
-void	asm_error_p2(int er_nu, int line, t_asm *asm_ms);
-void	check_name_p1_5(t_asm *asm_ms, int i);
-void	check_comment_p1_5(t_asm *asm_ms, int i);
-void	check_name_p2(int i, t_asm *asm_ms);
-void	check_comment_p2(int i, t_asm *asm_ms);
+void				asm_error_p2(int er_nu, int line, t_asm *asm_ms);
+void				check_name_p2(int i, t_asm *asm_ms);
+void				check_comment_p2(int i, t_asm *asm_ms);
+int					save_info_one_arg(t_asm *asm_ms, char *str, t_token *current, int last);
 
 #endif
