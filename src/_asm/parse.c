@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/10 17:27:08 by kturnips          #+#    #+#             */
+/*   Updated: 2020/02/10 17:27:46 by kturnips         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
-void parse_p3(t_asm *asm_ms)
+void	parse_p3(t_asm *asm_ms)
 {
 	t_token *token;
 
@@ -15,11 +27,11 @@ void parse_p3(t_asm *asm_ms)
 	}
 }
 
-void parse_p2(t_asm *asm_ms)
+void	parse_p2(t_asm *asm_ms)
 {
-	char *str;
-	char *str1;
-	t_token *new;
+	char	*str;
+	char	*str1;
+	t_token	*new;
 
 	while (get_next_line(asm_ms->fd_r, &str) > 0)
 	{
@@ -38,7 +50,7 @@ void parse_p2(t_asm *asm_ms)
 	parse_p3(asm_ms);
 }
 
-void parse_p1(t_asm *asm_ms)
+void	parse_p1(t_asm *asm_ms)
 {
 	char *str;
 	char *str1;
@@ -53,7 +65,7 @@ void parse_p1(t_asm *asm_ms)
 		is_space(&str1);
 		if (check_name_comment(str1, asm_ms))
 			free(str);
-		if(asm_ms->name && asm_ms->comment)
+		if (asm_ms->name && asm_ms->comment)
 			break ;
 	}
 	parse_p2(asm_ms);

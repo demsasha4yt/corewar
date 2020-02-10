@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   asm_init.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/10 16:09:34 by kturnips          #+#    #+#             */
+/*   Updated: 2020/02/10 16:11:03 by kturnips         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
-int init_label(char **str, t_label *label, t_asm *asm_ms, int i)
+int		init_label(char **str, t_label *label, t_asm *asm_ms, int i)
 {
 	t_token *new;
 
@@ -19,17 +31,7 @@ int init_label(char **str, t_label *label, t_asm *asm_ms, int i)
 	return (1);
 }
 
-void init_token_p2(t_token *token) ///НАХ надо???
-{
-	token->next = 0;
-	token->arg1 = 0;
-	token->arg2 = 0;
-	token->arg3 = 0;
-	token->output = 0;
-	token->name = 0;
-}
-
-t_token *init_token_p1(t_asm *asm_ms)
+t_token	*init_token_p1(t_asm *asm_ms)
 {
 	t_token *temp;
 
@@ -49,16 +51,13 @@ t_token *init_token_p1(t_asm *asm_ms)
 		temp = temp->next;
 	}
 	temp->current_line = asm_ms->current_line;
-	init_token_p2(temp);
 	return (temp);
 }
 
-void init_asm_ms(t_asm *asm_ms)
+void	init_asm_ms(t_asm *asm_ms)
 {
 	ft_memset(asm_ms, 0, sizeof(t_asm));
 	asm_ms->fd_r = -1;
 	asm_ms->fd_w = -1;
 	asm_ms->first = 0;
-	// if (!(asm_ms->comment = ft_strnew(COMMENT_LENGTH)))
-	// 	asm_error(4);
 }

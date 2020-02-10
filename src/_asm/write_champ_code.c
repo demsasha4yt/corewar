@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   write_champ_code.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/10 17:28:38 by kturnips          #+#    #+#             */
+/*   Updated: 2020/02/10 17:29:23 by kturnips         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
-void write_magic_header(t_asm *asm_ms)
+void	write_magic_header(t_asm *asm_ms)
 {
-	char *char_to_print;
-	int i;
-	char ch;
+	char	*char_to_print;
+	int		i;
+	char	ch;
 
 	ch = 0;
 	i = COREWAR_EXEC_MAGIC;
@@ -15,10 +27,10 @@ void write_magic_header(t_asm *asm_ms)
 	write(asm_ms->fd_w, &char_to_print[0], 1);
 }
 
-void write_null(t_asm *asm_ms)
+void	write_null(t_asm *asm_ms)
 {
-	char c;
-	int i;
+	char	c;
+	int		i;
 
 	c = 0;
 	i = -1;
@@ -26,10 +38,10 @@ void write_null(t_asm *asm_ms)
 		write(asm_ms->fd_w, &c, 1);
 }
 
-void write_size(t_asm *asm_ms)
+void	write_size(t_asm *asm_ms)
 {
-	char *size;
-	int len;
+	char	*size;
+	int		len;
 
 	size = (char *)(&(asm_ms->current_byte));
 	len = ft_strlen(size);
@@ -40,7 +52,7 @@ void write_size(t_asm *asm_ms)
 		write(asm_ms->fd_w, &size[len], 1);
 }
 
-void write_code(t_asm *asm_ms)
+void	write_code(t_asm *asm_ms)
 {
 	t_token *token;
 
@@ -54,7 +66,7 @@ void write_code(t_asm *asm_ms)
 	}
 }
 
-void write_champ_code(t_asm *asm_ms)
+void	write_champ_code(t_asm *asm_ms)
 {
 	write_magic_header(asm_ms);
 	write(asm_ms->fd_w, asm_ms->name, PROG_NAME_LENGTH);
