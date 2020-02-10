@@ -6,7 +6,7 @@
 /*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 16:12:37 by kturnips          #+#    #+#             */
-/*   Updated: 2020/02/10 16:13:06 by kturnips         ###   ########.fr       */
+/*   Updated: 2020/02/10 18:07:20 by kturnips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		check_label(char **str, t_asm *asm_ms)
 	t_label	*temp;
 
 	i = 0;
-	while ((*str)[i] && is_labelChar((*str)[i]))
+	while ((*str)[i] && is_labelchar((*str)[i]))
 		i++;
 	if ((*str)[i] != LABEL_CHAR)
 		return (0);

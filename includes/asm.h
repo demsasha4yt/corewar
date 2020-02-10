@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/08 18:41:31 by kbessa           ###   ########.fr       */
+/*   Updated: 2020/02/10 18:18:48 by kturnips         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,10 @@ int					two_three_arguments(t_asm *asm_ms, char *str,
 						t_token *current);
 void				save_all_info(t_asm *asm_ms, t_token *current);
 int					ft_atoi_asm_ed(const char *str);
+void	asm_error_p2(int er_nu, int line, t_asm *asm_ms);
+void	check_name_p1_5(t_asm *asm_ms, int i);
+void	check_comment_p1_5(t_asm *asm_ms, int i);
+void	check_name_p2(int i, t_asm *asm_ms);
+void	check_comment_p2(int i, t_asm *asm_ms);
 
 #endif
