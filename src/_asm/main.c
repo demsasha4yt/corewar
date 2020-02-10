@@ -37,13 +37,13 @@ void asm_error(int er_nu, int line, t_asm *asm_ms)
     else if (er_nu == 16)
         ft_printf("%s:%d \x1B[31mInvalid instruction in third argument\n\033[0m", asm_ms->error_name, line);
     else if (er_nu == 17)
-        ft_printf("\x1B[31mBad name length\n\033[0m");
+        ft_printf("%s:%d\x1B[31mBad name length\n\033[0m", asm_ms->error_name, line);
     else if (er_nu == 18)
-        ft_printf("\x1B[31mBad symbols after name declaration\n\033[0m");
+        ft_printf("s:%d \x1B[31mBad symbols after name declaration\n\033[0m", asm_ms->error_name, line);
     else if (er_nu == 19)
-        ft_printf("\x1B[31mBad comment length\n\033[0m");
+        ft_printf("%s:%d \x1B[31mBad comment length\n\033[0m", asm_ms->error_name, line);
     else if (er_nu == 20)
-        ft_printf("\x1B[31mBad symbols after comment declaration\n\033[0m");
+        ft_printf("%s:%d \x1B[31mBad symbols after comment declaration\n\033[0m", asm_ms->error_name, line);
     else if (er_nu == 21)
         ft_printf("%s:%d \x1B[31mBad character. No quotation mark met after name declaration\n\033[0m", asm_ms->error_name, line);
     else if (er_nu == 22)

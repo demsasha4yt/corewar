@@ -183,21 +183,21 @@ void	_register_size(t_token *current)
 
 void    _check_arg(t_token *current, char *arg, int num)
 {
-	t_asm kostyl;
+	t_asm tmp;
 
-	kostyl.file_name = "42.cor";
+	tmp.file_name = "42.cor";
     if (g_op_tab[current->index].args_types[num] == 1)
-        arg[0] != 'r' ? asm_error(9+num, current->current_line, &kostyl) : 0;
+        arg[0] != 'r' ? asm_error(9+num, current->current_line, &tmp) : 0;
     else if (g_op_tab[current->index].args_types[num] == 2)
-        arg[0] != '%' ? asm_error(9+num, current->current_line, &kostyl) : 0;
+        arg[0] != '%' ? asm_error(9+num, current->current_line, &tmp) : 0;
     else if (g_op_tab[current->index].args_types[num] == 3)
-        arg[0] == 'r' || arg[0] == '%' ? 0 : asm_error(9+num, current->current_line, &kostyl);
+        arg[0] == 'r' || arg[0] == '%' ? 0 : asm_error(9+num, current->current_line, &tmp);
     else if (g_op_tab[current->index].args_types[num] == 4)
-        arg[0] != 'r' && arg[0] != '%' ? 0 : asm_error(9+num, current->current_line, &kostyl);
+        arg[0] != 'r' && arg[0] != '%' ? 0 : asm_error(9+num, current->current_line, &tmp);
     else if (g_op_tab[current->index].args_types[num] == 5)
-        arg[0] != '%' ? 0 : asm_error(9+num, current->current_line, &kostyl);
+        arg[0] != '%' ? 0 : asm_error(9+num, current->current_line, &tmp);
     else if (g_op_tab[current->index].args_types[num] == 6)
-        arg[0] != 'r' ? 0 : asm_error(9+num, current->current_line, &kostyl);
+        arg[0] != 'r' ? 0 : asm_error(9+num, current->current_line, &tmp);
 }
 
 void _arg(char *str, t_token *current, int start, int end)
