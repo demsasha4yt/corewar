@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/11 17:25:40 by kbessa           ###   ########.fr       */
+/*   Updated: 2020/02/11 21:16:48 by kbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,10 @@ typedef struct		s_asm
 {
 	int				fd_r;
 	int				fd_w;
-	char			*file_name;
+	char			*file_name_cor;
 	char			*name;
 	char			*comment;
-	char 			*error_name;
+	char 			*file_name_s;
 	struct s_token	*first;
 	struct s_label	*label;
 	int				current_byte;
@@ -81,6 +81,7 @@ typedef struct		s_variables
 	int i;
 	int j;
 	int start;
+	int end;
 }					t_var;
 
 void				parse_p1(t_asm *asm_ms);

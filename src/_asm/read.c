@@ -6,7 +6,7 @@
 /*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 17:28:03 by kturnips          #+#    #+#             */
-/*   Updated: 2020/02/10 17:28:17 by kturnips         ###   ########.fr       */
+/*   Updated: 2020/02/12 00:06:05 by kbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		check_last_row(char *file)
 {
-	int i;
+	size_t i;
 
 	i = ft_strlen(file) - 1;
 	while (file[i] != '\n')
@@ -22,7 +22,7 @@ int		check_last_row(char *file)
 	++i;
 	while (file[i] && (file[i] == ' ' || file[i] == '\t'))
 		++i;
-	if (file[i] && file[i] != COMMENT_CHAR && file[i] != ALT_COMMENT_CHAR)
+	if (!is_comment(&file[i]) && file[i])
 		return (0);
 	return (1);
 }

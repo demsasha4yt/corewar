@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_commands.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kbessa <kbessa@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/12 00:02:17 by kbessa            #+#    #+#             */
+/*   Updated: 2020/02/12 00:02:19 by kbessa           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "asm.h"
 
 int		check_and_save_command(char *str, t_token *current)
@@ -5,7 +17,7 @@ int		check_and_save_command(char *str, t_token *current)
 	int i;
 
 	i = -1;
-	while (i < 16)
+	while (i < 15)
 	{
 		i++;
 		if (ft_strncmp(str, g_op_tab[i].name, ft_strlen(g_op_tab[i].name)) == 0)
