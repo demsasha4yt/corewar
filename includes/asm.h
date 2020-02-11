@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/10 21:46:04 by kbessa           ###   ########.fr       */
+/*   Updated: 2020/02/11 17:25:40 by kbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,5 +116,5 @@ void				asm_error_p2(int er_nu, int line, t_asm *asm_ms);
 void				check_name_p2(int i, t_asm *asm_ms);
 void				check_comment_p2(int i, t_asm *asm_ms);
 int					save_info_one_arg(t_asm *asm_ms, char *str, t_token *current, int last);
-
+int					asm_create_file(char *argv, t_asm *asm_ms);
 #endif

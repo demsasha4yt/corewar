@@ -6,7 +6,7 @@
 /*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 16:55:04 by kturnips          #+#    #+#             */
-/*   Updated: 2020/02/10 20:18:40 by kbessa           ###   ########.fr       */
+/*   Updated: 2020/02/11 17:30:59 by kbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ int		main(int argc, char **argv)
 		asm_error(1, -1, &asm_ms);
 	if ((asm_ms.fd_r = open(argv[1], O_RDONLY)) == -1)
 		asm_error(2, -1, &asm_ms);
-	if ((asm_ms.fd_w = asm_create_file(argv[1], &asm_ms)) == -1)
-		asm_error(3, -1, &asm_ms);
 	file = asm_read_cycle(&asm_ms);
 	if ((close(asm_ms.fd_r) == -1))
 		asm_error(7, -1, &asm_ms);

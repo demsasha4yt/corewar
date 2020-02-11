@@ -6,7 +6,7 @@
 /*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 17:28:38 by kturnips          #+#    #+#             */
-/*   Updated: 2020/02/10 17:29:23 by kturnips         ###   ########.fr       */
+/*   Updated: 2020/02/11 17:29:51 by kbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ void	write_code(t_asm *asm_ms)
 
 void	write_champ_code(t_asm *asm_ms)
 {
+	if ((asm_ms->fd_w = asm_create_file(asm_ms->error_name, asm_ms)) == -1)
+		asm_error(3, -1, asm_ms);
 	write_magic_header(asm_ms);
 	write(asm_ms->fd_w, asm_ms->name, PROG_NAME_LENGTH);
 	write_null(asm_ms);
@@ -77,4 +79,5 @@ void	write_champ_code(t_asm *asm_ms)
 	write_code(asm_ms);
 	if ((close(asm_ms->fd_w)) == -1)
 		asm_error(7, -1, asm_ms);
+	ft_printf("Writing output program to %s\n", asm_ms->file_name);
 }

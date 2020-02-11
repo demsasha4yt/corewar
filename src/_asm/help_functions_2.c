@@ -26,6 +26,7 @@ void	asm_error_p4(int er_nu, int line, t_asm *asm_ms)
 			asm_ms->error_name, line);
 		ft_printf("\n\033[0m");
 	}
+	exit(er_nu);
 }
 
 void	asm_error_p3(int er_nu, int line, t_asm *asm_ms)
@@ -52,7 +53,6 @@ void	asm_error_p3(int er_nu, int line, t_asm *asm_ms)
 		ft_printf("declaration\n\033[0m");
 	}
 	asm_error_p4(er_nu, line, asm_ms);
-	exit(er_nu);
 }
 
 void	asm_error_p2(int er_nu, int line, t_asm *asm_ms)

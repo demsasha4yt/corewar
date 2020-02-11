@@ -16,9 +16,11 @@ void	*ft_memalloc(size_t size)
 {
 	void *ptr;
 
-	ptr = (void*)malloc(size);
-	if (!ptr)
-		return (NULL);
+	if (!(ptr = (void *)malloc(size)))
+	{
+		write(2, "Memory Allocation Error\n", 24);
+		exit(-1);
+	}
 	ft_bzero(ptr, size);
 	return (ptr);
 }

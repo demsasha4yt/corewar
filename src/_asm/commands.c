@@ -199,7 +199,7 @@ void    _check_arg(t_token *current, const char *arg, int num)
 {
 	t_asm tmp;
 
-	tmp.file_name = "42.cor";///error name pls
+	tmp.error_name = "error";///error name pls
 	if (g_op_tab[current->index].args_types[num] == 1)
 		arg[0] != 'r' ? asm_error(9+num, current->current_line, &tmp) : 0;
 	else if (g_op_tab[current->index].args_types[num] == 2)
@@ -233,161 +233,193 @@ void _arg(char *str, t_token *current, int start, int end)
 	}
 }
 
+int 	two_three_direct_number(char *str, t_token *current, t_asm *asm_ms, t_var *var)
+{
+	str[var->i] == '-' ? var->j++ : 0;
+	str[var->i] == '-' && ((!str[var->i + 1] || !is_number_char(str[var->i + 1]))) ? asm_error(14 + var->a, current->current_line, asm_ms) : 0;
+	str[var->i] == '-' ? var->i++ : 0;
+	while (str[var->i] && is_number_char(str[var->i]))
+	{
+		var->i++;
+		var->j++;
+	}
+	_direct_size(current);
+	_arg(str, current, var->start, var->j);
+	is_spacei(str, &var->i);
+	if (var->a + 1 == current->arg_numbers)
+	{
+		is_spacei(str, &var->i);
+		if (str[var->i] != COMMENT_CHAR && str[var->i] != ALT_COMMENT_CHAR && str[var->i])
+			asm_error(14 + var->a, current->current_line, asm_ms);
+	}
+	else if (str[var->i++] == SEPARATOR_CHAR)
+	{
+		var->a++;
+		return (1);
+	}
+	return (0);
+}
+
+int 	two_three_direct_label(char *str, t_token *current, t_asm *asm_ms, t_var *var)
+{
+	var->i++;
+	var->j++;
+	while (str[var->i] && is_label_char(str[var->i]))
+	{
+		var->i++;
+		var->j++;
+	}
+	_direct_size(current);
+	_arg(str, current, var->start, var->j);
+	is_spacei(str, &var->i);
+	if (var->a + 1 == current->arg_numbers)
+	{
+		is_spacei(str, &var->i);
+		if (str[var->i] != COMMENT_CHAR && str[var->i] != ALT_COMMENT_CHAR && str[var->i])
+			asm_error(14 + var->a, current->current_line, asm_ms);
+	}
+	else if (str[var->i++] == SEPARATOR_CHAR)
+	{
+		var->a++;
+		return (1);
+	}
+	return (0);
+}
+
+int 	two_three_indirect_label(char *str, t_token *current, t_asm *asm_ms, t_var *var)
+{
+	var->start = var->i++;
+	var->j++;
+	while (str[var->i] && is_label_char(str[var->i]))
+	{
+		var->i++;
+		var->j++;
+	}
+	_indirect_size(current);
+	_arg(str, current, var->start, var->j);
+	is_spacei(str, &var->i);
+	if (var->a + 1 == current->arg_numbers)
+	{
+		is_spacei(str, &var->i);
+		if (str[var->i] != COMMENT_CHAR && str[var->i] != ALT_COMMENT_CHAR && str[var->i])
+			asm_error(14 + var->a, current->current_line, asm_ms);
+	}
+	else if (str[var->i++] == SEPARATOR_CHAR)
+	{
+		var->a++;
+		return (1);
+	}
+	return (0);
+}
+
+int 	two_three_register(char *str, t_token *current, t_asm *asm_ms, t_var *var)
+{
+	var->start = var->i++;
+	var->j++;
+	is_number_char(str[var->i]) ? 0 : asm_error(14 + var->a, current->current_line, asm_ms);
+	while (str[var->i] && is_number_char(str[var->i]))
+	{
+		var->i++;
+		var->j++;
+	}
+	var->j > 3 ? asm_error(14 + var->a, current->current_line, asm_ms) : 0;
+	_register_size(current);
+	_arg(str, current, var->start, var->j);
+	is_spacei(str, &var->i);
+	if (var->a + 1 == current->arg_numbers)
+	{
+		is_spacei(str, &var->i);
+		if (str[var->i] != COMMENT_CHAR && str[var->i] != ALT_COMMENT_CHAR && str[var->i])
+			asm_error(14 + var->a, current->current_line, asm_ms);
+	}
+	else if (str[var->i++] == SEPARATOR_CHAR)
+	{
+		var->a++;
+		return (1);
+	}
+	return (0);
+}
+
+int 	two_three_indirect_number(char *str, t_token *current, t_asm *asm_ms, t_var *var)
+{
+	var->j++;
+	var->start = var->i;
+	str[var->i] == '-' ? var->j++ : 0;
+	str[var->i] == '-' && ((!str[var->i + 1] || !(is_number_char)(str[var->i + 1]))) ? asm_error(14 + var->a, current->current_line, asm_ms) : var->i++;
+	while (str[var->i] && is_number_char(str[var->i]))
+	{
+		var->i++;
+		var->j++;
+	}
+	_indirect_size(current);
+	_arg(str, current, var->start, var->j);
+	is_spacei(str, &var->i);
+	if (var->a + 1 == current->arg_numbers)
+	{
+		is_spacei(str, &var->i);
+		if (str[var->i] != COMMENT_CHAR && str[var->i] != ALT_COMMENT_CHAR && str[var->i])
+			asm_error(14 + var->a, current->current_line, asm_ms);
+	}
+	else if (str[var->i++] == SEPARATOR_CHAR)
+	{
+		var->a++;
+		return (1);
+	}
+	return (0);
+}
+
+int 	two_three_direct(char *str, t_token *current, t_asm *asm_ms, t_var *var)
+{
+	var->start = var->i;
+	var->i++;
+	var->j++;
+	if (str[var->i] && (str[var->i] == '-' || is_number_char(str[var->i])))
+	{
+		if(two_three_direct_number(str, current, asm_ms, var))
+			return (1);
+	}
+	else if (str[var->i] && str[var->i] == LABEL_CHAR)
+	{
+		if(two_three_direct_label(str, current, asm_ms, var))
+			return (1);
+	}
+	else
+		asm_error(14 + var->a, current->current_line, asm_ms);
+	return (0);
+}
+
 int		two_three_arguments(t_asm *asm_ms, char *str, t_token *current)
 {
 	t_var var;
 
 	ft_bzero(&var, sizeof(t_var));
-	int a;
-	int i;
-	int j;
-	int start;
-
-	a = 0;
-	i = 0;
-	while (a < current->arg_numbers)
+	while (var.a < current->arg_numbers)
 	{
-		j = 0;
-		is_spacei(str, &i);
-		if (str[i] && str[i] == DIRECT_CHAR) /////////////  %...   ////////////
+		var.j = 0;
+		is_spacei(str, &var.i);
+		if (str[var.i] && str[var.i] == DIRECT_CHAR)
 		{
-			start = i;
-			i++;
-			j++;
-			if (str[i] && (str[i] == '-' || is_number_char(str[i])))////// %5 or %-5 //////////
-			{
-				str[i] == '-' ? j++ : 0;
-				str[i] == '-' && ((!str[i + 1] || !is_number_char(str[i + 1]))) ? asm_error(14 + a, current->current_line, asm_ms) : 0;
-				str[i] == '-' ? i++ : 0;
-				while (str[i] && is_number_char(str[i]))
-				{
-					i++;
-					j++;
-				}
-				_direct_size(current);
-				_arg(str, current, start, j);
-				is_spacei(str, &i);
-				if (a + 1 == current->arg_numbers)
-				{
-					is_spacei(str, &i);
-					if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
-						asm_error(14 + a, current->current_line, asm_ms);
-				}
-				else if (str[i++] == SEPARATOR_CHAR)
-				{
-					a++;
-					continue;
-				}
-			}
-			else if (str[i] && str[i] == LABEL_CHAR)//////////   %:  ////////////
-			{
-				i++;
-				j++;
-				while (str[i] && is_label_char(str[i]))
-				{
-					i++;
-					j++;
-				}
-				_direct_size(current);
-				_arg(str, current, start, j);
-				is_spacei(str, &i);
-				if (a + 1 == current->arg_numbers)
-				{
-					is_spacei(str, &i);
-					if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
-						asm_error(14 + a, current->current_line, asm_ms);
-				}
-				else if (str[i++] == SEPARATOR_CHAR)
-				{
-					a++;
-					continue;
-				}
-			}
-			else
-				asm_error(14 + a, current->current_line, asm_ms);
-
+			if (two_three_direct(str, current, asm_ms, &var))
+				continue ;
 		}
-		else if (str[i] && str[i] == LABEL_CHAR) ///////   :   ///////
+		else if (str[var.i] && str[var.i] == LABEL_CHAR)
 		{
-			start = i;
-			i++;
-			j++;
-			while (str[i] && is_label_char(str[i]))
-			{
-				i++;
-				j++;
-			}
-			_indirect_size(current);
-			_arg(str, current, start, j);
-			is_spacei(str, &i);
-			if (a + 1 == current->arg_numbers)
-			{
-				is_spacei(str, &i);
-				if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
-					asm_error(14 + a, current->current_line, asm_ms);
-			}
-			else if (str[i++] == SEPARATOR_CHAR)
-			{
-				a++;
-				continue;
-			}
+			if (two_three_indirect_label(str, current, asm_ms, &var))
+				continue ;
 		}
-		else if (str[i] && str[i] == REGISTER_CHAR) ///////   r99   ////////
+		else if (str[var.i] && str[var.i] == REGISTER_CHAR)
 		{
-			start = i;
-			i++;
-			j++;
-			is_number_char(str[i]) ? 0 : asm_error(14 + a, current->current_line, asm_ms);
-			while (str[i] && is_number_char(str[i]))
-			{
-				i++;
-				j++;
-			}
-			j > 3 ? asm_error(14 + a, current->current_line, asm_ms) : 0;
-			_register_size(current);
-			_arg(str, current, start, j);
-			is_spacei(str, &i);
-			if (a + 1 == current->arg_numbers)
-			{
-				is_spacei(str, &i);
-				if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
-					asm_error(14 + a, current->current_line, asm_ms);
-			}
-			else if (str[i++] == SEPARATOR_CHAR)
-			{
-				a++;
-				continue;
-			}
+			if (two_three_register(str, current, asm_ms, &var))
+				continue ;
 		}
-		else if (str[i] && (str[i] == '-' || is_number_char(str[i]))) //////   from -1000... to 1000...   //////
+		else if (str[var.i] && (str[var.i] == '-' || is_number_char(str[var.i])))
 		{
-			j++;
-			start = i;
-			str[i] == '-' ? j++ : 0;
-			str[i] == '-' && ((!str[i + 1] || !(is_number_char)(str[i + 1]))) ? asm_error(14 + a, current->current_line, asm_ms) : i++;
-			while (str[i] && is_number_char(str[i]))
-			{
-				i++;
-				j++;
-			}
-			_indirect_size(current);
-			_arg(str, current, start, j);
-			is_spacei(str, &i);
-			if (a + 1 == current->arg_numbers)
-			{
-				is_spacei(str, &i);
-				if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
-					asm_error(14 + a, current->current_line, asm_ms);
-			}
-			else if (str[i++] == SEPARATOR_CHAR)
-			{
-				a++;
-				continue;
-			}
+			if (two_three_indirect_number(str, current, asm_ms, &var))
+				continue ;
 		}
 		else
-			asm_error(14 + a, current->current_line, asm_ms);
-		a++;
+			asm_error(14 + var.a, current->current_line, asm_ms);
+		var.a++;
 	}
 	save_all_info(asm_ms, current);
 	return (0);

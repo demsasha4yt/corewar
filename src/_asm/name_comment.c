@@ -6,7 +6,7 @@
 /*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 16:37:10 by kturnips          #+#    #+#             */
-/*   Updated: 2020/02/10 21:25:55 by kbessa           ###   ########.fr       */
+/*   Updated: 2020/02/11 14:07:08 by kbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ void	check_name_p2(int i, t_asm *asm_ms)
 
 int		check_name_p1(char *str, t_asm *asm_ms, int i)
 {
-	if (!(asm_ms->name = (char *)ft_memalloc((PROG_NAME_LENGTH))))
-		asm_error(4, -1, asm_ms);
+	asm_ms->name = (char *)ft_memalloc(sizeof(char) * PROG_NAME_LENGTH);
 	str += 5;
 	is_space(&str);
 	if (*str++ == '"')
@@ -55,8 +54,9 @@ int		check_name_p1(char *str, t_asm *asm_ms, int i)
 			i++;
 		}
 		i > PROG_NAME_LENGTH ? asm_error(17, asm_ms->current_line, asm_ms) : 0;
-		if (str[i++] == '"')
+		if (str[i] == '"')
 		{
+			i++;
 			while (str[i] == ' ' || str[i] == '\t')
 				i++;
 			if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
@@ -101,8 +101,7 @@ void	check_comment_p2(int i, t_asm *asm_ms)
 
 int		check_comment_p1(char *str, t_asm *asm_ms, int i)
 {
-	if (!(asm_ms->comment = (char *)ft_memalloc(sizeof(char) * COMMENT_LENGTH)))
-		asm_error(4, -1, asm_ms);
+	asm_ms->comment = (char *)ft_memalloc(sizeof(char) * COMMENT_LENGTH);
 	str += 8;
 	is_space(&str);
 	if (*str++ == '"')
@@ -113,8 +112,9 @@ int		check_comment_p1(char *str, t_asm *asm_ms, int i)
 			i++;
 		}
 		i > COMMENT_LENGTH ? asm_error(19, asm_ms->current_line, asm_ms) : 0;
-		if (str[i++] == '"')
+		if (str[i] == '"')
 		{
+			i++;
 			while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 				i++;
 			if (str[i] != COMMENT_CHAR && str[i] != ALT_COMMENT_CHAR && str[i])
@@ -138,15 +138,17 @@ int		check_name_comment(char *str1, t_asm *asm_ms)
 		if (*str == COMMENT_CHAR || *str == ALT_COMMENT_CHAR)
 			return (1);
 		if (ft_strncmp(str, NAME_CMD_STRING, 5) == 0 && asm_ms->name == NULL)
+		{
 			check_name_p1(str, asm_ms, 0);
+		}
 		else if (ft_strncmp(str, NAME_CMD_STRING, 5) == 0 && asm_ms->name
 				!= NULL)
 			asm_error(23, asm_ms->current_line, asm_ms);
 		else if (ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0
-			&& asm_ms->comment == NULL)
+				&& asm_ms->comment == NULL)
 			check_comment_p1(str, asm_ms, 0);
 		else if (ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0
-			&& asm_ms->comment != NULL)
+				&& asm_ms->comment != NULL)
 			asm_error(24, asm_ms->current_line, asm_ms);
 		else if (!asm_ms->comment || !asm_ms->name)
 			asm_error(25, asm_ms->current_line, asm_ms);
