@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 22:28:23 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/29 21:34:01 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/12 08:11:13 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	render_info(t_cw *cw)
 
 void	render(t_cw *cw)
 {
-	if (!cw->visualize_active)
+	if ((cw->v & 2048) == 0) 
 		return ;
 	render_map(cw);
 	render_info(cw);

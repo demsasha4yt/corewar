@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:27:25 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/05 21:00:24 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/12 01:48:33 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ typedef struct	s_op
 	uint8_t		args_num;
 	int			args_types_code;
 	uint8_t		args_types[3];
-	int			modify_carry;
 	uint8_t		t_dir_size;
 	uint32_t	cycles;
 	void		(*func)(t_cw *, t_carry *);
@@ -67,7 +66,6 @@ static t_op		g_op[16] = {
 		.args_num = 1,
 		.args_types_code = 0,
 		.args_types = {T_DIR, 0, 0},
-		.modify_carry = 0,
 		.t_dir_size = 4,
 		.cycles = 10,
 		.func = &cw_live
@@ -78,7 +76,6 @@ static t_op		g_op[16] = {
 		.args_num = 2,
 		.args_types_code = 1,
 		.args_types = {T_DIR | T_IND, T_REG, 0},
-		.modify_carry = 1,
 		.t_dir_size = 4,
 		.cycles = 5,
 		.func = &cw_ld
@@ -89,7 +86,6 @@ static t_op		g_op[16] = {
 		.args_num = 2,
 		.args_types_code = 1,
 		.args_types = {T_REG, T_REG | T_IND, 0},
-		.modify_carry = 0,
 		.t_dir_size = 4,
 		.cycles = 5,
 		.func = &cw_st
@@ -100,7 +96,6 @@ static t_op		g_op[16] = {
 		.args_num = 3,
 		.args_types_code = 1,
 		.args_types = {T_REG, T_REG, T_REG},
-		.modify_carry = 1,
 		.t_dir_size = 4,
 		.cycles = 10,
 		.func = &cw_add
@@ -111,7 +106,6 @@ static t_op		g_op[16] = {
 		.args_num = 3,
 		.args_types_code = 1,
 		.args_types = {T_REG, T_REG, T_REG},
-		.modify_carry = 1,
 		.t_dir_size = 4,
 		.cycles = 10,
 		.func = &cw_sub
@@ -122,7 +116,6 @@ static t_op		g_op[16] = {
 		.args_num = 3,
 		.args_types_code = 1,
 		.args_types = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
-		.modify_carry = 1,
 		.t_dir_size = 4,
 		.cycles = 6,
 		.func = &cw_and
@@ -133,7 +126,6 @@ static t_op		g_op[16] = {
 		.args_num = 3,
 		.args_types_code = 1,
 		.args_types = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
-		.modify_carry = 1,
 		.t_dir_size = 4,
 		.cycles = 6,
 		.func = &cw_or
@@ -144,7 +136,6 @@ static t_op		g_op[16] = {
 		.args_num = 3,
 		.args_types_code = 1,
 		.args_types = {T_REG | T_DIR | T_IND, T_REG | T_DIR | T_IND, T_REG},
-		.modify_carry = 1,
 		.t_dir_size = 4,
 		.cycles = 6,
 		.func = &cw_xor
@@ -155,7 +146,6 @@ static t_op		g_op[16] = {
 		.args_num = 1,
 		.args_types_code = 0,
 		.args_types = {T_DIR, 0, 0},
-		.modify_carry = 0,
 		.t_dir_size = 2,
 		.cycles = 20,
 		.func = &cw_zjmp
@@ -166,7 +156,6 @@ static t_op		g_op[16] = {
 		.args_num = 3,
 		.args_types_code = 1,
 		.args_types = {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG},
-		.modify_carry = 0,
 		.t_dir_size = 2,
 		.cycles = 25,
 		.func = &cw_ldi
@@ -177,7 +166,6 @@ static t_op		g_op[16] = {
 		.args_num = 3,
 		.args_types_code = 1,
 		.args_types = {T_REG, T_REG | T_DIR | T_IND, T_REG | T_DIR},
-		.modify_carry = 0,
 		.t_dir_size = 2,
 		.cycles = 25,
 		.func = &cw_sti
@@ -188,7 +176,6 @@ static t_op		g_op[16] = {
 		.args_num = 1,
 		.args_types_code = 0,
 		.args_types = {T_DIR, 0, 0},
-		.modify_carry = 0,
 		.t_dir_size = 2,
 		.cycles = 800,
 		.func = &cw_fork
@@ -199,7 +186,6 @@ static t_op		g_op[16] = {
 		.args_num = 2,
 		.args_types_code = 1,
 		.args_types = {T_DIR | T_IND, T_REG, 0},
-		.modify_carry = 1,
 		.t_dir_size = 4,
 		.cycles = 10,
 		.func = &cw_lld
@@ -210,7 +196,6 @@ static t_op		g_op[16] = {
 		.args_num = 3,
 		.args_types_code = 1,
 		.args_types = {T_REG | T_DIR | T_IND, T_REG | T_DIR, T_REG},
-		.modify_carry = 1,
 		.t_dir_size = 2,
 		.cycles = 50,
 		.func = &cw_lldi
@@ -221,7 +206,6 @@ static t_op		g_op[16] = {
 		.args_num = 1,
 		.args_types_code = 0,
 		.args_types = {T_DIR, 0, 0},
-		.modify_carry = 0,
 		.t_dir_size = 2,
 		.cycles = 1000,
 		.func = &cw_lfork
@@ -232,7 +216,6 @@ static t_op		g_op[16] = {
 		.args_num = 1,
 		.args_types_code = 1,
 		.args_types = {T_REG, 0, 0},
-		.modify_carry = 0,
 		.t_dir_size = 4,
 		.cycles = 2,
 		.func = &cw_aff

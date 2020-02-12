@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:33:25 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/05 22:08:45 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/12 09:03:48 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	cw_st(t_cw *cw, t_carry *carry)
 	int value;
 	int a;
 
-	ft_printf("Do op: \"st\" [CYCLE: %d CARRY: %d]\n", cw->cycles, carry->id);
 	carry->step = OP_SIZE + ARGS_SIZE;
 	r = arena_get_byte(cw, carry->position, carry->step);
 	carry->step += REG_LEN;
@@ -37,4 +36,6 @@ void	cw_st(t_cw *cw, t_carry *carry)
 		int_to_bytecode(cw, carry->position + a % IDX_MOD, value, DIR_SIZE);
 		carry->step += IND_SIZE;
 	}
+	if (cw->v & OP_LOG)
+		log_st(carry->id, r, a);
 }

@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:32:07 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/05 22:09:33 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/12 10:11:23 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,15 @@
 
 void	cw_ld(t_cw *cw, t_carry *carry)
 {
-	ft_printf("Do op: \"ld\" [CYCLE: %d CARRY: %d]\n", cw->cycles, carry->id);
-	
 	int	val;
 	int	r;
 
 	carry->step += (OP_SIZE + ARGS_SIZE);
 	val = get_argument(cw, carry, 1, 1);
-	carry->carry = (!val) ? 1 : 0;
+	carry->carry = (val == 0) ? 1 : 0;
 	r = arena_get_byte(cw, carry->position, carry->step);
-	ft_printf("%d %d\n", val, r);
 	carry->registers[r - 1] = val;
 	carry->step += REG_LEN;
+	if (cw->v & OP_LOG)
+		log_ld(carry->id, val, r);
 }

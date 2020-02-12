@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 21:18:59 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/24 18:53:19 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/12 08:10:43 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void		set_sizes(t_cw *cw)
 
 void			init_visualize(t_cw *cw)
 {
-	if (!cw->visualize_active) 
+	if ((cw->v & 2048) == 0)
 		return ;
 	init_screen();
 	if (cw->vis)

@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:32:51 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/05 22:09:18 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/12 09:48:24 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,15 @@ static t_ply	*get_ply(t_cw *cw, int id)
 
 void	cw_live(t_cw *cw, t_carry *carry)
 {
-	ft_printf("Do op: \"live\" [CYCLE: %d CARRY: %d]\n", cw->cycles, carry->id);
-	int		id;
+	int			id;
 	t_ply		*ply;
 
-	printf("do op live\n");
 	carry->step += OP_SIZE;
 	id = get_argument(cw, carry, 1, false);
 	cw->lives_num++;
 	carry->live_cycle = cw->cycles;
 	ply = NULL;
-	if (id <= -1 && id >= -((int)cw->count_players))
+	if (id <= -1 && id >= -((cw->count_players < 0) ? -cw->count_players: cw->count_players))
 	{
 		ply = get_ply(cw, -id);
 		if (!ply)
@@ -47,5 +45,9 @@ void	cw_live(t_cw *cw, t_carry *carry)
 		ply->live_cycle = cw->cycles;
 		ply->lives_num++;
 		cw->last_alive = ply;
+		if (cw->v & OP_LOG)
+			log_live(carry->id, ply->lives_num);
+		if (cw->v & LIVE_LOG && ply)
+			log_live_msg((ply->id < 0) ? -ply->id: ply->id, ply->name);
 	}
 }

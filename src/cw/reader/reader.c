@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 20:11:25 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/26 21:00:58 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/12 07:31:59 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ void	reader(t_cw *cw, int argc, char **argv)
 			read_v_flag(cw, &i, argv);
 		else if (cw_is_flag(argv[i], "-n") && (i + 2) < argc)
 			read_n_flag(cw, &i, argv);
+		else if (cw_is_flag(argv[i], "-a"))
+				read_a_flag(cw, &i, argv);
 		else if (cw_is_champion_file(argv[i]))
 			read_champion(cw, argv[i]);
 		else

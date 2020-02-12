@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/05 21:28:31 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/12 08:56:45 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@
 # define OP_SIZE 1
 # define ARGS_SIZE 1
 # define REG_LEN 1
+
+# define LIVE_LOG			1
+# define CYCLE_LOG			2
+# define OP_LOG				4
+# define DEATH_LOG			8
+# define MOVE_LOG			16
 
 static uint8_t			g_arg_code[3] = {
 	T_REG,
@@ -39,7 +45,6 @@ typedef	struct		s_ply
 	char			*file_path;
 	int				lives_num;
 	int				live_cycle;
-	int				prev_lives_num;
 	struct s_ply	*next;
 	struct s_ply	*prev;
 }					t_ply;
@@ -77,11 +82,13 @@ typedef struct		s_vis
 
 typedef struct		s_cw
 {
-	int				visualize_active;
+	int				v;
 	int				dump_cycles;
 	int				d_cycles;
+	int				aff;
 	int				cycles;
 	int				cycles_to_check;
+	int				checks;
 	int				live_count;
 	int				cycles_to_die;
 	int				count_players;
@@ -105,6 +112,7 @@ void				read_n_flag(t_cw *cw, int *i, char **argv);
 void				read_dump_flag(t_cw *cw, int *i, char **argv);
 void				read_d_flag(t_cw *cw, int *i, char **argv);
 void				read_v_flag(t_cw *cw, int *i, char **argv);
+void				read_a_flag(t_cw *cw, int *i, char **argv);
 void				skip_bytes(int fd, t_cw *cw);
 
 void				read_magic(int fd, t_cw *cw);
@@ -153,6 +161,10 @@ t_carry				*push_new_carry(t_cw *cw, int byte, int player);
 void				destroy_carry(t_carry *carry);
 void				destroy_all_carries(t_cw *cw);
 void				initialize_carries(t_cw *cw);
+void				carry_duplicate(t_cw *cw, t_carry *carry, int a);
+void				push_duplicated_carry(t_cw *cw, t_carry *duplicated,
+							int a);
+void				destroy_died_carry(t_cw *cw, t_carry *carry);
 
 /*
  * Arena
@@ -171,7 +183,6 @@ void				main_cycle(t_cw *cw);
 void				move_carry(t_carry *carry, t_cw *cw);
 void				print_arena(uint8_t *arena, int print_mode);
 
-
 /*
 ** Check
 */
@@ -188,6 +199,30 @@ int					arena_bytes_to_int(const uint8_t *arena, int32_t addr, int32_t size);
 void				int_to_bytecode(t_cw *cw, int32_t addr, int32_t val, int32_t size);
 int8_t				carry_get_byte(t_cw *cw, t_carry *carry, int step);
 
+/*
+** LOGS
+*/
+
+void				log_cycles_die(int cycles_to_die);
+void				log_cycle(int cycle);
+void				log_death(t_cw *vm, t_carry *carry);
+void				log_movement(uint8_t *arena, t_carry *carry);
+void				log_add(int carry, int r1, int r2, int r3);
+void				log_and(int carry, int v1, int v2, int r);
+void				log_fork(t_carry *carry, int a);
+void				log_ld(int carry, int v, int r);
+void				log_ldi(t_carry *carry, int a1, int a2, int r);
+void				log_lfork(t_carry *carry, int a);
+void				log_live(int carry, int id);
+void				log_live_msg(int id, char *player_name);
+void				log_lld(int carry, int value, int r);
+void				log_lldi(t_carry *carry, int a1, int a2, int r);
+void				log_or(int carry, int r1, int r2, int r3);
+void				log_st(int carry, int r, int a);
+void				log_sti(t_carry *cursor, int r, int a1, int a2);
+void				log_sub(int carry, int r1, int r2, int r3);
+void				log_xor(int carry, int r1, int r2, int r3);
+void				log_zjmp(t_carry *carry, int a);
 
 // visualization
 void				init_visualize(t_cw *cw);

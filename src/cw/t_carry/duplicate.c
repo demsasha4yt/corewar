@@ -1,43 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new.c                                              :+:      :+:    :+:   */
+/*   duplicate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/22 18:15:34 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 01:21:55 by bharrold         ###   ########.fr       */
+/*   Created: 2020/02/12 01:18:58 by bharrold          #+#    #+#             */
+/*   Updated: 2020/02/12 01:45:07 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "cw_ops.h"
 
-static void	initialize_new_registers(t_carry *carry)
+static void	_carry_duplicate(t_cw *cw, t_carry *carry, t_carry *new, int a)
 {
-	int i;
-
+	int		i;
+	a = calc_addr(carry->position + a);
 	i = -1;
 	while (++i < REG_NUMBER)
-		carry->registers[i] = 0;
+		new->registers[i] = carry->registers[i];
+	new->carry = carry->carry;
+	new->live_cycle = carry->live_cycle;
+	push_duplicated_carry(cw, new, a);
 }
 
-t_carry		*new_carry(t_cw *cw)
+void	carry_duplicate(t_cw *cw, t_carry *carry, int a)
 {
-	t_carry *carry;
+	t_carry *new;
 
-	carry = (t_carry*)ft_memalloc(sizeof(t_carry));
 	if (!carry)
-		terminate(1, cw);
-	carry->id = -1;
-	carry->live_cycle = -1;
-	carry->position = -1;
-	carry->next = NULL;
-	carry->prev = NULL;
-	carry->player = -1;
-	carry->carry = -1;
-	carry->cycles_to_exec = 0;
-	carry->op = -1;
-	carry->step = 0;
-	initialize_new_registers(carry);
-	return (carry);
+		terminate(10, cw);
+	new = new_carry(cw);
+	if (!new)
+		terminate(10, cw);
+	_carry_duplicate(cw, carry, new, a);
 }

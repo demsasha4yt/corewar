@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 19:14:30 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/05 21:28:45 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/12 02:37:19 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_ply	*new_ply(int number, char *name, char *comment, uint8_t *code)
 	ply->file_path = NULL;
 	ply->lives_num = 0;
 	ply->live_cycle = 0;
-	ply->prev_lives_num = 0;
 	ply->next = NULL;
 	ply->prev = NULL;
 	return (ply);

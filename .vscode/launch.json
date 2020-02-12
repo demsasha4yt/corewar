@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/corewar",
-			"args": ["-n", "2", "resources/champs/toto.cor", "resources/champs/toto.cor"], 
+			"args": ["../42-corewar/tests/vm/overflow/ldi_overflow.cor"], 
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

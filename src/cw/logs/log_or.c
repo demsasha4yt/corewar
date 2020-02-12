@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lfork.c                                            :+:      :+:    :+:   */
+/*   log_or.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 18:32:35 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 09:07:49 by bharrold         ###   ########.fr       */
+/*   Created: 2020/02/12 08:39:23 by bharrold          #+#    #+#             */
+/*   Updated: 2020/02/12 10:05:00 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "cw_ops.h"
 
-void	cw_lfork(t_cw *cw, t_carry *carry)
+void	log_or(int carry, int r1, int r2, int r3)
 {
-	int		a;
-
-	carry->step += OP_SIZE;
-	a = get_argument(cw, carry, 1, true);
-	carry_duplicate(cw, carry, a);
-	if (cw->v & OP_LOG)
-		log_lfork(carry, a);
+	ft_printf("P %4d | or %d %d r%d\n", carry, r1, r2, r3);
 }

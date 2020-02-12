@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _read_code_size.c                                  :+:      :+:    :+:   */
+/*   log_live.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/26 21:26:16 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 07:17:27 by bharrold         ###   ########.fr       */
+/*   Created: 2020/02/12 08:38:32 by bharrold          #+#    #+#             */
+/*   Updated: 2020/02/12 08:46:11 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void	_terminate(t_cw *cw, uint8_t *ptr)
+void	log_live(int carry, int id)
 {
-	free(ptr);
-	terminate(1, cw);
+	ft_printf("P %4d | live %d\n", carry, id);
 }
 
-int	read_code_size(int fd, t_cw *cw)
+void	log_live_msg(int id, char *player_name)
 {
-	int		result;
-	uint8_t	*ptr;
-
-	result = 0;
-	if (!(ptr = ft_memalloc(INT_SIZE)))
-		terminate(1, cw);
-	if (read(fd, ptr, INT_SIZE) != INT_SIZE)
-		_terminate(cw, ptr);
-	result = bytes_to_int(ptr, 4);
-	// ft_printf("%d\n", result);
-	if (result < 0 || result > 682)
-		_terminate(cw, ptr);
-	free(ptr);
-	return (result);
+	ft_printf("Player %d (%s) is said to be alive\n",
+		id, player_name);
 }

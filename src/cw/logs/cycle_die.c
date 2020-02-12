@@ -1,37 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _read_code_size.c                                  :+:      :+:    :+:   */
+/*   cycle_die.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/26 21:26:16 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 07:17:27 by bharrold         ###   ########.fr       */
+/*   Created: 2020/02/12 07:49:07 by bharrold          #+#    #+#             */
+/*   Updated: 2020/02/12 07:53:56 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
+#include "cw_ops.h"
 
-static void	_terminate(t_cw *cw, uint8_t *ptr)
+void		log_cycles_die(int cycles_to_die)
 {
-	free(ptr);
-	terminate(1, cw);
+	ft_printf("Cycle to die is now %i\n", cycles_to_die);
 }
 
-int	read_code_size(int fd, t_cw *cw)
-{
-	int		result;
-	uint8_t	*ptr;
-
-	result = 0;
-	if (!(ptr = ft_memalloc(INT_SIZE)))
-		terminate(1, cw);
-	if (read(fd, ptr, INT_SIZE) != INT_SIZE)
-		_terminate(cw, ptr);
-	result = bytes_to_int(ptr, 4);
-	// ft_printf("%d\n", result);
-	if (result < 0 || result > 682)
-		_terminate(cw, ptr);
-	free(ptr);
-	return (result);
-}

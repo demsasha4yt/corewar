@@ -16,7 +16,7 @@ CC = gcc
 LFLAGS = $(L_LIBFT) -lncurses
 IFLAGS = $(I_I) $(I_LIBFT)
 DFLAGS = -g
-EFLAGS = -Wall -Wextra -Werror -O3 
+EFLAGS = -Wall -Wextra -Werror
 CFLAGS = $(DFLAGS) $(IFLAGS) $(EFLAGS)
 CCFLAGS = $(DFLAGS) $(IFLAGS) $(LFLAGS) $(EFLAGS)
 

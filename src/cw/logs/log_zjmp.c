@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lfork.c                                            :+:      :+:    :+:   */
+/*   log_zjmp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/24 18:32:35 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 09:07:49 by bharrold         ###   ########.fr       */
+/*   Created: 2020/02/12 08:40:38 by bharrold          #+#    #+#             */
+/*   Updated: 2020/02/12 08:51:33 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-#include "cw_ops.h"
 
-void	cw_lfork(t_cw *cw, t_carry *carry)
+void	log_zjmp(t_carry *carry, int a)
 {
-	int		a;
-
-	carry->step += OP_SIZE;
-	a = get_argument(cw, carry, 1, true);
-	carry_duplicate(cw, carry, a);
-	if (cw->v & OP_LOG)
-		log_lfork(carry, a);
+	ft_printf("P %4d | zjmp %d %s\n",
+		carry->id, a, (carry->carry) ? "OK" : "FAILED");
 }
