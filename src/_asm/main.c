@@ -6,7 +6,7 @@
 /*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 16:55:04 by kturnips          #+#    #+#             */
-/*   Updated: 2020/02/12 00:08:42 by kbessa           ###   ########.fr       */
+/*   Updated: 2020/02/12 16:24:41 by kbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,30 @@
 
 void	asm_error(int er_nu, int line, t_asm *asm_ms)
 {
-	if (er_nu == 0)
-		ft_printf("x1B[31m%s\n\033[0m", ERR_ARG);
-	else if (er_nu == 1)
-		ft_printf("\x1B[31m%s\n\033[0m", ERR_FILE_EXT);
+	er_nu == 0 ? ft_printf("%s\n", ERR_ARG_0) : 0;
+	if (er_nu == 1)
+		ft_printf(SOC"%s"EOC, ERR_FILE_EXT_1);
 	else if (er_nu == 2)
-		ft_printf("\x1B[31m%s\n\033[0m", ERR_OPEN);
+		ft_printf(SOC"%s"EOC, ERR_OPEN_2);
 	else if (er_nu == 3)
-		ft_printf("\x1B[31m%s\n\033[0m", ERR_CREATE);
+		ft_printf(SOC"%s"EOC, ERR_CREATE_3);
 	else if (er_nu == 4)
-		ft_printf("\x1B[31m%s\n\033[0m", ERR_MALLOC);
+		ft_printf(SOC"%s"EOC, ERR_MALLOC_4);
 	else if (er_nu == 5)
-		ft_printf("\x1B[31m%s\n\033[0m", ERR_READ);
+		ft_printf(SOC"%s"EOC, ERR_READ_5);
 	else if (er_nu == 6)
-		ft_printf("%s \x1B[31m%s\n\033[0m",asm_ms->file_name_s, ERR_EOF);
+		ft_printf("%s "SOC"%s"EOC, asm_ms->file_name_s, ERR_EOF_6);
 	else if (er_nu == 7)
-		ft_printf("\x1B[31m%s\n\033[0m", ERR_CLOSE);
+		ft_printf(SOC"%s"EOC, ERR_CLOSE_7);
 	else if (er_nu == 8)
-		ft_printf("%s:%d \x1B[31m%s\n\033[0m",
-			asm_ms->file_name_s, line, ERR_COMMAND);
+		ft_printf("%s:%d "SOC"%s"EOC,
+			asm_ms->file_name_s, line, ERR_COMMAND_8);
 	else if (er_nu == 9)
-		ft_printf("%s:%d \x1B[31m%s\n\033[0m",
-			asm_ms->file_name_s, line, ERR_TYPE_FIRST_ARG);
+		ft_printf("%s:%d "SOC"%s"EOC, asm_ms->file_name_s,
+			line, ERR_TYPE_FIRST_ARG_9);
+	else if (er_nu == 10)
+		ft_printf("%s:%d "SOC"%s"EOC,
+			asm_ms->file_name_s, line, ERR_TYPE_SECOND_ARG_10);
 	asm_error_p2(er_nu, line, asm_ms);
 }
 
@@ -70,9 +72,7 @@ int		asm_check_name(char *argv, t_asm *asm_ms)
 int		main(int argc, char **argv)
 {
 	t_asm	asm_ms;
-	char	*file;
 
-	file = NULL;
 	init_asm_ms(&asm_ms);
 	if (argc != 2)
 		asm_error(0, -1, &asm_ms);
@@ -80,7 +80,7 @@ int		main(int argc, char **argv)
 		asm_error(1, -1, &asm_ms);
 	if ((asm_ms.fd_r = open(argv[1], O_RDONLY)) == -1)
 		asm_error(2, -1, &asm_ms);
-	file = asm_read_cycle(&asm_ms);
+	asm_read_cycle(&asm_ms);
 	if ((close(asm_ms.fd_r) == -1))
 		asm_error(7, -1, &asm_ms);
 	if ((asm_ms.fd_r = open(argv[1], O_RDONLY)) == -1)

@@ -47,7 +47,7 @@ void	check_valid_commands(t_asm *asm_ms, char *str, t_token *current)
 	current->code_operation == 16)
 		one_argument(asm_ms, str, current);
 	else
-		two_three_arguments(asm_ms, str, current);
+		main_cycle_two_three_arguments(asm_ms, str, current);
 }
 
 int		check_command(t_asm *asm_ms, char *str, t_token *current)
