@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 17:51:01 by kbessa           ###   ########.fr       */
+/*   Updated: 2020/02/12 20:43:54 by kbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct		s_asm
 	char			*file_name_cor;
 	char			*name;
 	char			*comment;
-	char 			*file_name_s;
+	char			*file_name_s;
 	struct s_token	*first;
 	struct s_label	*label;
 	int				current_byte;
@@ -111,21 +111,27 @@ int					add(t_token *token, int to_add, int byte, int size);
 int					check_command(t_asm *asm_ms, char *str, t_token *current);
 int					one_argument(t_asm *asm_ms, char *str, t_token *current);
 char				shell_arg_byte(int type_args);
-int					main_cycle_two_three_arguments(t_asm *asm_ms, char *str, t_token *current);
+int					main_cycle_two_three_arguments(t_asm *asm_ms, char *str,
+						t_token *current);
 void				save_all_info(t_asm *asm_ms, t_token *current);
 int					ft_atoi_asm_ed(const char *str);
 void				asm_error_p2(int er_nu, int line, t_asm *asm_ms);
 void				check_name_p2(int i, t_asm *asm_ms);
 void				check_comment_p2(int i, t_asm *asm_ms);
-int					save_info_one_arg(t_asm *asm_ms, char *str, t_token *current, int last);
+int					save_info_one_arg(t_asm *asm_ms, char *str,
+						t_token *current, int last);
 int					asm_create_file(char *argv, t_asm *asm_ms);
-int					two_three_indirect_num(char *str, t_token *cur, t_asm *asm_ms, t_var *var);
-int					two_three_register(char *str, t_token *current, t_asm *asm_ms, t_var *var);
-int					two_three_indirect_label(char *str, t_token *cur, t_asm *asm_ms, t_var *var);
+int					two_three_indirect_num(char *str, t_token *cur,
+						t_asm *asm_ms, t_var *var);
+int					two_three_register(char *str, t_token *current,
+						t_asm *asm_ms, t_var *var);
+int					two_three_indirect_label(char *str, t_token *cur,
+						t_asm *asm_ms, t_var *var);
 void				direct_size(t_token *current);
 void				indirect_size(t_token *current);
 void				register_size(t_token *current);
 char				*ft_strsub2(char const *s, unsigned int start, size_t len);
-void				save_arguments(char *str, t_token *current, t_var *var, t_asm *asm_ms);
+void				save_arguments(char *str, t_token *current, t_var *var,
+						t_asm *asm_ms);
 
 #endif
