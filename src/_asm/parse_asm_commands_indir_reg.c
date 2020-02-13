@@ -43,7 +43,7 @@ int	two_three_register(char *str, t_token *current, t_asm *asm_ms, t_var *var)
 	var->start = var->i++;
 	var->j++;
 	is_number_char(str[var->i]) ? 0 : asm_error(14 + var->a,
-												current->current_line, asm_ms);
+		current->current_line, asm_ms);
 	while (str[var->i] && is_number_char(str[var->i]))
 	{
 		var->i++;

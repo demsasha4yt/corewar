@@ -6,7 +6,7 @@
 /*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 16:37:10 by kturnips          #+#    #+#             */
-/*   Updated: 2020/02/11 19:48:02 by kbessa           ###   ########.fr       */
+/*   Updated: 2020/02/13 14:42:26 by kbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ void	check_name_p2(int i, t_asm *asm_ms)
 		while (str[j] != '"' && str[j] && i < PROG_NAME_LENGTH)
 			asm_ms->name[i++] = str[j++];
 		check ? asm_ms->name[i++] = '\n' : 0;
-		if (i > PROG_NAME_LENGTH)
-			asm_error(17, asm_ms->current_line, asm_ms);
+		i > PROG_NAME_LENGTH ? asm_error(17, asm_ms->current_line, asm_ms) : 0;
 		if (str[j++] == '"')
 		{
 			while (str[j] == ' ' || str[j] == '\t')
 				j++;
 			if (str[j] != COMMENT_CHAR && str[j] != ALT_COMMENT_CHAR && str[j])
 				asm_error(18, asm_ms->current_line, asm_ms);
+			free(str);
 			return ;
 		}
 		free(str);
@@ -85,14 +85,14 @@ void	check_comment_p2(int i, t_asm *asm_ms)
 		while (str[j] != '"' && str[j] && i < COMMENT_LENGTH)
 			asm_ms->comment[i++] = str[j++];
 		check ? asm_ms->comment[i++] = '\n' : 0;
-		if (i > COMMENT_LENGTH)
-			asm_error(19, asm_ms->current_line, asm_ms);
+		i > COMMENT_LENGTH ? asm_error(19, asm_ms->current_line, asm_ms) : 0;
 		if (str[j++] == '"')
 		{
 			while (str[j] == ' ' || str[j] == '\t')
 				j++;
 			if (str[j] != COMMENT_CHAR && str[j] != ALT_COMMENT_CHAR && str[j])
 				asm_error(20, asm_ms->current_line, asm_ms);
+			free(str);
 			return ;
 		}
 		free(str);

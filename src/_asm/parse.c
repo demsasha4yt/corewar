@@ -55,7 +55,6 @@ void	parse_p1(t_asm *asm_ms)
 	char *str;
 	char *str1;
 
-	asm_ms->current_line = 0;
 	while (get_next_line(asm_ms->fd_r, &str) > 0)
 	{
 		asm_ms->current_line += 1;
