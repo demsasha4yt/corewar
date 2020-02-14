@@ -6,13 +6,13 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/05 19:06:51 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/05 21:15:55 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/14 21:25:25 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	int_to_bytecode(t_cw *cw, int32_t addr, int32_t val, int32_t size)
+void	int_to_bytecode(t_cw *cw, int addr, int val, int size)
 {
 	int8_t i;
 

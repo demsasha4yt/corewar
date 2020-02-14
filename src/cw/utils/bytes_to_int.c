@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 21:30:05 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/14 21:22:49 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/14 21:25:00 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	bytes_to_int(uint8_t *bytes, size_t size)
 	return (result);
 }
 
-int		arena_bytes_to_int(const uint8_t *arena, int32_t addr, int32_t size)
+int		arena_bytes_to_int(const uint8_t *arena, int addr, int size)
 {
 	int			result;
 	int			sign;

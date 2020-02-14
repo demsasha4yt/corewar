@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 08:56:45 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/14 21:28:48 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,21 +129,21 @@ int					cw_is_flag(char *str, char *flag);
 int					cw_is_champion_file(char *str);
 
 /*
- * CoreWar enviroment
+** CoreWar enviroment
 */
 
 void				initialize_cw(t_cw *cw);
 void				destroy_cw(t_cw *cw);
 
 /*
- *	Players
+**	Players
 */
 
 t_ply				*new_ply(int number, char *name, char *comment,
 								uint8_t *code);
 void				push_ply(t_cw *cw, t_ply *ply);
 t_ply				*set_ply_code_size(t_ply *ply, int code_size, t_cw *cw);
-t_ply 				*set_ply_code(t_ply *ply, uint8_t *code, 
+t_ply				*set_ply_code(t_ply *ply, uint8_t *code,
 						int code_size, t_cw *cw);
 t_ply				*set_ply_file_path(t_ply *ply, char *file_path, t_cw *cw);
 void				initialize_plys(t_cw *cw);
@@ -153,7 +153,7 @@ void				destroy_all_plys(t_cw *cw);
 void				introduce_plys(t_cw *cw);
 
 /*
- * Carries
+** Carries
 */
 
 t_carry				*new_carry(t_cw *cw);
@@ -167,7 +167,7 @@ void				push_duplicated_carry(t_cw *cw, t_carry *duplicated,
 void				destroy_died_carry(t_cw *cw, t_carry *carry);
 
 /*
- * Arena
+** Arena
 */
 void				initialize_arena(t_cw *cw);
 void				destroy_arena(t_cw *cw);
@@ -176,7 +176,7 @@ uint8_t				*get_bytes_at_position(t_cw *cw, int position);
 uint8_t				arena_get_byte(t_cw *cw, int position, int step);
 
 /*
-** Mayn cycle 
+** Mayn cycle
 */
 
 void				main_cycle(t_cw *cw);
@@ -195,8 +195,9 @@ void				check(t_cw *cw);
 
 int					calc_addr(int addr);
 int					bytes_to_int(uint8_t *bytes, size_t size);
-int					arena_bytes_to_int(const uint8_t *arena, int32_t addr, int32_t size);
-void				int_to_bytecode(t_cw *cw, int32_t addr, int32_t val, int32_t size);
+int					arena_bytes_to_int(const uint8_t *arena, int addr,
+						int size);
+void				int_to_bytecode(t_cw *cw, int addr, int val, int size);
 int8_t				carry_get_byte(t_cw *cw, t_carry *carry, int step);
 
 /*
@@ -224,7 +225,9 @@ void				log_sub(int carry, int r1, int r2, int r3);
 void				log_xor(int carry, int r1, int r2, int r3);
 void				log_zjmp(t_carry *carry, int a);
 
-// visualization
+/*
+** ncurses
+*/
 void				init_visualize(t_cw *cw);
 void				destroy_visualize(t_cw *cw);
 void				render(t_cw *cw);

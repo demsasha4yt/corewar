@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 18:16:42 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/26 20:46:46 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/14 21:28:29 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@
 # include <wchar.h>
 # include "ft_printf.h"
 # include "get_next_line.h"
-
-/*
-	** MACROS
-*/
-
-# define ABS(x) ((x < 0) ? -x : x);
 
 /*
 	** typedefs

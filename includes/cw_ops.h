@@ -6,12 +6,15 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 19:27:25 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 01:48:33 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/14 21:30:59 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "corewar.h"
-#include "libft.h"
+#ifndef CW_OPS_H
+# define CW_OPS_H
+
+# include "corewar.h"
+# include "libft.h"
 
 typedef struct	s_op
 {
@@ -25,10 +28,10 @@ typedef struct	s_op
 	void		(*func)(t_cw *, t_carry *);
 }				t_op;
 
-
 /*
-**	Commands 
+**	Commands
 */
+
 void			cw_add(t_cw *cw, t_carry *carry);
 void			cw_aff(t_cw *cw, t_carry *carry);
 void			cw_and(t_cw *cw, t_carry *carry);
@@ -49,15 +52,15 @@ void			cw_zjmp(t_cw *cw, t_carry *carry);
 /*
 ** Main Cycle
 */
-void				parse_args(t_cw *cw, t_carry *carry, t_op *op);
-void				clear_args(t_cw *cw, t_carry *carry);
-int					is_arg_types_valid(t_carry *carry, t_op *op);
-int					is_args_valid(t_carry *carry, t_cw *cw, t_op *op);
-int					step_size(uint8_t arg_type, t_op *op);
-int					calc_step(t_carry *carry, t_op *op);
-void				clear_args(t_cw *cw, t_carry *carry);
-int					get_argument(t_cw *cw, t_carry *c, int i, int mod);
 
+void			parse_args(t_cw *cw, t_carry *carry, t_op *op);
+void			clear_args(t_cw *cw, t_carry *carry);
+int				is_arg_types_valid(t_carry *carry, t_op *op);
+int				is_args_valid(t_carry *carry, t_cw *cw, t_op *op);
+int				step_size(uint8_t arg_type, t_op *op);
+int				calc_step(t_carry *carry, t_op *op);
+void			clear_args(t_cw *cw, t_carry *carry);
+int				get_argument(t_cw *cw, t_carry *c, int i, int mod);
 
 static t_op		g_op[16] = {
 	{
@@ -221,3 +224,5 @@ static t_op		g_op[16] = {
 		.func = &cw_aff
 	}
 };
+
+#endif
