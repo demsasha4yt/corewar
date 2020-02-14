@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:32:51 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 09:48:24 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/14 18:31:36 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	cw_live(t_cw *cw, t_carry *carry)
 		ply->live_cycle = cw->cycles;
 		ply->lives_num++;
 		cw->last_alive = ply;
-		if (cw->v & OP_LOG)
-			log_live(carry->id, ply->lives_num);
 		if (cw->v & LIVE_LOG && ply)
-			log_live_msg((ply->id < 0) ? -ply->id: ply->id, ply->name);
+			log_live_msg((ply->id < 0) ? -ply->id: ply->id, ply->name);		
 	}
+	if (cw->v & OP_LOG)
+			log_live(carry->id, id);
 }

@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 21:05:54 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/29 19:46:18 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/14 18:23:08 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void _set_ids(t_cw *cw, int ids[MAX_PLAYERS])
 
 static void initialize_last_alive(t_cw *cw)
 {
-	t_ply *ply;
+	t_ply	*ply;
 
 	ply = cw->players;
 	while (ply)

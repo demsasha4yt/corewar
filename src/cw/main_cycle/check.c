@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:56:08 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 08:15:38 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/14 18:54:08 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,14 @@ void	check(t_cw *cw)
 	delete_carries(cw);
 	if (cw->lives_num >= NBR_LIVE || cw->checks == MAX_CHECKS)
 	{
-		if (cw->v & CYCLE_LOG)
-			log_cycles_die(cw->cycles_to_die);
 		cw->cycles_to_die -= CYCLE_DELTA;
 		cw->checks = 0;
+		
+		if (cw->v & CYCLE_LOG)
+			log_cycles_die(cw->cycles_to_die);
 	}
 	cw->cycles_to_check = 0;
+	cw->lives_num = 0;
 	ptr = cw->players;
 	while (ptr)
 	{

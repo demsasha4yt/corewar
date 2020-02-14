@@ -6,10 +6,13 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:33:43 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 10:12:44 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/14 18:33:34 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
+// ./corewar -v 30  ../42-corewar/tests/vm/overflow/live.cor ../42-corewar/tests/vm/overflow/live.cor ../42-corewar/tests/vm/overflow/live.cor > 2
+// ./resources/corewar -v 30  ../42-corewar/tests/vm/overflow/live.cor ../42-corewar/tests/vm/overflow/live.cor ../42-corewar/tests/vm/overflow/live.cor > 1
 #include "corewar.h"
 #include "cw_ops.h"
 

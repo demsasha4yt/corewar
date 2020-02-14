@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/26 21:30:05 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/05 21:01:47 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/14 21:19:11 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ int		arena_bytes_to_int(const uint8_t *arena, int32_t addr, int32_t size)
 			result += arena[calc_addr(addr + size - 1)] << (i++ * 8);
 		size--;
 	}
+	ft_printf("result: %d | ", result);
 	if (sign)
 		result = ~(result);
+	ft_printf("result: %d | ", result);
 	return (result);
 }
