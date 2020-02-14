@@ -26,16 +26,15 @@ static void print_winner(t_cw *cw)
 int		main (int argc, char **argv)
 {
 	t_cw	cw;
-	
+
   	initialize_cw(&cw);
 	reader(&cw, argc, argv);
 	initialize_plys(&cw);
-	cw.last_alive = cw.players;
 	initialize_arena(&cw);
 	initialize_carries(&cw);
 	introduce_plys(&cw);
 	init_visualize(&cw);
 	main_cycle(&cw);
 	print_winner(&cw);
-	destroy_cw(&cw);	
+	destroy_cw(&cw);
 }

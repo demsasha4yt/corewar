@@ -29,7 +29,7 @@ static int	_get_free_id(int ids[MAX_PLAYERS])
 static void _set_ids(t_cw *cw, int ids[MAX_PLAYERS])
 {
 	t_ply *ptr;
-	
+
 	ptr = cw->players;
 	while (ptr)
 	{
@@ -43,6 +43,22 @@ static void _set_ids(t_cw *cw, int ids[MAX_PLAYERS])
 			ids[ptr->id - 1] = 1;
 		}
 		ptr = ptr->next;
+	}
+}
+
+static void initialize_last_alive(t_cw *cw)
+{
+	t_ply *ply;
+
+	ply = cw->players;
+	while (ply)
+	{
+		if (ply->next == NULL)
+		{
+				cw->last_alive = ply;
+				break;
+		}
+		ply = ply->next;
 	}
 }
 
@@ -70,4 +86,5 @@ void		initialize_plys(t_cw *cw)
 	}
 	_set_ids(cw, ids);
 	sort_plys(cw);
+	initialize_last_alive(cw);
 }
