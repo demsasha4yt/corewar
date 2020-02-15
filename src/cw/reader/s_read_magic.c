@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _read_code_size.c                                  :+:      :+:    :+:   */
+/*   _read_magic.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/26 21:26:16 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 07:17:27 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/26 21:26:21 by bharrold          #+#    #+#             */
+/*   Updated: 2020/02/15 22:44:32 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void	_terminate(t_cw *cw, uint8_t *ptr)
+void	read_magic(int fd, t_cw *cw)
 {
-	free(ptr);
-	terminate(1, cw);
-}
-
-int	read_code_size(int fd, t_cw *cw)
-{
-	int		result;
 	uint8_t	*ptr;
+	int		magic;
 
-	result = 0;
-	if (!(ptr = ft_memalloc(INT_SIZE)))
+	if (!(ptr = (uint8_t*)ft_memalloc(INT_SIZE)))
 		terminate(1, cw);
+	ft_bzero(ptr, INT_SIZE);
 	if (read(fd, ptr, INT_SIZE) != INT_SIZE)
-		_terminate(cw, ptr);
-	result = bytes_to_int(ptr, 4);
-	// ft_printf("%d\n", result);
-	if (result < 0 || result > 682)
-		_terminate(cw, ptr);
+		terminate(1, cw);
+	magic = bytes_to_int(ptr, INT_SIZE);
+	if (magic != COREWAR_EXEC_MAGIC)
+		terminate(1, cw);
 	free(ptr);
-	return (result);
+	return ;
 }

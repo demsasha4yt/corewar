@@ -6,13 +6,10 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:33:43 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/14 18:33:34 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/15 22:34:13 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
-// ./corewar -v 30  ../42-corewar/tests/vm/overflow/live.cor ../42-corewar/tests/vm/overflow/live.cor ../42-corewar/tests/vm/overflow/live.cor > 2
-// ./resources/corewar -v 30  ../42-corewar/tests/vm/overflow/live.cor ../42-corewar/tests/vm/overflow/live.cor ../42-corewar/tests/vm/overflow/live.cor > 1
 #include "corewar.h"
 #include "cw_ops.h"
 
@@ -36,4 +33,3 @@ void	cw_sub(t_cw *cw, t_carry *carry)
 	if (cw->v & OP_LOG)
 		log_sub(carry->id, r1, r2, r3);
 }
-

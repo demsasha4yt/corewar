@@ -6,17 +6,17 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/29 21:59:21 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 20:42:20 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/15 22:50:19 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void	_initialize_carry(t_ply *ply, t_cw *cw)
+static void	s_initialize_carry(t_ply *ply, t_cw *cw)
 {
 	t_carry	*carry;
-	
-	carry = push_new_carry(cw, cw->arena->sections[ply->id -1], ply->id);
+
+	carry = push_new_carry(cw, cw->arena->sections[ply->id - 1], ply->id);
 }
 
 void		initialize_carries(t_cw *cw)
@@ -28,8 +28,7 @@ void		initialize_carries(t_cw *cw)
 	ply = cw->players;
 	while (ply)
 	{
-		_initialize_carry(ply, cw);
+		s_initialize_carry(ply, cw);
 		ply = ply->next;
 	}
-
 }

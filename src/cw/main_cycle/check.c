@@ -6,12 +6,11 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:56:08 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/14 18:54:08 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/15 22:41:18 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
-
 
 static int	is_carry_died(t_cw *cw, t_carry *carry)
 {
@@ -30,7 +29,6 @@ static void	delete_carries(t_cw *cw)
 	while (ptr)
 		if (is_carry_died(cw, (delete = ptr)))
 		{
-			// ft_printf("died %d\n", ptr->id);
 			ptr = ptr->next;
 			if (cw->carries == delete)
 				cw->carries = ptr;
@@ -47,16 +45,16 @@ static void	delete_carries(t_cw *cw)
 		}
 }
 
-void	check(t_cw *cw)
+void		check(t_cw *cw)
 {
 	t_ply	*ptr;
+
 	cw->checks++;
 	delete_carries(cw);
 	if (cw->lives_num >= NBR_LIVE || cw->checks == MAX_CHECKS)
 	{
 		cw->cycles_to_die -= CYCLE_DELTA;
 		cw->checks = 0;
-		
 		if (cw->v & CYCLE_LOG)
 			log_cycles_die(cw->cycles_to_die);
 	}

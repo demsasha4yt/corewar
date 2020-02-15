@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/12 07:49:07 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 07:53:56 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/15 22:36:41 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,4 +17,3 @@ void		log_cycles_die(int cycles_to_die)
 {
 	ft_printf("Cycle to die is now %i\n", cycles_to_die);
 }
-

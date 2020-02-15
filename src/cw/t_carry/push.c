@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 18:41:52 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 02:38:37 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/15 22:49:31 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_carry		*push_new_carry(t_cw *cw, int byte, int player)
 	return (carry);
 }
 
-void	push_duplicated_carry(t_cw *cw, t_carry *duplicated, int a) 
+void		push_duplicated_carry(t_cw *cw, t_carry *duplicated, int a)
 {
 	if (!duplicated)
 		terminate(10, cw);

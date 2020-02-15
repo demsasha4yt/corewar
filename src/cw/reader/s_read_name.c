@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _skip_bytes.c                                      :+:      :+:    :+:   */
+/*   s_read_name.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/26 21:26:41 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/26 22:57:27 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/26 21:26:26 by bharrold          #+#    #+#             */
+/*   Updated: 2020/02/15 22:46:20 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void	skip_bytes(int fd, t_cw *cw)
+char	*read_name(int fd, t_cw *cw)
 {
-	char *ptr;
+	char	*name;
 
-	if(!(ptr = ft_strnew(INT_SIZE)))
+	if (!(name = ft_strnew(PROG_NAME_LENGTH)))
 		terminate(1, cw);
-	if (read(fd,ptr, INT_SIZE) != INT_SIZE)
-	{
-		free(ptr);
+	if (read(fd, name, PROG_NAME_LENGTH) != PROG_NAME_LENGTH)
 		terminate(1, cw);
-	}
-	free(ptr);
+	return (name);
 }

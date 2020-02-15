@@ -6,13 +6,13 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 21:05:54 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/14 18:23:08 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/15 22:52:40 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static int	_get_free_id(int ids[MAX_PLAYERS])
+static int	s_get_free_id(int ids[MAX_PLAYERS])
 {
 	int i;
 
@@ -26,7 +26,7 @@ static int	_get_free_id(int ids[MAX_PLAYERS])
 	return (-1);
 }
 
-static void _set_ids(t_cw *cw, int ids[MAX_PLAYERS])
+static void	s_set_ids(t_cw *cw, int ids[MAX_PLAYERS])
 {
 	t_ply *ptr;
 
@@ -37,7 +37,7 @@ static void _set_ids(t_cw *cw, int ids[MAX_PLAYERS])
 			terminate(8, cw);
 		if (ptr->id == -1)
 		{
-			ptr->id = _get_free_id(ids) + 1;
+			ptr->id = s_get_free_id(ids) + 1;
 			if (ptr->id == -1)
 				terminate(4, cw);
 			ids[ptr->id - 1] = 1;
@@ -46,7 +46,7 @@ static void _set_ids(t_cw *cw, int ids[MAX_PLAYERS])
 	}
 }
 
-static void initialize_last_alive(t_cw *cw)
+static void	initialize_last_alive(t_cw *cw)
 {
 	t_ply	*ply;
 
@@ -55,8 +55,8 @@ static void initialize_last_alive(t_cw *cw)
 	{
 		if (ply->next == NULL)
 		{
-				cw->last_alive = ply;
-				break;
+			cw->last_alive = ply;
+			break ;
 		}
 		ply = ply->next;
 	}
@@ -84,7 +84,7 @@ void		initialize_plys(t_cw *cw)
 			ids[ptr->id - 1] = 1;
 		ptr = ptr->next;
 	}
-	_set_ids(cw, ids);
+	s_set_ids(cw, ids);
 	sort_plys(cw);
 	initialize_last_alive(cw);
 }

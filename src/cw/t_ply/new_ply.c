@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 19:14:30 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 02:37:19 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/15 22:54:11 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_ply	*new_ply(int number, char *name, char *comment, uint8_t *code)
 {
 	t_ply	*ply;
-	
+
 	if (!name || !comment)
 		return (NULL);
 	ply = (t_ply*)ft_memalloc(sizeof(t_ply));

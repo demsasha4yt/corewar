@@ -6,17 +6,17 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 20:17:11 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 20:04:25 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/15 22:54:28 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void	_destroy_all_plys(t_cw *cw)
+static void	s_destoy_all_plys(t_cw *cw)
 {
 	t_ply *ptr;
 	t_ply *next;
-	
+
 	ptr = cw->players;
 	while (ptr)
 	{
@@ -26,11 +26,11 @@ static void	_destroy_all_plys(t_cw *cw)
 	}
 }
 
-void	destroy_all_plys(t_cw *cw)
+void		destroy_all_plys(t_cw *cw)
 {
 	if (!cw)
 		return ;
 	if (!cw->players)
 		return ;
-	_destroy_all_plys(cw);
+	s_destoy_all_plys(cw);
 }

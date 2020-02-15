@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 21:08:54 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/03 22:27:49 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/15 22:40:20 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,3 @@ void		print_arena(uint8_t *arena, int print_mode)
 		i += print_mode;
 	}
 }
-

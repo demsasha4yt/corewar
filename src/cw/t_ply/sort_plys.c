@@ -6,13 +6,13 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 19:25:50 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/29 20:06:43 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/15 22:51:42 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-static void	_swap(t_ply *t1, t_ply *t2, t_cw *cw)
+static void	s_swap(t_ply *t1, t_ply *t2, t_cw *cw)
 {
 	if (t1->prev)
 		t1->prev->next = t2;
@@ -26,10 +26,10 @@ static void	_swap(t_ply *t1, t_ply *t2, t_cw *cw)
 		cw->players = t2;
 }
 
-static void	_sort_plys(t_cw *cw)
+static void	s_sort_plys(t_cw *cw)
 {
 	t_ply	*ply;
-	t_ply	*next;	
+	t_ply	*next;
 
 	ply = cw->players;
 	next = cw->players->next;
@@ -37,7 +37,7 @@ static void	_sort_plys(t_cw *cw)
 	{
 		if (next->id < ply->id)
 		{
-			_swap(ply, next, cw);
+			s_swap(ply, next, cw);
 			ply = cw->players;
 			next = cw->players->next;
 			continue;
@@ -53,5 +53,5 @@ void		sort_plys(t_cw *cw)
 		terminate(3, cw);
 	if (!cw->players)
 		terminate(3, cw);
-	_sort_plys(cw);
+	s_sort_plys(cw);
 }

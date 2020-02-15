@@ -6,44 +6,34 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/23 20:07:58 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 09:19:32 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/15 22:38:46 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 #include "cw_ops.h"
 
-static int	_do_op(t_carry *carry, t_cw *cw)
+static int	s_do_op(t_carry *carry, t_cw *cw)
 {
 	t_op	*op;
+
 	op = NULL;
-	
 	if (carry->op >= 0x01 && carry->op <= 0x10)
 		op = &g_op[carry->op - 1];
 	if (op)
 	{
-		// if (cw->cycles == 11146)
-		// {
-		// 	ft_printf("cycle = %i [%i]: %.2x %i\n", cw->cycles, carry->id, carry->op, carry->position);
-		// }
 		parse_args(cw, carry, op);
 		if (is_arg_types_valid(carry, op) && is_args_valid(carry, cw, op))
 			op->func(cw, carry);
-		else 
-		{
+		else
 			carry->step = calc_step(carry, op);
-			// if (cw->cycles == 2390) {
-			// 	ft_printf("invalid\n");
-			// }
-		}
-			
 		return (1);
-	}	
+	}
 	else
 		return (0);
 }
 
-static void	_update_op(t_carry *carry, t_cw *cw)
+static void	s_update_op(t_carry *carry, t_cw *cw)
 {
 	int		code;
 
@@ -55,15 +45,16 @@ static void	_update_op(t_carry *carry, t_cw *cw)
 		carry->cycles_to_exec = g_op[code - 1].cycles;
 }
 
-static void	_cycle_carry(t_carry *carry, t_cw *cw)
+static void	s_cycle_carry(t_carry *carry, t_cw *cw)
 {
 	if (carry->cycles_to_exec == 0)
-		_update_op(carry, cw);
+		s_update_op(carry, cw);
 	if (carry->cycles_to_exec > 0)
 		carry->cycles_to_exec -= 1;
-	if (carry->cycles_to_exec == 0) 
+	if (carry->cycles_to_exec == 0)
 	{
-		if (!_do_op(carry, cw)) {
+		if (!s_do_op(carry, cw))
+		{
 			carry->step = OP_SIZE;
 			move_carry(carry, cw);
 			return ;
@@ -74,10 +65,10 @@ static void	_cycle_carry(t_carry *carry, t_cw *cw)
 	}
 }
 
-static void	_cycle(t_cw *cw)
+static void	s_cycle(t_cw *cw)
 {
-	t_carry *carry;
-	
+	t_carry	*carry;
+
 	cw->cycles += 1;
 	cw->cycles_to_check += 1;
 	if (cw->v & CYCLE_LOG)
@@ -85,19 +76,12 @@ static void	_cycle(t_cw *cw)
 	carry = cw->carries;
 	while (carry)
 	{
-		// int i = 0;
-		// printf("cycle %i [carry %i]: ", cw->cycles, carry->id);
-		// while (i < REG_NUMBER) {
-		// 	printf("%i ", carry->registers[i]);
-		// 	i++;
-		// }
-		// printf("\n");
-		_cycle_carry(carry, cw);
+		s_cycle_carry(carry, cw);
 		carry = carry->next;
 	}
 }
 
-void	main_cycle(t_cw *cw)
+void		main_cycle(t_cw *cw)
 {
 	while (cw->carries)
 	{
@@ -111,8 +95,7 @@ void	main_cycle(t_cw *cw)
 			print_arena(cw->arena->data, 64);
 			terminate(0, cw);
 		}
-		_cycle(cw);
-		// ft_printf("%i %i %i\n", cw->cycles, cw->cycles_to_die, cw->cycles_to_check);
+		s_cycle(cw);
 		if (cw->cycles_to_die <= 0
 			|| cw->cycles_to_check == cw->cycles_to_die)
 			check(cw);

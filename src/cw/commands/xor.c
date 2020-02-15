@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:43:47 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 10:13:22 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/15 22:34:19 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,3 @@ void	cw_xor(t_cw *cw, t_carry *carry)
 	if (cw->v & OP_LOG)
 		log_xor(carry->id, val1, val2, r);
 }
-

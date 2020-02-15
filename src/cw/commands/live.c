@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:32:51 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/14 18:31:36 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/15 22:35:23 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_ply	*get_ply(t_cw *cw, int id)
 	return (NULL);
 }
 
-void	cw_live(t_cw *cw, t_carry *carry)
+void			cw_live(t_cw *cw, t_carry *carry)
 {
 	int			id;
 	t_ply		*ply;
@@ -37,7 +37,8 @@ void	cw_live(t_cw *cw, t_carry *carry)
 	cw->lives_num++;
 	carry->live_cycle = cw->cycles;
 	ply = NULL;
-	if (id <= -1 && id >= -((cw->count_players < 0) ? -cw->count_players: cw->count_players))
+	if (id <= -1 && id >= -((cw->count_players < 0) ?
+		-cw->count_players : cw->count_players))
 	{
 		ply = get_ply(cw, -id);
 		if (!ply)
@@ -46,8 +47,8 @@ void	cw_live(t_cw *cw, t_carry *carry)
 		ply->lives_num++;
 		cw->last_alive = ply;
 		if (cw->v & LIVE_LOG && ply)
-			log_live_msg((ply->id < 0) ? -ply->id: ply->id, ply->name);		
+			log_live_msg((ply->id < 0) ? -ply->id : ply->id, ply->name);
 	}
 	if (cw->v & OP_LOG)
-			log_live(carry->id, id);
+		log_live(carry->id, id);
 }

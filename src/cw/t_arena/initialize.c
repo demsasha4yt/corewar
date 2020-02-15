@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/22 17:38:40 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/29 21:42:28 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/15 22:47:58 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ static void	initialize_arena_sections(t_cw *cw)
 		terminate(1, cw);
 	i = -1;
 	while (++i < cw->count_players)
-		cw->arena->sections[i] = (!i) ? 0 : 
+		cw->arena->sections[i] = (!i) ? 0 :
 			cw->arena->arena_size / cw->count_players * i;
-	while (i < MAX_PLAYERS) {
+	while (i < MAX_PLAYERS)
+	{
 		cw->arena->sections[i] = -1;
 		i++;
 	}
@@ -55,7 +56,7 @@ static void	initialize_plys_code(t_cw *cw)
 			continue;
 		if (ply->code_size > 0)
 			ft_memcpy(cw->arena->data + cw->arena->sections[i], ply->code,
-				 ply->code_size);
+				ply->code_size);
 		i++;
 		ply = ply->next;
 	}

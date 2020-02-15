@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 20:10:24 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/31 19:45:48 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/15 22:53:56 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	pokeout(t_ply *ply)
 		ply->next->prev = NULL;
 }
 
-void	destroy_ply(t_ply *ply)
+void		destroy_ply(t_ply *ply)
 {
 	if (!ply)
 		return ;

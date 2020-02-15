@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy_visualize.c                                :+:      :+:    :+:   */
+/*   s_read_comment.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/23 21:39:33 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/23 22:02:43 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/26 21:26:19 by bharrold          #+#    #+#             */
+/*   Updated: 2020/02/15 22:46:29 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-void		destroy_visualize(t_cw *cw)
+char	*read_comment(int fd, t_cw *cw)
 {
-	if (!cw->vis)
-		return ;
-	free(cw->vis);
-	endwin();
+	char	*comment;
+
+	if (!(comment = ft_strnew(COMMENT_LENGTH)))
+		terminate(1, cw);
+	if (read(fd, comment, COMMENT_LENGTH) != COMMENT_LENGTH)
+		terminate(1, cw);
+	return (comment);
 }

@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   _read_code.c                                       :+:      :+:    :+:   */
+/*   s_skip_bytes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/01/26 21:26:04 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/14 20:58:13 by bharrold         ###   ########.fr       */
+/*   Created: 2020/01/26 21:26:41 by bharrold          #+#    #+#             */
+/*   Updated: 2020/02/15 22:46:02 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-uint8_t	*read_code(int fd, int size, t_cw *cw)
+void	skip_bytes(int fd, t_cw *cw)
 {
-	uint8_t	*code;
-	int		ret;
-	
-	if (!(code = (uint8_t*)ft_memalloc(size)))
+	char	*ptr;
+
+	if (!(ptr = ft_strnew(INT_SIZE)))
 		terminate(1, cw);
-	if ((ret = read(fd, code, size)) != size)
+	if (read(fd, ptr, INT_SIZE) != INT_SIZE)
+	{
+		free(ptr);
 		terminate(1, cw);
-	if ((ret = read(fd, code, 1)) == 1)
-		terminate(1, cw);
-	return (code);
+	}
+	free(ptr);
 }

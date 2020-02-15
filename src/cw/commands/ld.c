@@ -6,12 +6,12 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:32:07 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/14 20:12:49 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/15 22:35:52 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- #include "corewar.h"
- #include "cw_ops.h"
+#include "corewar.h"
+#include "cw_ops.h"
 
 void	cw_ld(t_cw *cw, t_carry *carry)
 {

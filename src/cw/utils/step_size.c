@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/03 22:00:36 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/05 20:51:10 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/15 22:55:18 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	step_size(uint8_t arg_type, t_op *op)
 int	calc_step(t_carry *carry, t_op *op)
 {
 	int		i;
-	int			step;
+	int		step;
 
 	i = 0;
 	step = 0;

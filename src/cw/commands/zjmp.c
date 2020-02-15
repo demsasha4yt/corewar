@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/24 18:34:00 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 10:15:24 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/15 22:34:29 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	cw_zjmp(t_cw *cw, t_carry *carry)
 {
 	int a;
-	
+
 	carry->step += OP_SIZE;
 	a = get_argument(cw, carry, 1, true);
 	if (carry->carry)
@@ -27,4 +27,3 @@ void	cw_zjmp(t_cw *cw, t_carry *carry)
 	if (cw->v & OP_LOG)
 		log_zjmp(carry, a);
 }
-
