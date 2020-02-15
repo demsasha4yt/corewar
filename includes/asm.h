@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/14 18:27:46 by bharrold          #+#    #+#             */
-/*   Updated: 2020/02/12 20:43:54 by kbessa           ###   ########.fr       */
+/*   Updated: 2020/02/15 19:43:02 by kbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ typedef struct		s_variables
 }					t_var;
 
 void				parse_p1(t_asm *asm_ms);
-char				*asm_read_cycle(t_asm *asm_ms);
+void				asm_read_cycle(t_asm *asm_ms);
 void				asm_error(int er_nu, int line, t_asm *asm_ms);
 int					is_space(char **str);
 int					is_comment(char *str);

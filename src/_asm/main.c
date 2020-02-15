@@ -87,5 +87,5 @@ int		main(int argc, char **argv)
 		asm_error(2, -1, &asm_ms);
 	parse_p1(&asm_ms);
 	write_champ_code(&asm_ms);
-	exit(0);
+	return(0);
 }

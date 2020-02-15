@@ -8,7 +8,6 @@ resources
 cmake-build-debug
 .vscode
 CMakeLists.txt
-src/cw
 libs
 .idea
 .DS_Store

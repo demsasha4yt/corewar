@@ -6,7 +6,7 @@
 /*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 17:28:03 by kturnips          #+#    #+#             */
-/*   Updated: 2020/02/12 00:06:05 by kbessa           ###   ########.fr       */
+/*   Updated: 2020/02/15 19:43:02 by kbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		check_last_row(char *file)
 	return (1);
 }
 
-char	*asm_read_cycle(t_asm *asm_ms)
+void	asm_read_cycle(t_asm *asm_ms)
 {
 	char	*file;
 	char	temp1[10];
@@ -48,5 +48,5 @@ char	*asm_read_cycle(t_asm *asm_ms)
 		asm_error(5, -1, asm_ms);
 	if (!check_last_row(file))
 		asm_error(6, -1, asm_ms);
-	return (file);
+	free(file);
 }
