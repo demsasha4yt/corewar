@@ -133,5 +133,6 @@ void				register_size(t_token *current);
 char				*ft_strsub2(char const *s, unsigned int start, size_t len);
 void				save_arguments(char *str, t_token *current, t_var *var,
 						t_asm *asm_ms);
+void				free_tokens(t_asm *asm_ms);
 
 #endif

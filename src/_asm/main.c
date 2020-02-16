@@ -6,7 +6,7 @@
 /*   By: kturnips <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 16:55:04 by kturnips          #+#    #+#             */
-/*   Updated: 2020/02/12 16:24:41 by kbessa           ###   ########.fr       */
+/*   Updated: 2020/02/16 17:14:17 by kbessa           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,32 @@ int		asm_check_name(char *argv, t_asm *asm_ms)
 	return (0);
 }
 
+void	free_all(t_asm *asm_ms)
+{
+	t_label *curr;
+
+	if (asm_ms->name)
+		free(asm_ms->name);
+	if (asm_ms->comment)
+		free(asm_ms->comment);
+	if (asm_ms->file_name_cor)
+		free(asm_ms->file_name_cor);
+	if (asm_ms->label)
+	{
+		curr = asm_ms->label;
+		while (curr->next)
+		{
+			curr = asm_ms->label->next;
+			free(asm_ms->label->name);
+			free(asm_ms->label);
+			asm_ms->label = curr;
+		}
+		free(asm_ms->label->name);
+		free(asm_ms->label);
+	}
+	free_tokens(asm_ms);
+}
+
 int		main(int argc, char **argv)
 {
 	t_asm	asm_ms;
@@ -87,5 +113,6 @@ int		main(int argc, char **argv)
 		asm_error(2, -1, &asm_ms);
 	parse_p1(&asm_ms);
 	write_champ_code(&asm_ms);
-	return(0);
+	free_all(&asm_ms);
+	return (0);
 }

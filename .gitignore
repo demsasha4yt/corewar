@@ -1,6 +1,7 @@
 corewar
 champs
 asm
+QWERTY
 *.o
 *.cor
 *.s

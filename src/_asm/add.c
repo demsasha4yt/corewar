@@ -12,7 +12,7 @@
 
 #include "asm.h"
 
-int		ft_strlen_asm(unsigned char *str)
+int		ft_strlen_asm(const unsigned char *str)
 {
 	if (str[3])
 		return (4);
