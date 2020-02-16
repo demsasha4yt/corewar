@@ -12,3 +12,4 @@ CMakeLists.txt
 libs
 .idea
 .DS_Store
+asm.dSYM
