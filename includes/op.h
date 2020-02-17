@@ -43,6 +43,8 @@
 
 # define NAME_CMD_STRING		".name"
 # define COMMENT_CMD_STRING		".comment"
+# define NCS                    NAME_CMD_STRING
+# define CCS                    COMMENT_CMD_STRING
 
 # define REG_NUMBER				16
 

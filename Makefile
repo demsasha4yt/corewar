@@ -10,7 +10,7 @@ I_LIBFT = -I $(D_LIBFT)/includes
 # INCLUDES
 I_DIR = ./includes
 I_I = -I $(I_DIR) 
-HEADER	=	includes/asm.h
+HEADER	=	includes/asm.h includes/op.h
 
 #COMPILER OPTIONS
 CC = gcc

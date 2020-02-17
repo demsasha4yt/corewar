@@ -40,6 +40,7 @@
 # define ERR_DOUBLE_NAME_23			"Error, second declaration of name"
 # define ERR_DOUBLE_COMMENT_24		"Error, second declaration of comment"
 # define ERR_SYM_BEFORE_25			"Error, symbols before .name/.comment"
+# define ERR_MAGICK_26				"Error, the header file has been modified."
 
 # define START_OF_COLOR				"\x1B[31m"
 # define END_OF_COLOR				"\n\033[0m"

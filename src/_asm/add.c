@@ -32,7 +32,7 @@ int		add(t_token *token, int to_add, int byte, int size)
 
 	if (size == 2)
 		to_add = (to_add >= 0) ? (unsigned short)to_add :
-			(unsigned short)((~(-to_add) + 1));
+			(unsigned short)((~(unsigned)(-to_add) + 1));
 	char_to_add = (unsigned char *)(&(to_add));
 	len = ft_strlen_asm(char_to_add);
 	while (++len <= size)

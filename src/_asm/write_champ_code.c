@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "asm.h"
+#include <errors.h>
 
 void	write_magic_header(t_asm *asm_ms)
 {
@@ -20,6 +21,11 @@ void	write_magic_header(t_asm *asm_ms)
 
 	ch = 0;
 	i = COREWAR_EXEC_MAGIC;
+	if (i != 15369203)
+	{
+		write(2, ERR_MAGICK_26, 41);
+		exit(26);
+	}
 	write(asm_ms->fd_w, &ch, 1);
 	char_to_print = (char *)(&i);
 	write(asm_ms->fd_w, &char_to_print[2], 1);

@@ -137,17 +137,15 @@ int		check_name_comment(char *str1, t_asm *asm_ms)
 	{
 		if (*str == COMMENT_CHAR || *str == ALT_COMMENT_CHAR)
 			return (1);
-		if (ft_strncmp(str, NAME_CMD_STRING, 5) == 0 && asm_ms->name == NULL)
-		{
+		if (ft_strncmp(str, NCS, ft_strlen(NCS)) == 0 && asm_ms->name == NULL)
 			check_name_p1(str, asm_ms, 0);
-		}
-		else if (ft_strncmp(str, NAME_CMD_STRING, 5) == 0 && asm_ms->name
+		else if (ft_strncmp(str, NCS, ft_strlen(NCS)) == 0 && asm_ms->name
 				!= NULL)
 			asm_error(23, asm_ms->current_line, asm_ms);
-		else if (ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0
+		else if (ft_strncmp(str, CCS, ft_strlen(CCS)) == 0
 				&& asm_ms->comment == NULL)
 			check_comment_p1(str, asm_ms, 0);
-		else if (ft_strncmp(str, COMMENT_CMD_STRING, 8) == 0
+		else if (ft_strncmp(str, CCS, ft_strlen(CCS)) == 0
 				&& asm_ms->comment != NULL)
 			asm_error(24, asm_ms->current_line, asm_ms);
 		else if (!asm_ms->comment || !asm_ms->name)
