@@ -1,4 +1,15 @@
 corewar
 champs
 asm
+QWERTY
 *.o
+*.cor
+*.s
+resources
+cmake-build-debug
+.vscode
+CMakeLists.txt
+libs
+.idea
+.DS_Store
+asm.dSYM

@@ -10,6 +10,7 @@ I_LIBFT = -I $(D_LIBFT)/includes
 # INCLUDES
 I_DIR = ./includes
 I_I = -I $(I_DIR) 
+HEADER	=	includes/asm.h includes/op.h
 
 #COMPILER OPTIONS
 CC = gcc
@@ -38,7 +39,7 @@ $(COREWAR_EXEC): $(COREWAR_OBJS)
 	@$(CC) $(CCFLAGS) -o $(COREWAR_EXEC) $(COREWAR_OBJS)
 	@echo ...........The $(COREWAR_EXEC) program builded!............
 
-$(ASM_EXEC): $(ASM_OBJS)
+$(ASM_EXEC): $(ASM_OBJS) $(HEADER)
 	@$(CC) $(CCFLAGS) -o $(ASM_EXEC) $(ASM_OBJS)
 	@echo ...........The $(ASM_EXEC) program builded!............
 
