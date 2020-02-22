@@ -54,6 +54,7 @@ SRCS =		./chars/ft_chtostr.c\
 			./mem/ft_memmove.c\
 			./mem/ft_memset.c\
 			./numbers/ft_atoi.c\
+			./numbers/ft_atoi_base.c\
 			./numbers/ft_itoa.c\
 			./numbers/ft_lllen.c\
 			./numbers/ft_lltoa.c\
@@ -91,6 +92,8 @@ SRCS =		./chars/ft_chtostr.c\
 			./str/ft_strstr.c\
 			./str/ft_strsub.c\
 			./str/ft_strtrim.c\
+			./str/ft_isnumeric.c\
+			./str/ft_isnumber.c\
 			./widechars/ft_putwchar.c\
 			./widechars/ft_putwchar_fd.c\
 			./widechars/ft_putwnchar.c\

@@ -6,7 +6,7 @@
 /*   By: bharrold <bharrold@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/20 18:16:42 by bharrold          #+#    #+#             */
-/*   Updated: 2020/01/01 20:07:19 by bharrold         ###   ########.fr       */
+/*   Updated: 2020/02/14 21:28:29 by bharrold         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@
 # include <wchar.h>
 # include "ft_printf.h"
 # include "get_next_line.h"
-
-/*
-	** MACROS
-*/
-
-# define ABS(x) ((x < 0) ? -x : x);
 
 /*
 	** typedefs
@@ -99,6 +93,7 @@ void			*ft_memccpy(void *restrict dst, const void *restrict src, int c,
 	** Number Functions
 */
 int				ft_atoi(const char *str);
+int				ft_atoi_base(char *str, char *base);
 char			*ft_itoa(int n);
 int				ft_ulllen(unsigned long long num, int base);
 char			*ft_ulltoa(unsigned long long num, int base);
@@ -145,7 +140,8 @@ char			*ft_strtrim(char const *s);
 char			**ft_strsplit(char const *s, char c);
 void			ft_strclr(char *s);
 void			ft_putendl_fd(char const *s, int fd);
-
+int				ft_isnumeric(char *str);
+int				ft_isnumber(char *str);
 /*
 	** WideChar Functions
 */

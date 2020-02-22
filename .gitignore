@@ -13,3 +13,5 @@ libs
 .idea
 .DS_Store
 asm.dSYM
+*.txt
+
